@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `date_created` DATETIME NOT NULL,
   `role` VARCHAR(100) NULL,
   `email` VARCHAR(1000) NULL,
+  `date_updated` DATETIME NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_user_address1_idx` (`address_id` ASC),
   CONSTRAINT `fk_user_address1`
@@ -62,10 +63,10 @@ DROP TABLE IF EXISTS `location` ;
 CREATE TABLE IF NOT EXISTS `location` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `address_id` INT NOT NULL,
+  `creator_id` INT NOT NULL,
   `date_updated` DATETIME NULL,
   `name` VARCHAR(500) NULL,
   `date_created` DATETIME NULL,
-  `creator_id` INT NOT NULL,
   `description` TEXT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
@@ -232,7 +233,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`) VALUES (1, 1, 'admin', 'admin', true, '2020-04-28', 'admin', 'admin@admin.com');
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (1, 1, 'admin', 'admin', true, '2020-04-28', 'admin', 'admin@admin.com', NULL);
 
 COMMIT;
 
@@ -242,7 +243,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `location` (`id`, `address_id`, `date_updated`, `name`, `date_created`, `creator_id`, `description`) VALUES (1, 2, '2020-04-27', 'King Soopers', '2020-04-27', 1, 'Its awesome and has pharmacy');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (1, 2, 1, '2020-04-27', 'King Soopers', '2020-04-27', 'Its awesome and has pharmacy');
 
 COMMIT;
 
