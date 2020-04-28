@@ -30,11 +30,11 @@ public class ReviewComment {
 
 	private boolean active;
 
-	@Column(name = "user_id")
-	private User user;
-
-	@Column(name = "review_id")
-	private Review review;
+//	@Column(name = "user_id")
+//	private User user;
+//
+//	@Column(name = "review_id")
+//	private Review review;
 
 	public ReviewComment() {
 		super();
@@ -49,8 +49,8 @@ public class ReviewComment {
 		this.updatedAt = updatedAt;
 		this.reviewRating = reviewRating;
 		this.active = active;
-		this.user = user;
-		this.review = review;
+//		this.user = user;
+//		this.review = review;
 	}
 
 	public int getId() {
@@ -100,30 +100,53 @@ public class ReviewComment {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Review getReview() {
-		return review;
-	}
-
-	public void setReview(Review review) {
-		this.review = review;
-	}
+//
+//	public User getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
+//
+//	public Review getReview() {
+//		return review;
+//	}
+//
+//	public void setReview(Review review) {
+//		this.review = review;
+//	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("ReviewComment [id=").append(id).append(", content=").append(content).append(", createdAt=")
 				.append(createdAt).append(", updatedAt=").append(updatedAt).append(", reviewRating=")
-				.append(reviewRating).append(", active=").append(active).append(", user=").append(user).append("]");
+				.append(reviewRating).append(", active=").append(active);
 		return builder.toString();
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ReviewComment other = (ReviewComment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	
 }
