@@ -44,5 +44,6 @@ class ReviewCommentTest {
 	void test_for_basic_mapping() {
 		assertNotNull(comment);
 		assertEquals("It was great", comment.getContent());
+		assertEquals("admin", comment.getUser().getUsername());
 	}
 }

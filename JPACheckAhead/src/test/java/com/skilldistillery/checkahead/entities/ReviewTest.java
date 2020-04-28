@@ -44,11 +44,11 @@ class ReviewTest {
 	void test() {
 		assertNotNull(review);
 		assertEquals(1, review.getId());
-		assertEquals(1, review.getUserId());
-		assertEquals(1, review.getLocationId());
 		assertEquals("Looked great", review.getContent());
-		assertEquals(1, review.isActive());
-//		assertEquals(2020-04-2700:00:00, review.getDateCreated());
+		assertEquals(true, review.isActive());
+		assertEquals("admin", review.getUser().getUsername());
+		assertEquals(1, review.getRatings().size());
+		assertEquals(1, review.getComments().size());
 	
 		
 	}

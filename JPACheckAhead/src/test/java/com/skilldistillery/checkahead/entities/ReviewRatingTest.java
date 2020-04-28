@@ -46,6 +46,7 @@ class ReviewRatingTest {
 	void test_for_id_and_values_mapped() {
 		assertNotNull(reviewRating);
 		assertEquals(5, reviewRating.getRatingValue());
+		assertEquals("cleanliness", reviewRating.getRating().getCategory());
 	}
 
 }

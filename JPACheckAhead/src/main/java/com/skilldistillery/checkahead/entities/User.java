@@ -1,6 +1,8 @@
 package com.skilldistillery.checkahead.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -39,6 +44,20 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
+	@OneToMany(mappedBy = "creator")
+	private List<Location> createdLocations;
+	
+	@OneToMany(mappedBy = "user")
+	private List<ReviewComment> comments;
+
+	@OneToMany(mappedBy = "user")
+	private List<Review> reviews;
+	
+	@ManyToMany
+	@JoinTable(name = "user_favorite", 
+		joinColumns = @JoinColumn(name = "location_id"), 
+		inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<Location> favorites;
 	
 	// m e t h o d s
 
@@ -47,7 +66,8 @@ public class User {
 	}
 
 	public User(int id, String username, String password, String email, String role, boolean active,
-			LocalDateTime dateCreated, LocalDateTime dateUpdated, Address address) {
+			LocalDateTime dateCreated, LocalDateTime dateUpdated, Address address, List<Location> createdLocations,
+			List<ReviewComment> comments, List<Review> reviews, Set<Location> favorites) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -58,6 +78,10 @@ public class User {
 		this.dateCreated = dateCreated;
 		this.dateUpdated = dateUpdated;
 		this.address = address;
+		this.createdLocations = createdLocations;
+		this.comments = comments;
+		this.reviews = reviews;
+		this.favorites = favorites;
 	}
 
 	public int getId() {
@@ -130,6 +154,38 @@ public class User {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public List<Location> getCreatedLocations() {
+		return createdLocations;
+	}
+
+	public void setCreatedLocations(List<Location> createdLocations) {
+		this.createdLocations = createdLocations;
+	}
+
+	public Set<Location> getFavorites() {
+		return favorites;
+	}
+
+	public void setFavorites(Set<Location> favorites) {
+		this.favorites = favorites;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
+	public List<ReviewComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<ReviewComment> comments) {
+		this.comments = comments;
 	}
 
 	@Override
