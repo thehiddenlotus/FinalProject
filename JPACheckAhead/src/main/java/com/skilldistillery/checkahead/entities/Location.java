@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Location {
@@ -17,23 +20,41 @@ public class Location {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="address_id")
-	private int addressId;
+	private String name;
 	
-	@Column(name="creator_id")
-	private int creatorId;
-	
+	private String description;
+
 	@Column(name="date_updated")
 	private LocalDateTime dateUpdated;
-	
-	private String name;
 	
 	@Column(name="date_created")
 	private LocalDateTime dateCreated;
 	
-	private String description;
+	@OneToOne
+	@JoinColumn(name = "address_id")
+	private Address address;
 	
+	@ManyToOne
+	@JoinColumn(name="creator_id")
+	private User creator;
+
 	// m e t h o d s
+
+	public Location() {
+		super();
+	}
+
+	public Location(int id, String name, String description, LocalDateTime dateUpdated, LocalDateTime dateCreated,
+			Address address, User creator) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.dateUpdated = dateUpdated;
+		this.dateCreated = dateCreated;
+		this.address = address;
+		this.creator = creator;
+	}
 
 	public int getId() {
 		return id;
@@ -41,30 +62,6 @@ public class Location {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getAddressId() {
-		return addressId;
-	}
-
-	public void setAddressId(int addressId) {
-		this.addressId = addressId;
-	}
-
-	public int getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(int creatorId) {
-		this.creatorId = creatorId;
-	}
-
-	public LocalDateTime getDateUpdated() {
-		return dateUpdated;
-	}
-
-	public void setDateUpdated(LocalDateTime dateUpdated) {
-		this.dateUpdated = dateUpdated;
 	}
 
 	public String getName() {
@@ -75,14 +72,6 @@ public class Location {
 		this.name = name;
 	}
 
-	public LocalDateTime getDateCreated() {
-		return dateCreated;
-	}
-
-	public void setDateCreated(LocalDateTime dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -91,20 +80,42 @@ public class Location {
 		this.description = description;
 	}
 
-	public Location(int id, int addressId, int creatorId, LocalDateTime dateUpdated, String name,
-			LocalDateTime dateCreated, String description) {
-		super();
-		this.id = id;
-		this.addressId = addressId;
-		this.creatorId = creatorId;
-		this.dateUpdated = dateUpdated;
-		this.name = name;
-		this.dateCreated = dateCreated;
-		this.description = description;
+	public LocalDateTime getDateUpdated() {
+		return dateUpdated;
 	}
 
-	public Location() {
-		super();
+	public void setDateUpdated(LocalDateTime dateUpdated) {
+		this.dateUpdated = dateUpdated;
+	}
+
+	public LocalDateTime getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(LocalDateTime dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	@Override
+	public String toString() {
+		return "Location [id=" + id + ", name=" + name + ", description=" + description + ", dateUpdated=" + dateUpdated
+				+ ", dateCreated=" + dateCreated + ", address=" + address + ", creator=" + creator + "]";
 	}
 
 	@Override
@@ -128,16 +139,6 @@ public class Location {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Location [id=").append(id).append(", dateUpdated=").append(dateUpdated).append(", name=")
-				.append(name).append(", dateCreated=").append(dateCreated).append(", description=").append(description)
-				.append("]");
-		return builder.toString();
-	}
-	
 	
 
 }
