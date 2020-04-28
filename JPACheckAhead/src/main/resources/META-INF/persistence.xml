@@ -9,6 +9,13 @@
     </provider>
     
     <!-- entities -->
+    <class>com.skilldistillery.checkahead.entities.Address</class>
+    <class>com.skilldistillery.checkahead.entities.Location</class>
+    <class>com.skilldistillery.checkahead.entities.Rating</class>
+    <class>com.skilldistillery.checkahead.entities.Review</class>
+    <class>com.skilldistillery.checkahead.entities.ReviewComment</class>
+    <class>com.skilldistillery.checkahead.entities.ReviewRating</class>
+    <class>com.skilldistillery.checkahead.entities.ReviewRatingId</class>
     <class>com.skilldistillery.checkahead.entities.User</class>
 
     

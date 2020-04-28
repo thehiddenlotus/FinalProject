@@ -18,18 +18,39 @@ public class ReviewComment {
 	private int id;
 
 	private String content;
-	
-	@Column(name="date_created")
+
+	@Column(name = "date_created")
 	private LocalDateTime createdAt;
-	
-	@Column(name="date_updated")
+
+	@Column(name = "date_updated")
 	private LocalDateTime updatedAt;
-	
+
 	@Column(name = "review_rating")
 	private int reviewRating;
-	
+
+	private boolean active;
+
+	@Column(name = "user_id")
+	private User user;
+
+	@Column(name = "review_id")
+	private Review review;
+
 	public ReviewComment() {
 		super();
+	}
+
+	public ReviewComment(int id, String content, LocalDateTime createdAt, LocalDateTime updatedAt, int reviewRating,
+			boolean active, User user, Review review) {
+		super();
+		this.id = id;
+		this.content = content;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.reviewRating = reviewRating;
+		this.active = active;
+		this.user = user;
+		this.review = review;
 	}
 
 	public int getId() {
@@ -96,15 +117,6 @@ public class ReviewComment {
 		this.review = review;
 	}
 
-	private boolean active;
-	
-	@Column(name = "user_id")
-	private User user;
-	
-	@Column(name = "review_id")
-	private Review review;
-	
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -113,10 +125,5 @@ public class ReviewComment {
 				.append(reviewRating).append(", active=").append(active).append(", user=").append(user).append("]");
 		return builder.toString();
 	}
-	
-	
-	
-	
-
 
 }
