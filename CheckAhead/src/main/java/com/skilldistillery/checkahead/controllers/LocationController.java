@@ -24,7 +24,6 @@ public class LocationController {
 	@Autowired
 	LocationService locationServ;
 
-	//GET, POST, PUT, DELETE
 	@GetMapping("locations")
 	public List<Location> showAllLocations(){
 		return null;
