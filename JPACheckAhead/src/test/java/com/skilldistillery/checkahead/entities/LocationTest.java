@@ -44,6 +44,9 @@ class LocationTest {
 	void test_for_basic_mapping() {
 		assertNotNull(location);
 		assertEquals("King Soopers", location.getName());
+		assertEquals("Aurora", location.getAddress().getCity());
+		assertEquals("admin", location.getCreator().getUsername());
+		assertEquals(1, location.getReviews().size());
 	}
 
 }

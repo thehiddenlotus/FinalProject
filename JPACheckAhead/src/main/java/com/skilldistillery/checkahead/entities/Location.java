@@ -1,6 +1,8 @@
 package com.skilldistillery.checkahead.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Location {
@@ -37,6 +43,13 @@ public class Location {
 	@ManyToOne
 	@JoinColumn(name="creator_id")
 	private User creator;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "favorites")
+	private Set<User> usersFavoritedBy;
+	
+	@OneToMany(mappedBy = "location")
+	private List<Review> reviews;
 
 	// m e t h o d s
 
@@ -45,7 +58,7 @@ public class Location {
 	}
 
 	public Location(int id, String name, String description, LocalDateTime dateUpdated, LocalDateTime dateCreated,
-			Address address, User creator) {
+			Address address, User creator, Set<User> usersFavoritedBy, List<Review> reviews) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,6 +67,8 @@ public class Location {
 		this.dateCreated = dateCreated;
 		this.address = address;
 		this.creator = creator;
+		this.usersFavoritedBy = usersFavoritedBy;
+		this.reviews = reviews;
 	}
 
 	public int getId() {
@@ -112,10 +127,26 @@ public class Location {
 		this.creator = creator;
 	}
 
+	public Set<User> getUsersFavoritedBy() {
+		return usersFavoritedBy;
+	}
+
+	public void setUsersFavoritedBy(Set<User> usersFavoritedBy) {
+		this.usersFavoritedBy = usersFavoritedBy;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", name=" + name + ", description=" + description + ", dateUpdated=" + dateUpdated
-				+ ", dateCreated=" + dateCreated + ", address=" + address + ", creator=" + creator + "]";
+				+ ", dateCreated=" + dateCreated + ", address=" + address + "]";
 	}
 
 	@Override

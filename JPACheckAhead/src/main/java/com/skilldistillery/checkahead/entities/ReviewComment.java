@@ -7,11 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "review_comment")
 public class ReviewComment {
+	
+	// f i e l d s
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +33,16 @@ public class ReviewComment {
 	private int reviewRating;
 
 	private boolean active;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 
-//	@Column(name = "user_id")
-//	private User user;
-//
-//	@Column(name = "review_id")
-//	private Review review;
+	@ManyToOne
+	@JoinColumn(name="review_id")
+	private Review review;
+	
+	// m e t h o d s
 
 	public ReviewComment() {
 		super();
@@ -49,8 +57,8 @@ public class ReviewComment {
 		this.updatedAt = updatedAt;
 		this.reviewRating = reviewRating;
 		this.active = active;
-//		this.user = user;
-//		this.review = review;
+		this.user = user;
+		this.review = review;
 	}
 
 	public int getId() {
@@ -100,22 +108,22 @@ public class ReviewComment {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-//
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-//
-//	public Review getReview() {
-//		return review;
-//	}
-//
-//	public void setReview(Review review) {
-//		this.review = review;
-//	}
+
+	public Review getReview() {
+		return review;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
