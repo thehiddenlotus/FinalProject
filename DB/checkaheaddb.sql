@@ -222,6 +222,7 @@ START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (1, '3932 South Joplin Way', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (2, '4271 South Buckley Road', 'Aurora', 80013, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (3, '123 main st', 'Aurora', 80013, 'CO');
 
 COMMIT;
 
