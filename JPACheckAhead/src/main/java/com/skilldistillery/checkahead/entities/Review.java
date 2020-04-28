@@ -10,109 +10,78 @@ import javax.persistence.Id;
 
 @Entity
 public class Review {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private int id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-@Column(name= "user_id")
-private int userId;
+//	@Column(name = "user_id")
+//	private int userId;
+//
+//	@Column(name = "location_id")
+//	private int locationId;
 
-@Column(name= "location_id")
-private int locationId;
+	private String content;
 
-private String content;
+	private boolean active;
 
-private boolean active;
+	@Column(name = "date_created")
+	private LocalDateTime dateCreated;
 
-@Column(name= "date_created")
-private LocalDateTime dateCreated;
+	@Column(name = "date_updated")
+	private LocalDateTime dateUpdated;
 
-@Column(name= "date_updated")
-private LocalDateTime dateUpdated;
+	@Column(name = "date_visited")
+	private LocalDateTime dateVistied;
 
-@Column(name= "date_visited")
-private LocalDateTime dateVistied;
+	public int getId() {
+		return id;
+	}
 
-public int getId() {
-	return id;
-}
+	public void setId(int id) {
+		this.id = id;
+	}
 
-public void setId(int id) {
-	this.id = id;
-}
+	public String getContent() {
+		return content;
+	}
 
-public int getUserId() {
-	return userId;
-}
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-public void setUserId(int userId) {
-	this.userId = userId;
-}
+	public boolean isActive() {
+		return active;
+	}
 
-public int getLocationId() {
-	return locationId;
-}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 
-public void setLocationId(int locationId) {
-	this.locationId = locationId;
-}
+	public LocalDateTime getDateCreated() {
+		return dateCreated;
+	}
 
-public String getContent() {
-	return content;
-}
+	public void setDateCreated(LocalDateTime dateCreated) {
+		this.dateCreated = dateCreated;
+	}
 
-public void setContent(String content) {
-	this.content = content;
-}
+	public LocalDateTime getDateUpdated() {
+		return dateUpdated;
+	}
 
-public boolean isActive() {
-	return active;
-}
+	public void setDateUpdated(LocalDateTime dateUpdated) {
+		this.dateUpdated = dateUpdated;
+	}
 
-public void setActive(boolean active) {
-	this.active = active;
-}
+	public LocalDateTime getDateVistied() {
+		return dateVistied;
+	}
 
-public LocalDateTime getDateCreated() {
-	return dateCreated;
-}
+	public void setDateVistied(LocalDateTime dateVistied) {
+		this.dateVistied = dateVistied;
+	}
 
-public void setDateCreated(LocalDateTime dateCreated) {
-	this.dateCreated = dateCreated;
-}
-
-public LocalDateTime getDateUpdated() {
-	return dateUpdated;
-}
-
-public void setDateUpdated(LocalDateTime dateUpdated) {
-	this.dateUpdated = dateUpdated;
-}
-
-public LocalDateTime getDateVistied() {
-	return dateVistied;
-}
-
-public void setDateVistied(LocalDateTime dateVistied) {
-	this.dateVistied = dateVistied;
-}
-
-public Review(int id, int userId, int locationId, String content, boolean active, LocalDateTime dateCreated,
-		LocalDateTime dateUpdated, LocalDateTime dateVistied) {
-	super();
-	this.id = id;
-	this.userId = userId;
-	this.locationId = locationId;
-	this.content = content;
-	this.active = active;
-	this.dateCreated = dateCreated;
-	this.dateUpdated = dateUpdated;
-	this.dateVistied = dateVistied;
-}
-
-public Review() {
-	super();
-}
 
 
 }
