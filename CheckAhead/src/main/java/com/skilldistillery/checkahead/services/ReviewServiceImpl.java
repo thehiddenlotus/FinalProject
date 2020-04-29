@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
@@ -19,8 +20,6 @@ import com.skilldistillery.checkahead.repositories.UserRepository;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	
-	@PersistenceContext
-	private EntityManager em;
 	
 	@Autowired
 	private ReviewRepository reviewRepo;
@@ -43,36 +42,50 @@ public class ReviewServiceImpl implements ReviewService {
 		return null;
 	}
 
-//	@Override
-//	public Review createReview(String username, Review review) {
-//		User user = userRepo.findByUsername(username);
-//		if (user != null) {
-//			review.setUser(user);
-//			reviewRepo.saveAndFlush(review);
-//		} else {
-//			review = null;
-//		}
-//		return review;
-//	}
 	@Override
-	public Review createReview(Review review) {
-		em.persist(review);
-		em.flush();
+	public Review createReview(User user, Review review, Location location) {
+//		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			review.setUser(user);
+			review.setLocation(location);
+			reviewRepo.saveAndFlush(review);
+		} else {
+			review = null;
+		}
 		return review;
 	}
+//	@Override
+//	public Review createReview(Review review) {
+//		
+//		return review;
+//	}
 
 
 	
 	@Override
 	public Review updateReview(Integer reviewId, Review review) {
-		// TODO Auto-generated method stub
+		Optional<Review> optReview = reviewRepo.findById(reviewId);
+		Review managedReview = null;
+		if (optReview.isPresent()) {
+			managedReview = optReview.get();
+			managedReview.setId(reviewId);
+			managedReview.setContent(review.getContent());
+			managedReview.setUser(review.getUser());
+			managedReview.setLocation(review.getLocation());
+			return reviewRepo.saveAndFlush(managedReview);			
+		}
 		return null;
 	}
 
 	@Override
 	public boolean deleteReview(Integer reviewId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean answer = false;
+		Optional<Review> optReview = reviewRepo.findById(reviewId);
+		if (optReview.isPresent()) {
+			reviewRepo.deleteById(reviewId);
+			answer = true;
+		}
+		return answer;
 	}
 
 }

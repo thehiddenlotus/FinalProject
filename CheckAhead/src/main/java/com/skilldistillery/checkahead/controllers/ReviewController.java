@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,9 +43,9 @@ public class ReviewController {
 	}
 	
 	@PostMapping("reviews")
-    public Review create(@RequestBody Review review ,HttpServletRequest request, HttpServletResponse response) { 
+    public Review createReview(@RequestBody Review review,HttpServletRequest request, HttpServletResponse response) { 
         try {
-           review = reviewSvc.createReview(review);
+           review = reviewSvc.createReview(review.getUser(), review, review.getLocation());
            if(review == null) {
                response.setStatus(400);
                return null;
@@ -56,6 +58,31 @@ public class ReviewController {
            response.setStatus(400);
            return null;
        }
+        
+	}
+	
+	@PutMapping("reviews/{reviewId}")
+	public Review updateReview(@RequestBody Review review, @PathVariable Integer reviewId, HttpServletResponse response) {
+		Review editReview = reviewSvc.updateReview(reviewId, review);
+		if (editReview != null) {
+			return editReview;
+		} else {
+			response.setStatus(404);
+			return null;
+		}
+	}
+	
+	@DeleteMapping("reviews/{reviewId}")
+	public void deleteLocation(@PathVariable Integer reviewId, HttpServletResponse response){
+		boolean deleted = false;
+		try {
+			deleted = reviewSvc.deleteReview(reviewId);
+			if (deleted == true) {
+				response.setStatus(204);
+			}
+		} catch (Exception e) {			
+			response.setStatus(404);
+		}
 	}
 	
 

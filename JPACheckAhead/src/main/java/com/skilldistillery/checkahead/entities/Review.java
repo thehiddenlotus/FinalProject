@@ -42,12 +42,12 @@ public class Review {
 	@CreationTimestamp
 	private LocalDateTime dateVistied;
 	
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="location_id")
 	private Location location;
 
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
