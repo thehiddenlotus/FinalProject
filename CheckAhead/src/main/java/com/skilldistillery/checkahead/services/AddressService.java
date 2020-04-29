@@ -8,13 +8,13 @@ public interface AddressService {
 
 	List<Address> findAllAddresses();
 	
-	Address findAddressById(int id);
+	Address findAddressById(Integer addressId);
 	
 	Address createAddress(Address address);
 
-	Address updateAddress(Address address);
+	Address updateAddress(Integer addressId, Address address);
 	
-	boolean deleteAddress(int id);
+	boolean deleteAddress(Integer addressId);
 	
 	
 	
