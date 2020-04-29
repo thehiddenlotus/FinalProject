@@ -3,6 +3,10 @@ package com.skilldistillery.checkahead.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +15,10 @@ import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
 import com.skilldistillery.checkahead.repositories.UserRepository;
 
+@Transactional
 @Service
 public class ReviewServiceImpl implements ReviewService {
-
+	
 	@Autowired
 	private ReviewRepository reviewRepo;
 
@@ -22,19 +27,12 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<Review> findAllReviews() {
-		// TODO Auto-generated method stub
 		return reviewRepo.findAll();
 	}
 
 	@Override
-	public Review findById(Integer reviewId) {
-		Optional<Review> optReview = reviewRepo.findById(reviewId);
-
-		if (optReview.isPresent()) {
-			Review foundReview = optReview.get();
-			return foundReview;
-		}
-		return null;
+	public Review findById(String username, Integer reviewId) {
+		return reviewRepo.findByUser_UsernameAndId(username, reviewId);
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import com.skilldistillery.checkahead.entities.Review;
 public interface ReviewService {
 	List<Review> findAllReviews();
 	
-	Review findById(Integer reviewId);
+	Review findById(String username, Integer reviewId);
 	
 	Review createReview(String username, Review review);
 	
