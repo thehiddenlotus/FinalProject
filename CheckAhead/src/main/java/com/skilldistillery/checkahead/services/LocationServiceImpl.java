@@ -1,6 +1,5 @@
 package com.skilldistillery.checkahead.services;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Location;
+import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.LocationRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -17,6 +18,7 @@ public class LocationServiceImpl implements LocationService {
 	LocationRepository locationRepo;
 	
 	@Autowired
+	UserRepository userRepo;
 	
 	@Override
 	public List<Location> findAllLocations() {
@@ -74,7 +76,8 @@ public class LocationServiceImpl implements LocationService {
 	
 	@Override
 	public Location createLocation(int userId, Location location) {
-		location.setCreator(creator);;
+		Optional<User> creator = userRepo.findById(userId);
+		location.setCreator(creator.get());
 		Location newLocation = locationRepo.saveAndFlush(location);
 		if (newLocation != null) {
 			return newLocation;
