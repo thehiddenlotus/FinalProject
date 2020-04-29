@@ -2,6 +2,8 @@ package com.skilldistillery.checkahead.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,15 @@ public class UserController {
 	UserService userServ;
 
 	@GetMapping("users")
-	public List<User> showAllUsers(){
-		return null;
+	public List<User> showAllUsers(HttpServletResponse resp){
+		List<User> users = userServ.findAllUsers();
+		if (users.size() > 0) {
+			return users;
+		}
+		else {
+			resp.setStatus(404);
+			return null;
+		}
 	}
 	@GetMapping("users/{id}")
 	public User findAllUserById(@PathVariable Integer id) {
