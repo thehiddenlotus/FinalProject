@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	
@@ -44,6 +46,7 @@ public class User {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "creator")
 	private List<Location> createdLocations;
 	

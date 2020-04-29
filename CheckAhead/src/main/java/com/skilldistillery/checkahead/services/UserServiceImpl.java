@@ -1,6 +1,7 @@
 package com.skilldistillery.checkahead.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,13 @@ public class UserServiceImpl implements UserService{
 
 		@Override
 		public User findUserById(int id) {
-			// TODO Auto-generated method stub
-			return null;
+			Optional<User> user = userRepo.findById(id);
+			if(user.isPresent()) {
+				return user.get();
+			}
+			else {
+				return null;
+			}
 		}
 
 		@Override
