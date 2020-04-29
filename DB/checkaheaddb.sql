@@ -21,7 +21,7 @@ USE `checkaheaddb` ;
 DROP TABLE IF EXISTS `address` ;
 
 CREATE TABLE IF NOT EXISTS `address` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `address` VARCHAR(1000) NULL,
   `city` VARCHAR(500) NULL,
   `zip` INT NULL,
@@ -120,7 +120,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `rating` ;
 
 CREATE TABLE IF NOT EXISTS `rating` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `category` VARCHAR(500) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
