@@ -19,6 +19,9 @@ import com.skilldistillery.checkahead.repositories.UserRepository;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	
+	@PersistenceContext
+	private EntityManager em;
+	
 	@Autowired
 	private ReviewRepository reviewRepo;
 
@@ -31,22 +34,35 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Review findById(String username, Integer reviewId) {
-		return reviewRepo.findByUser_UsernameAndId(username, reviewId);
+	public Review findById(Integer reviewId) {
+		Optional<Review> optReview = reviewRepo.findById(reviewId);
+		if (optReview.isPresent()) {
+			Review foundReview = optReview.get();
+			return foundReview;
+		}
+		return null;
 	}
 
+//	@Override
+//	public Review createReview(String username, Review review) {
+//		User user = userRepo.findByUsername(username);
+//		if (user != null) {
+//			review.setUser(user);
+//			reviewRepo.saveAndFlush(review);
+//		} else {
+//			review = null;
+//		}
+//		return review;
+//	}
 	@Override
-	public Review createReview(String username, Review review) {
-		User user = userRepo.findByUsername(username);
-		if (user != null) {
-			review.setUser(user);
-			reviewRepo.saveAndFlush(review);
-		} else {
-			review = null;
-		}
+	public Review createReview(Review review) {
+		em.persist(review);
+		em.flush();
 		return review;
 	}
 
+
+	
 	@Override
 	public Review updateReview(Integer reviewId, Review review) {
 		// TODO Auto-generated method stub
@@ -58,4 +74,5 @@ public class ReviewServiceImpl implements ReviewService {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 }

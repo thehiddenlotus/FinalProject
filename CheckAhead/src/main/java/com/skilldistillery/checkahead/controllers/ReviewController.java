@@ -1,6 +1,5 @@
 package com.skilldistillery.checkahead.controllers;
 
-import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,14 +30,32 @@ public class ReviewController {
 	}
 	
 	@GetMapping("reviews/{reviewId}")
-	public Review show(@PathVariable("reviewId") Integer reviewId, HttpServletRequest request, HttpServletResponse response, String username) {
-		Review review = reviewSvc.findById(username, reviewId);
+	public Review show(@PathVariable("reviewId") Integer reviewId, HttpServletRequest request, HttpServletResponse response) {
+		Review review = reviewSvc.findById(reviewId);
 		if (review == null) {
 			response.setStatus(404);
 		} else {
 			response.setStatus(201);
 		}
 		return review;
+	}
+	
+	@PostMapping("reviews")
+    public Review create(@RequestBody Review review ,HttpServletRequest request, HttpServletResponse response) { 
+        try {
+           review = reviewSvc.createReview(review);
+           if(review == null) {
+               response.setStatus(400);
+               return null;
+           }else {
+               response.setStatus(201);
+               return review;
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           response.setStatus(400);
+           return null;
+       }
 	}
 	
 
