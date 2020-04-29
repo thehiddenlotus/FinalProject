@@ -35,6 +35,7 @@ public class ReviewRating {
 	private Rating rating;
 
 	// m e t h o d s
+	
 
 	public ReviewRating() {
 		super();

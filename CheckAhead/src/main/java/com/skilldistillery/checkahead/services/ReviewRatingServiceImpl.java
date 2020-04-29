@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.ReviewRating;
@@ -31,7 +32,6 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 	
 	@Override
 	public ReviewRating createRR(int reviewId, int ratingId, ReviewRating rr) {
-		
 		Optional<Review> review = reviewRepo.findById(reviewId);
 		if (review.isPresent()) {
 			rr.setReview(review.get());
@@ -51,6 +51,18 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 			return newrr;
 		}
 			return null;			
+	}
+	
+	@Override
+	public ReviewRating updateRR(int id, ReviewRating rr) {
+		Optional<ReviewRating> oldRR = rrRepo.findById(rr.getId());
+		ReviewRating managedRR = null;
+		if (oldRR.isPresent()) {
+			managedRR = oldRR.get();
+			managedRR.setRatingValue(rr.getRatingValue());
+			return rrRepo.saveAndFlush(managedRR);			
+		}
+		return null;
 	}
 
 }

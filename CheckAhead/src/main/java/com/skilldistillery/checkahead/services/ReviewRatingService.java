@@ -10,4 +10,6 @@ public interface ReviewRatingService {
 
 	ReviewRating createRR(int reviewId, int ratingId, ReviewRating rr);
 
+	ReviewRating updateRR(int id, ReviewRating rr);
+
 }
