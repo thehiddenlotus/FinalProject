@@ -51,13 +51,15 @@ public class User {
 	@OneToMany(mappedBy = "creator")
 	private List<Location> createdLocations;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<ReviewComment> comments;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
-	
+
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "user_favorite", 
 		joinColumns = @JoinColumn(name = "location_id"), 
