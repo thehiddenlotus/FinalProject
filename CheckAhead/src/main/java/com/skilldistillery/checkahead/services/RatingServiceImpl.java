@@ -1,7 +1,10 @@
 package com.skilldistillery.checkahead.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
@@ -10,23 +13,35 @@ import com.skilldistillery.checkahead.repositories.RatingRepository;
 public class RatingServiceImpl implements RatingService {
 
 	@Autowired
-	private RatingRepository repo;
+	private RatingRepository rateRepo;
 
 	@Override
 	public Rating createRating(Rating rating) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return rateRepo.saveAndFlush(rating);
 	}
 
 	@Override
 	public Rating updateRating(Rating rating) {
-		// TODO Auto-generated method stub
-		return null;
+		if(rateRepo.findById(rating.getId())!= null) {
+			return rateRepo.saveAndFlush(rating);
+		}else {
+			
+			return null;
+		}
 	}
 
 	@Override
 	public boolean deleteRating(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean answer = false;
+		Optional<Rating> rating = rateRepo.findById(id);
+		if (rating.isPresent()) {
+			rateRepo.deleteById(id);
+			answer = true;
+		}
+		
+		return answer;
+	
+		
 	}
 }

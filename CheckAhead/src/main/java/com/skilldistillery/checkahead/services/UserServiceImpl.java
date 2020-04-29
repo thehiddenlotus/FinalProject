@@ -1,6 +1,7 @@
 package com.skilldistillery.checkahead.services;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ public class UserServiceImpl implements UserService{
 
 		@Autowired
 		UserRepository userRepo;
+
 
 		@Override
 		public List<User> findAllUsers() {

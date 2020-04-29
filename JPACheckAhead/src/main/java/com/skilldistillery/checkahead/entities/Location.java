@@ -40,6 +40,7 @@ public class Location {
 	@JoinColumn(name = "address_id")
 	private Address address;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="creator_id")
 	private User creator;
@@ -48,6 +49,7 @@ public class Location {
 	@ManyToMany(mappedBy = "favorites")
 	private Set<User> usersFavoritedBy;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "location")
 	private List<Review> reviews;
 
