@@ -12,8 +12,6 @@ public interface UserService {
 
 	List<User> findUserByName(String username);
 
-	List<User> findUserByAddressId(int id);
-
 	User createUser(User user);
 
 	User updateUser(User user);
