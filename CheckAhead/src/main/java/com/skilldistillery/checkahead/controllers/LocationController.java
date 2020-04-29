@@ -27,7 +27,7 @@ public class LocationController {
 	private LocationService locationServ;
 	
 	@GetMapping("locations")
-	public List<Location> getAllLocations(HttpServletResponse response){
+	private List<Location> getAllLocations(HttpServletResponse response){
 		List<Location> locations = locationServ.findAllLocations();
 		if (locations.size() > 0) {
 			return locations;

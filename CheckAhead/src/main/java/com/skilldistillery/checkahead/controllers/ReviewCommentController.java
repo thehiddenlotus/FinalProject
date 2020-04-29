@@ -21,7 +21,7 @@ import com.skilldistillery.checkahead.services.UserService;
 @RestController
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4220" })
-public class UserController {
+public class ReviewCommentController {
 
 	@Autowired
 	UserService userServ;
@@ -66,13 +66,13 @@ public class UserController {
 	}
 	
 	@PutMapping("users/{id}")
-	public User updateExistingUser(@RequestBody User user, @PathVariable int id, HttpServletResponse resp){
+	public User updateExistingUser(@RequestBody User user, @PathVariable int id, HttpServletResponse response){
 		User editUser = userServ.updateUser(id, user);
 		if (editUser != null) {
 			return editUser;
 		}
 		else {
-			resp.setStatus(404);
+			response.setStatus(404);
 			return null;
 		}
 	}

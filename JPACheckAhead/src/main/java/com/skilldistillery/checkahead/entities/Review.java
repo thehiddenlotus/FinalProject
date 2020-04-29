@@ -12,6 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Review {
@@ -27,25 +31,32 @@ public class Review {
 	private boolean active;
 
 	@Column(name = "date_created")
+	@CreationTimestamp
 	private LocalDateTime dateCreated;
 
 	@Column(name = "date_updated")
+	@CreationTimestamp
 	private LocalDateTime dateUpdated;
 
 	@Column(name = "date_visited")
+	@CreationTimestamp
 	private LocalDateTime dateVistied;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="location_id")
 	private Location location;
 
+	
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "review")
 	private List<ReviewRating> ratings;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "review")
 	private List<ReviewComment> comments;
 	
