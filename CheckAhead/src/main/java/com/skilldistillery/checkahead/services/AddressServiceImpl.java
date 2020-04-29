@@ -41,21 +41,26 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public Address updateAddress(Address address) {
-		if (addRepo.findById(address.getId()) != null) {
-			return addRepo.saveAndFlush(address);
-		} else {
-
-			return null;
+	public Address updateAddress(Integer addressId, Address address) {
+		Optional<Address> optAddress = addRepo.findById(addressId);
+		Address managedAddress = null;
+		if (optAddress.isPresent()) {
+			managedAddress = optAddress.get();
+			managedAddress.setAddress(address.getAddress());
+			managedAddress.setCity(address.getCity());
+			managedAddress.setZip(address.getZip());
+			managedAddress.setState(address.getState());
+			return addRepo.saveAndFlush(managedAddress);
 		}
+		return null;
 	}
 
 	@Override
-	public boolean deleteAddress(int id) {
+	public boolean deleteAddress(Integer addressId) {
 		boolean answer = false;
-		Optional<Address> address = addRepo.findById(id);
+		Optional<Address> address = addRepo.findById(addressId);
 		if (address.isPresent()) {
-			addRepo.deleteById(id);
+			addRepo.deleteById(addressId);
 			answer = true;
 		}
 

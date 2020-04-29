@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,5 +61,28 @@ public class AddressController {
            return null;
        }
         
+	}
+	@PutMapping("addresses/{addressId}")
+	public Address updateAddress(@RequestBody Address address, @PathVariable Integer addressId, HttpServletResponse response) {
+		Address editAddress = addressSvc.updateAddress(addressId, address);
+		if (editAddress != null) {
+			return editAddress;
+		} else {
+			response.setStatus(404);
+			return null;
+		}
+	}
+	
+	@DeleteMapping("addresses/{addressId}")
+	public void deleteAddress(@PathVariable Integer addressId, HttpServletResponse response) {
+		boolean deleted = false;
+		try {
+			deleted = addressSvc.deleteAddress(addressId);
+			if (deleted == true) {
+				response.setStatus(204);
+			}
+		} catch (Exception e) {
+			response.setStatus(404);
+		}
 	}
 }
