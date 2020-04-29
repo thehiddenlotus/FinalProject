@@ -9,6 +9,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="review_rating")
 public class ReviewRating {
@@ -21,6 +23,7 @@ public class ReviewRating {
 	@Column(name="rating_value")
 	private int ratingValue;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="review_id")
 	@MapsId(value = "reviewId")  
@@ -32,6 +35,7 @@ public class ReviewRating {
 	private Rating rating;
 
 	// m e t h o d s
+	
 
 	public ReviewRating() {
 		super();
