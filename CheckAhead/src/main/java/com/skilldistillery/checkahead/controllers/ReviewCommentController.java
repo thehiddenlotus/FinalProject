@@ -50,9 +50,15 @@ public class ReviewCommentController {
 	}
 	
 
-	@PostMapping("comments")
-	public ReviewComment createNewComment(@RequestBody ReviewComment comment, HttpServletResponse resp){
-		ReviewComment newComment = svc.createComment(comment, comment.getUser(), comment.getReview());
+	@PostMapping("comments/{userid}/{reviewid}")
+	public ReviewComment createNewComment(
+			@RequestBody ReviewComment comment,
+			@PathVariable Integer userid,
+			@PathVariable Integer reviewid,
+			HttpServletResponse resp
+		){
+		System.out.println(comment.getReview());
+		ReviewComment newComment = svc.createComment(comment, userid, reviewid);
 		if (newComment != null) {
 			return newComment;
 		}
