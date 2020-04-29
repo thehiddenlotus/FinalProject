@@ -9,6 +9,7 @@ import { LocationDetailComponent } from './components/location-detail/location-d
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegisterComponent } from './components/register/register.component';
     LocationDetailComponent,
     UserSettingsComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
