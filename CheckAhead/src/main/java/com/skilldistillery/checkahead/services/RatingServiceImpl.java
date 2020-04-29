@@ -14,21 +14,20 @@ public class RatingServiceImpl implements RatingService {
 
 	@Autowired
 	private RatingRepository rateRepo;
+	
+
 
 	@Override
-	public Rating createRating(Rating rating) {
-
-		return rateRepo.saveAndFlush(rating);
-	}
-
-	@Override
-	public Rating updateRating(Rating rating) {
-		if(rateRepo.findById(rating.getId())!= null) {
+	public Rating updateRating(Rating rating,int id) {
+		Optional<Rating> oldRating = rateRepo.findById(id);
+		Rating newRating = null;
+		if(oldRating.isPresent()) {
+			newRating = oldRating.get();
+			newRating.setId(id);
+			newRating.setCategory(rating.getCategory());
 			return rateRepo.saveAndFlush(rating);
-		}else {
-			
-			return null;
 		}
+		return null;
 	}
 
 	@Override
@@ -39,9 +38,33 @@ public class RatingServiceImpl implements RatingService {
 			rateRepo.deleteById(id);
 			answer = true;
 		}
-		
+
 		return answer;
-	
-		
+
 	}
+
+	@Override
+	public Rating getRatingById(int id) {
+		Optional<Rating> rating = rateRepo.findById(id);
+		if (rating.isPresent()) {
+			return rating.get();
+		} else {
+
+			return null;
+		}
+	}
+
+	@Override
+	public Rating createRating(Rating rating) {
+
+		Rating newRating = rateRepo.saveAndFlush(rating);
+		if (newRating != null) {
+			return newRating;
+		} else {
+			return null;
+		}
+
+	}
+	
+	
 }
