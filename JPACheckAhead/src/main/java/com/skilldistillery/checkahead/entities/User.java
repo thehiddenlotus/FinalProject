@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -52,7 +53,8 @@ public class User {
 	
 	@OneToMany(mappedBy = "user")
 	private List<ReviewComment> comments;
-
+	
+	
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 	
