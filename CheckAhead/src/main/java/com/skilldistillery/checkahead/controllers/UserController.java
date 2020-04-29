@@ -37,6 +37,7 @@ public class UserController {
 	public User findAllUserById(@PathVariable Integer id) {
 		return null;
 	}
+	
 	@GetMapping("users/{username}")
 	public User findUserByUsername(@PathVariable String username) {
 	return null;

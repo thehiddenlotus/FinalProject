@@ -45,7 +45,7 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "address_id")
 	private Address address;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "creator")
 	private List<Location> createdLocations;
