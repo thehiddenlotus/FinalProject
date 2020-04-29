@@ -36,27 +36,16 @@ public class LocationServiceImpl implements LocationService {
 		}
 	}
 	
-//	@Override
-//	public List<Location> findLocationByName(String name) {
-//		List<Location> locations = locationRepo.findByName(name);
-//		if(locations.size() > 0) {
-//			return locations;
-//		}
-//		else {
-//			return null;
-//		}
-//	}
-	
-//	@Override
-//	public List<Location> findLocationByAddressId(int id) {
-//		List<Location> locations = locationRepo.findByAddressId(id);
-//		if(locations.size() > 0) {
-//			return locations;
-//		}
-//		else {
-//			return null;
-//		}
-//	}
+	@Override
+	public List<Location> findLocationByCreatorId(int id) {
+		List<Location> locations = locationRepo.findByCreatorId(id);
+		if(locations.size() > 0) {
+			return locations;
+		}
+		else {
+			return null;
+		}
+	}
 	
 	@Override
 	public Location updateLocation(int id, Location location) {
