@@ -10,6 +10,10 @@ public interface ReviewRatingService {
 
 	ReviewRating createRR(int reviewId, int ratingId, ReviewRating rr);
 
+	boolean deleteRR(int reviewId, int ratingId);
+
 	ReviewRating updateRR(int id, ReviewRating rr);
+	
+	List<ReviewRating> findByLocation(int locationId);
 
 }

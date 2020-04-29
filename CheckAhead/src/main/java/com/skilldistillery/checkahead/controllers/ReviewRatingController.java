@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,18 @@ public class ReviewRatingController {
 	@GetMapping("reviewratings")
 	public List<ReviewRating> getAllRRs(HttpServletResponse response){
 		List<ReviewRating> rrs = rrServ.findAllRRs();
+		if (rrs.size() > 0) {
+			return rrs;
+		}
+		else {
+			response.setStatus(404);
+			return null;
+		}
+	}
+	
+	@GetMapping("reviewratings/locations/{id}")
+	public List<ReviewRating> getRRsByLocation(@PathVariable int id, HttpServletResponse response){
+		List<ReviewRating> rrs = rrServ.findByLocation(id);
 		if (rrs.size() > 0) {
 			return rrs;
 		}
@@ -63,6 +76,19 @@ public class ReviewRatingController {
 		else {
 			response.setStatus(404);
 			return null;
+		}
+	}
+	
+	@DeleteMapping("reviewratings/{reviewid}/{ratingid}")
+	public void deleteRR(@PathVariable int reviewid, @PathVariable int ratingid, HttpServletResponse response){
+		boolean deleted = false;
+		try {
+			deleted = rrServ.deleteRR(reviewid, ratingid);
+			if (deleted == true) {
+				response.setStatus(204);
+			}
+		} catch (Exception e) {			
+			response.setStatus(404);
 		}
 	}
 

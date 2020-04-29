@@ -6,10 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.ReviewRating;
+import com.skilldistillery.checkahead.entities.ReviewRatingId;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
@@ -63,6 +63,23 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 			return rrRepo.saveAndFlush(managedRR);			
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean deleteRR(int reviewId, int ratingId) {
+		boolean answer = false;
+		ReviewRatingId rrId = new ReviewRatingId(reviewId,ratingId);
+		Optional<ReviewRating> rr = rrRepo.findById(rrId);
+		if (rr.isPresent()) {
+			rrRepo.deleteById(rrId);
+			answer = true;
+		}
+		return answer;
+	}
+
+	@Override
+	public List<ReviewRating> findByLocation(int locationId) {
+		return rrRepo.findByReviewLocationId(locationId);
 	}
 
 }
