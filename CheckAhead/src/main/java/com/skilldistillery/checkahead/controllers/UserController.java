@@ -38,7 +38,7 @@ public class UserController {
 		}
 	}
 	@GetMapping("users/{id}")
-	public User findAllUserById(@PathVariable Integer id, HttpServletResponse resp) {
+	public User findUserById(@PathVariable Integer id, HttpServletResponse resp) {
 		User user = userServ.findUserById(id);
 		if(user != null) {
 			return user;

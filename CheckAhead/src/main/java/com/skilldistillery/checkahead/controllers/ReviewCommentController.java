@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.checkahead.entities.User;
-import com.skilldistillery.checkahead.services.UserService;
+import com.skilldistillery.checkahead.entities.ReviewComment;
+import com.skilldistillery.checkahead.services.ReviewCommentService;
 
 @RestController
 @RequestMapping("api")
@@ -24,40 +24,37 @@ import com.skilldistillery.checkahead.services.UserService;
 public class ReviewCommentController {
 
 	@Autowired
-	UserService userServ;
+	ReviewCommentService svc;
 
-	@GetMapping("users")
-	public List<User> showAllUsers(HttpServletResponse resp){
-		List<User> users = userServ.findAllUsers();
-		if (users.size() > 0) {
-			return users;
+	@GetMapping("comments")
+	public List<ReviewComment> showAllComments(HttpServletResponse resp){
+		List<ReviewComment> comments = svc.findAllComments();
+		if (comments.size() > 0) {
+			return comments;
 		}
 		else {
 			resp.setStatus(404);
 			return null;
 		}
 	}
-	@GetMapping("users/{id}")
-	public User findAllUserById(@PathVariable Integer id, HttpServletResponse resp) {
-		User user = userServ.findUserById(id);
-		if(user != null) {
-			return user;
+	
+	@GetMapping("comments/{id}")
+	public ReviewComment findCommentById(@PathVariable Integer id, HttpServletResponse resp) {
+		ReviewComment comment = svc.findCommentById(id);
+		if(comment != null) {
+			return comment;
 		}else {
 			resp.setStatus(404);
 			return null;
 		}
 	}
 	
-//	@GetMapping("users/username/{username}")
-//	public User findUserByUsername(@PathVariable String username) {
-//	return null;
-//	}
-	
-	@PostMapping("users")
-	public User createNewUser(@RequestBody User user, HttpServletResponse resp){
-		User newUser = userServ.createUser(user, user.getAddress());
-		if (newUser != null) {
-			return newUser;
+
+	@PostMapping("comments")
+	public ReviewComment createNewComment(@RequestBody ReviewComment comment, HttpServletResponse resp){
+		ReviewComment newComment = svc.createComment(comment, comment.getUser(), comment.getReview());
+		if (newComment != null) {
+			return newComment;
 		}
 		else {
 			resp.setStatus(404);
@@ -65,11 +62,11 @@ public class ReviewCommentController {
 		}
 	}
 	
-	@PutMapping("users/{id}")
-	public User updateExistingUser(@RequestBody User user, @PathVariable int id, HttpServletResponse response){
-		User editUser = userServ.updateUser(id, user);
-		if (editUser != null) {
-			return editUser;
+	@PutMapping("comments/{id}")
+	public ReviewComment updateComment(@RequestBody ReviewComment comment, @PathVariable int id, HttpServletResponse response){
+		ReviewComment editComment = svc.updateComment(id, comment);
+		if (editComment != null) {
+			return editComment;
 		}
 		else {
 			response.setStatus(404);
@@ -77,11 +74,11 @@ public class ReviewCommentController {
 		}
 	}
 	
-	@DeleteMapping("users/{id}")
-	public void deleteUser(@PathVariable int id, HttpServletResponse resp){
+	@DeleteMapping("comments/{id}")
+	public void deleteComment(@PathVariable int id, HttpServletResponse resp){
 		boolean result = false;
 		try {
-			result = userServ.deleteUser(id);
+			result = svc.deleteComment(id);
 			if (result == true) {
 				resp.setStatus(204);
 			}
