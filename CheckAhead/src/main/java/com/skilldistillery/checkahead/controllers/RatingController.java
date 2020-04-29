@@ -36,8 +36,8 @@ public class RatingController {
 		}
 	}
 
-	@PostMapping("ratings/{userid}")
-	public Rating createRating(@PathVariable Integer userid, @RequestBody Rating rating, HttpServletResponse response) {
+	@PostMapping("ratings")
+	public Rating createRating(@RequestBody Rating rating, HttpServletResponse response) {
 		Rating newRating = ratingServ.createRating(rating);
 		if (newRating != null) {
 			return newRating;
