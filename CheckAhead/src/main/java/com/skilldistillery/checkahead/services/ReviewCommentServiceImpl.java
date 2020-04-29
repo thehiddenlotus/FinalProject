@@ -11,12 +11,18 @@ import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.ReviewComment;
 import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.ReviewCommentRepository;
+import com.skilldistillery.checkahead.repositories.ReviewRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
 public class ReviewCommentServiceImpl implements ReviewCommentService {
 
 	@Autowired
 	private ReviewCommentRepository repo;
+	@Autowired
+	private UserRepository uRepo;
+	@Autowired
+	private ReviewRepository rRepo;
 
 	@Override
 	public List<ReviewComment> findAllComments() {
@@ -35,11 +41,20 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	}
 
 	@Override
-	public ReviewComment createComment(ReviewComment comment, User user, Review review) {
-		comment.setReview(review);
-		comment.setUser(user);
+	public ReviewComment createComment(ReviewComment comment, int userId, int reviewId) {
+		Optional<Review> rOpt = rRepo.findById(reviewId);
+		if (rOpt.isPresent()) {
+			comment.setReview(rOpt.get());			
+		}else {
+			return null;
+		}
+		Optional<User> uOpt = uRepo.findById(userId);
+		if (uOpt.isPresent()) {
+			comment.setUser(uOpt.get());	
+		}else {
+			return null;
+		}
 		comment.setCreatedAt(LocalDateTime.now());
-		System.out.println(comment);
 		ReviewComment newComment = repo.saveAndFlush(comment);
 		if (newComment != null) {
 			return newComment;
