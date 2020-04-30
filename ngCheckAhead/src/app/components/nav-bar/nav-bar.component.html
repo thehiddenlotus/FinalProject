@@ -11,13 +11,17 @@
 
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav">
-      <a href="#" class="nav-item nav-link active">Home</a>
-      <a href="#" class="nav-item nav-link active">Search</a>
-      <a href="#" class="nav-item nav-link active">Login</a>
-      <a href="#" class="nav-item nav-link active">Register</a>
+      <a [routerLink]="['/home']" class="nav-item nav-link active">Home</a>
+      <a [routerLink]="['/search']" class="nav-item nav-link active">Search</a>
+      <a [routerLink]="['/login']" class="nav-item nav-link active">Login</a>
+      <a [routerLink]="['/register']" class="nav-item nav-link active"
+        >Register</a
+      >
     </div>
     <div class="navbar-nav ml-auto">
-      <a href="#" class="nav-item nav-link active">Settings</a>
+      <a [routerLink]="['/settings']" class="nav-item nav-link active"
+        >Settings</a
+      >
     </div>
   </div>
 </nav>
