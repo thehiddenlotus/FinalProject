@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LocationDetailComponent implements OnInit {
 
+  ratingReviewSelected = false;
+  ratingReviewSelected1 = false;
+  ratingReviewSelected2 = false;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -21,7 +21,7 @@ USE `checkaheaddb` ;
 DROP TABLE IF EXISTS `address` ;
 
 CREATE TABLE IF NOT EXISTS `address` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `address` VARCHAR(1000) NULL,
   `city` VARCHAR(500) NULL,
   `zip` INT NULL,
@@ -223,7 +223,11 @@ START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (1, '3932 South Joplin Way', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (2, '4271 South Buckley Road', 'Aurora', 80013, 'CO');
-INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (3, '123 main st', 'Aurora', 80013, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (3, '12200 E Mississippi Ave', 'Aurora', 80012, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (4, '12800 E Mississippi Ave', 'Aurora', 80012, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (5, '16910 E Quincy Ave', 'Aurora', 80015, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (6, '3440 S Tower Rd', 'Aurora', 80013, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (7, '1200 S Buckley Rd', 'Aurora', 80017, 'CO');
 
 COMMIT;
 
@@ -234,6 +238,8 @@ COMMIT;
 START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (1, 1, 'admin', 'admin', true, '2020-04-28', 'admin', 'admin@admin.com', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (2, 4, 'carefulShopper', 'pass', true, '2020-04-28', 'user', 'rob@robsoftheworld.com', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'user', NULL, NULL);
 
 COMMIT;
 
@@ -243,7 +249,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (1, 2, 1, '2020-04-27', 'King Soopers', '2020-04-27', 'Its awesome and has pharmacy');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (2, 5, 3, '2020-04-27', 'Target Grocery', '2020-04-27', 'Grocery delivery and fresh produce');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (3, 6, 3, '2020-04-27', 'Natural Grocers Aurora South', '2020-04-27', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union');
 
 COMMIT;
 
@@ -253,7 +262,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (1, 1, 1, 'Looked great', true, '2020-04-27', '2020-04-27', '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (1, 1, 1, 'Looked great and speedy checkout', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (2, 2, 2, 'Fast as usual and not too busy', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (3, 3, 3, 'Not the best time to go at 6pm', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (4, 3, 2, 'Lack of fresh produce this time around', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (5, 3, 1, 'It was great', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (6, 2, 1, 'It was a bad experience', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (7, 1, 2, 'It was the best shopping experience of my life! Go early', true, '2020-04-27', NULL, '2020-04-27');
 
 COMMIT;
 
@@ -277,6 +292,17 @@ COMMIT;
 START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 1, 5);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 1, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 1, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 1, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 2, 5);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 2, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 2, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 2, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 3, 5);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 3, 3);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 3, 2);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 3, 5);
 
 COMMIT;
 
@@ -286,7 +312,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `user_favorite` (`user_id`, `location_id`) VALUES (1, 1);
+INSERT INTO `user_favorite` (`user_id`, `location_id`) VALUES (3, 1);
+INSERT INTO `user_favorite` (`user_id`, `location_id`) VALUES (2, 1);
+INSERT INTO `user_favorite` (`user_id`, `location_id`) VALUES (3, 3);
+INSERT INTO `user_favorite` (`user_id`, `location_id`) VALUES (2, 3);
 
 COMMIT;
 
@@ -296,7 +325,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 1, 1, 'It was great', '2020-04-27', '2020-04-27', 7, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 2, 1, 'Thanks for the input', '2020-04-27', NULL, 9, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'This is trash', '2020-04-27', NULL, 4, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'I was there', '2020-04-27', NULL, 9, 1, true);
 
 COMMIT;
 
