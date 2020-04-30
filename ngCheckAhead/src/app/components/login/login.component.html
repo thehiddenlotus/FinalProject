@@ -1,1 +1,42 @@
-<p>login works!</p>
+<div class="container register-form">
+  <form>
+    <div class="note">
+      <p>Please Login Here</p>
+    </div>
+
+    <div class="form-content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Username *"
+              name="username"
+              for="username"
+              ngModel
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Password *"
+              name="password"
+              for="password"
+              ngModel
+            />
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btnSubmit">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- #form="ngForm" -->
+<!-- <button type="submit" class="btnSubmit" (click)="login(form)"> -->
