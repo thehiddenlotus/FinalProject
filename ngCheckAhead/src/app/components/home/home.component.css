@@ -1,0 +1,12 @@
+#jumbotron{
+  background-color: rgb(140, 223, 63);
+  color: black;
+}
+
+#searchbutton{
+  float:right;
+  background-color: skyblue;
+}
+#learnmore{
+  float:center;
+}
