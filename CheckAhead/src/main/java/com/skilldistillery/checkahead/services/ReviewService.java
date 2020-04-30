@@ -11,10 +11,10 @@ public interface ReviewService {
 	
 	Review findById(Integer reviewId);
 	
-	Review createReview(User user, Review review, Location location);
+	Review createReview(User user, Review review, Location location, String username);
 	
-	Review updateReview(Integer reviewId, Review review);
+	Review updateReview(Integer reviewId, Review review, String username);
 	
-	boolean deleteReview(Integer reviewId);
+	boolean deleteReview(Integer reviewId, String username);
 
 }

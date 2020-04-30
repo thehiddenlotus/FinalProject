@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -55,8 +56,10 @@ public class ReviewRatingController {
 			@PathVariable Integer ratingid, 
 			@PathVariable Integer reviewid, 
 			@RequestBody ReviewRating rr, 
-			HttpServletResponse response){
-		ReviewRating newRR = rrServ.createRR(reviewid, ratingid, rr);
+			HttpServletResponse response,
+			Principal principal
+		){
+		ReviewRating newRR = rrServ.createRR(reviewid, ratingid, rr, principal.getName());
 		if (newRR != null) {
 			return newRR;
 		}
@@ -67,8 +70,13 @@ public class ReviewRatingController {
 	}
 	
 	@PutMapping("reviewratings/{id}")
-	public ReviewRating updateExistingRR(@RequestBody ReviewRating rr, @PathVariable int id, HttpServletResponse response){
-		ReviewRating editRR = rrServ.updateRR(id, rr);
+	public ReviewRating updateExistingRR(
+			@RequestBody ReviewRating rr, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		ReviewRating editRR = rrServ.updateRR(id, rr, principal.getName());
 		if (editRR != null) {
 			return editRR;
 		}
@@ -79,10 +87,15 @@ public class ReviewRatingController {
 	}
 	
 	@DeleteMapping("reviewratings/{reviewid}/{ratingid}")
-	public void deleteRR(@PathVariable int reviewid, @PathVariable int ratingid, HttpServletResponse response){
+	public void deleteRR(
+			@PathVariable int reviewid, 
+			@PathVariable int ratingid, 
+			HttpServletResponse response,
+			Principal principal
+		){
 		boolean deleted = false;
 		try {
-			deleted = rrServ.deleteRR(reviewid, ratingid);
+			deleted = rrServ.deleteRR(reviewid, ratingid, principal.getName());
 			if (deleted == true) {
 				response.setStatus(204);
 			}

@@ -1,5 +1,7 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,10 @@ public class RatingController {
 	private RatingService ratingServ;
 
 	@GetMapping("ratings/{id}")
-	public Rating getRatingById(@PathVariable Integer id, HttpServletResponse response) {
+	public Rating getRatingById(
+			@PathVariable Integer id, 
+			HttpServletResponse response
+			) {
 		Rating rating = ratingServ.getRatingById(id);
 		if (rating != null) {
 			return rating;
@@ -37,8 +42,12 @@ public class RatingController {
 	}
 
 	@PostMapping("ratings")
-	public Rating createRating(@RequestBody Rating rating, HttpServletResponse response) {
-		Rating newRating = ratingServ.createRating(rating);
+	public Rating createRating(
+			@RequestBody Rating rating, 
+			HttpServletResponse response,
+			Principal principal
+			) {
+		Rating newRating = ratingServ.createRating(rating, principal.getName());
 		if (newRating != null) {
 			return newRating;
 		} else {
@@ -48,8 +57,13 @@ public class RatingController {
 	}
 
 	@PutMapping("ratings/{id}")
-	public Rating updateRating(@RequestBody Rating rating, @PathVariable int id, HttpServletResponse response) {
-		Rating editRating = ratingServ.updateRating(rating, id);
+	public Rating updateRating(
+			@RequestBody Rating rating, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			) {
+		Rating editRating = ratingServ.updateRating(rating, id, principal.getName());
 		if (editRating != null) {
 			return editRating;
 		} else {
@@ -58,10 +72,14 @@ public class RatingController {
 		}
 	}
 	@DeleteMapping("ratings/{id}")
-	public void deleteRating(@PathVariable int id, HttpServletResponse response) {
+	public void deleteRating(
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			) {
 		boolean deleted = false;
 		try {
-			deleted = ratingServ.deleteRating(id);
+			deleted = ratingServ.deleteRating(id, principal.getName());
 			if(deleted == true) {
 				response.setStatus(204);
 			}

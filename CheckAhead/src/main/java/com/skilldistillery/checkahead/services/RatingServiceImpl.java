@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -15,26 +16,29 @@ public class RatingServiceImpl implements RatingService {
 	@Autowired
 	private RatingRepository rateRepo;
 	
-
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
-	public Rating updateRating(Rating rating,int id) {
+	public Rating updateRating(Rating rating, int id, String username) {
 		Optional<Rating> oldRating = rateRepo.findById(id);
 		Rating newRating = null;
 		if(oldRating.isPresent()) {
 			newRating = oldRating.get();
 			newRating.setId(id);
 			newRating.setCategory(rating.getCategory());
-			return rateRepo.saveAndFlush(rating);
+			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+				return rateRepo.saveAndFlush(rating);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean deleteRating(int id) {
+	public boolean deleteRating(int id, String username) {
 		boolean answer = false;
 		Optional<Rating> rating = rateRepo.findById(id);
-		if (rating.isPresent()) {
+		if (rating.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
 			rateRepo.deleteById(id);
 			answer = true;
 		}
@@ -55,14 +59,12 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public Rating createRating(Rating rating) {
-
-		Rating newRating = rateRepo.saveAndFlush(rating);
-		if (newRating != null) {
-			return newRating;
-		} else {
-			return null;
+	public Rating createRating(Rating rating, String username) {
+		Rating newRating = null;
+		if (userRepo.findByUsername(username).getUsername().equals(username)) {
+			newRating = rateRepo.saveAndFlush(rating);
 		}
+		return newRating;
 
 	}
 	

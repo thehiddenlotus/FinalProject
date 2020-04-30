@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,11 @@ public class ReviewController {
 	}
 	
 	@GetMapping("reviews/{reviewId}")
-	public Review show(@PathVariable("reviewId") Integer reviewId, HttpServletRequest request, HttpServletResponse response) {
+	public Review show(
+			@PathVariable("reviewId") Integer reviewId, 
+			HttpServletRequest request, 
+			HttpServletResponse response
+		) {
 		Review review = reviewSvc.findById(reviewId);
 		if (review == null) {
 			response.setStatus(404);
@@ -43,9 +48,13 @@ public class ReviewController {
 	}
 	
 	@PostMapping("reviews")
-    public Review createReview(@RequestBody Review review,HttpServletRequest request, HttpServletResponse response) { 
+    public Review createReview(
+    		@RequestBody Review review,
+    		HttpServletRequest request, 
+    		HttpServletResponse response,
+    		Principal principal) { 
         try {
-           review = reviewSvc.createReview(review.getUser(), review, review.getLocation());
+           review = reviewSvc.createReview(review.getUser(), review, review.getLocation(), principal.getName());
            if(review == null) {
                response.setStatus(400);
                return null;
@@ -62,8 +71,12 @@ public class ReviewController {
 	}
 	
 	@PutMapping("reviews/{reviewId}")
-	public Review updateReview(@RequestBody Review review, @PathVariable Integer reviewId, HttpServletResponse response) {
-		Review editReview = reviewSvc.updateReview(reviewId, review);
+	public Review updateReview(@RequestBody Review review, 
+			@PathVariable Integer reviewId, 
+			HttpServletResponse response,
+			Principal principal
+			) {
+		Review editReview = reviewSvc.updateReview(reviewId, review, principal.getName());
 		if (editReview != null) {
 			return editReview;
 		} else {
@@ -73,10 +86,14 @@ public class ReviewController {
 	}
 	
 	@DeleteMapping("reviews/{reviewId}")
-	public void deleteLocation(@PathVariable Integer reviewId, HttpServletResponse response){
+	public void deleteLocation(
+			@PathVariable Integer reviewId, 
+			HttpServletResponse response,
+			Principal principal
+			){
 		boolean deleted = false;
 		try {
-			deleted = reviewSvc.deleteReview(reviewId);
+			deleted = reviewSvc.deleteReview(reviewId, principal.getName());
 			if (deleted == true) {
 				response.setStatus(204);
 			}

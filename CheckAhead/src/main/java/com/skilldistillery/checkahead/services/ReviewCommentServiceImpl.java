@@ -41,7 +41,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	}
 
 	@Override
-	public ReviewComment createComment(ReviewComment comment, int userId, int reviewId) {
+	public ReviewComment createComment(ReviewComment comment, int userId, int reviewId, String username) {
 		Optional<Review> rOpt = rRepo.findById(reviewId);
 		if (rOpt.isPresent()) {
 			comment.setReview(rOpt.get());			
@@ -55,15 +55,15 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 			return null;
 		}
 		comment.setCreatedAt(LocalDateTime.now());
-		ReviewComment newComment = repo.saveAndFlush(comment);
-		if (newComment != null) {
-			return newComment;
+		ReviewComment newComment = null;
+		if (comment.getUser().getUsername().equals(username)) {
+			newComment = repo.saveAndFlush(comment);
 		}
-		return null;
+		return newComment;
 	}
 
 	@Override
-	public ReviewComment updateComment(int id, ReviewComment comment) {
+	public ReviewComment updateComment(int id, ReviewComment comment, String username) {
 		Optional<ReviewComment> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			ReviewComment managed = opt.get();
@@ -72,20 +72,21 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 			managed.setReviewRating(comment.getReviewRating());
 			managed.setActive(comment.isActive());
 			managed.setUpdatedAt(LocalDateTime.now());
-			return repo.saveAndFlush(managed);
+			if (managed.getUser().getUsername().equals(username)) {
+				return repo.saveAndFlush(managed);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean deleteComment(int id) {
+	public boolean deleteComment(int id, String username) {
 		boolean result = false;
 		Optional<ReviewComment> comment = repo.findById(id);
-		if (comment.isPresent()) {
+		if (comment.isPresent() && comment.get().getUser().getUsername().equals(username)) {
 			repo.deleteById(id);
 			result = true;
 		}
-		
 		return result;
 	}
 }

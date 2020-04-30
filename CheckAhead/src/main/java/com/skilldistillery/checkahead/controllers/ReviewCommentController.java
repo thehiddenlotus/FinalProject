@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -55,10 +56,11 @@ public class ReviewCommentController {
 			@RequestBody ReviewComment comment,
 			@PathVariable Integer userid,
 			@PathVariable Integer reviewid,
-			HttpServletResponse resp
+			HttpServletResponse resp,
+			Principal principal
 		){
 		System.out.println(comment.getReview());
-		ReviewComment newComment = svc.createComment(comment, userid, reviewid);
+		ReviewComment newComment = svc.createComment(comment, userid, reviewid, principal.getName());
 		if (newComment != null) {
 			return newComment;
 		}
@@ -69,8 +71,13 @@ public class ReviewCommentController {
 	}
 	
 	@PutMapping("comments/{id}")
-	public ReviewComment updateComment(@RequestBody ReviewComment comment, @PathVariable int id, HttpServletResponse response){
-		ReviewComment editComment = svc.updateComment(id, comment);
+	public ReviewComment updateComment(
+			@RequestBody ReviewComment comment, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		ReviewComment editComment = svc.updateComment(id, comment, principal.getName());
 		if (editComment != null) {
 			return editComment;
 		}
@@ -81,10 +88,14 @@ public class ReviewCommentController {
 	}
 	
 	@DeleteMapping("comments/{id}")
-	public void deleteComment(@PathVariable int id, HttpServletResponse resp){
+	public void deleteComment(
+			@PathVariable int id, 
+			HttpServletResponse resp,
+			Principal principal
+			){
 		boolean result = false;
 		try {
-			result = svc.deleteComment(id);
+			result = svc.deleteComment(id, principal.getName());
 			if (result == true) {
 				resp.setStatus(204);
 			}

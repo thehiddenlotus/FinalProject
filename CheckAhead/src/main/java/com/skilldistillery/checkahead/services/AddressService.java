@@ -12,9 +12,9 @@ public interface AddressService {
 	
 	Address createAddress(Address address);
 
-	Address updateAddress(Integer addressId, Address address);
+	Address updateAddress(Integer addressId, Address address, String username);
 	
-	boolean deleteAddress(Integer addressId);
+	boolean deleteAddress(Integer addressId, String username);
 	
 	
 	

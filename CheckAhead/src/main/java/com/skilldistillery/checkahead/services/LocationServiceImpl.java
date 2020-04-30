@@ -48,7 +48,7 @@ public class LocationServiceImpl implements LocationService {
 	}
 	
 	@Override
-	public Location updateLocation(int id, Location location) {
+	public Location updateLocation(int id, Location location, String username) {
 		Optional<Location> oldLocation = locationRepo.findById(id);
 		Location managedLocation = null;
 		if (oldLocation.isPresent()) {
@@ -58,16 +58,21 @@ public class LocationServiceImpl implements LocationService {
 			managedLocation.setDescription(location.getDescription());
 			managedLocation.setDateUpdated(location.getDateUpdated());//LocalDateTime.now()
 			managedLocation.setAddress(location.getAddress());
-			return locationRepo.saveAndFlush(managedLocation);			
+			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+				return locationRepo.saveAndFlush(managedLocation);
+			}			
 		}
 		return null;
 	}
 	
 	@Override
-	public Location createLocation(int userId, Location location) {
+	public Location createLocation(int userId, Location location, String username) {
 		Optional<User> creator = userRepo.findById(userId);
 		location.setCreator(creator.get());
-		Location newLocation = locationRepo.saveAndFlush(location);
+		Location newLocation = null;
+		if (userRepo.findByUsername(username).getUsername().equals(username)) {
+			newLocation = locationRepo.saveAndFlush(location);
+		}
 		if (newLocation != null) {
 			return newLocation;
 		}
@@ -75,10 +80,10 @@ public class LocationServiceImpl implements LocationService {
 	}
 	
 	@Override
-	public boolean deleteLocation(int id) {
+	public boolean deleteLocation(int id, String username) {
 		boolean answer = false;
 		Optional<Location> location = locationRepo.findById(id);
-		if (location.isPresent()) {
+		if (location.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
 			locationRepo.deleteById(id);
 			answer = true;
 		}

@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Address;
 import com.skilldistillery.checkahead.repositories.AddressRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
 	@Autowired
-	AddressRepository addRepo;
+	private AddressRepository addRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Address> findAllAddresses() {
@@ -41,7 +45,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public Address updateAddress(Integer addressId, Address address) {
+	public Address updateAddress(Integer addressId, Address address, String username) {
 		Optional<Address> optAddress = addRepo.findById(addressId);
 		Address managedAddress = null;
 		if (optAddress.isPresent()) {
@@ -50,16 +54,18 @@ public class AddressServiceImpl implements AddressService {
 			managedAddress.setCity(address.getCity());
 			managedAddress.setZip(address.getZip());
 			managedAddress.setState(address.getState());
-			return addRepo.saveAndFlush(managedAddress);
+			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+				return addRepo.saveAndFlush(managedAddress);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean deleteAddress(Integer addressId) {
+	public boolean deleteAddress(Integer addressId, String username) {
 		boolean answer = false;
 		Optional<Address> address = addRepo.findById(addressId);
-		if (address.isPresent()) {
+		if (address.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
 			addRepo.deleteById(addressId);
 			answer = true;
 		}
