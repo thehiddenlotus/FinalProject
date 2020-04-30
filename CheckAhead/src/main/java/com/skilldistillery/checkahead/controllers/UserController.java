@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -66,8 +67,13 @@ public class UserController {
 	}
 	
 	@PutMapping("users/{id}")
-	public User updateExistingUser(@RequestBody User user, @PathVariable int id, HttpServletResponse resp){
-		User editUser = userServ.updateUser(id, user);
+	public User updateExistingUser(
+			@RequestBody User user, 
+			@PathVariable int id, 
+			HttpServletResponse resp,
+			Principal principal
+			){
+		User editUser = userServ.updateUser(id, user, principal.getName());
 		if (editUser != null) {
 			return editUser;
 		}
@@ -78,10 +84,14 @@ public class UserController {
 	}
 	
 	@DeleteMapping("users/{id}")
-	public void deleteUser(@PathVariable int id, HttpServletResponse resp){
+	public void deleteUser(
+			@PathVariable int id, 
+			HttpServletResponse resp,
+			Principal principal
+			){
 		boolean result = false;
 		try {
-			result = userServ.deleteUser(id);
+			result = userServ.deleteUser(id, principal.getName());
 			if (result == true) {
 				resp.setStatus(204);
 			}

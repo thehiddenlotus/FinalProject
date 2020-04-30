@@ -58,7 +58,7 @@ public class LocationServiceImpl implements LocationService {
 			managedLocation.setDescription(location.getDescription());
 			managedLocation.setDateUpdated(location.getDateUpdated());//LocalDateTime.now()
 			managedLocation.setAddress(location.getAddress());
-			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+			if (userRepo.findByUsername(username) != null) {
 				return locationRepo.saveAndFlush(managedLocation);
 			}			
 		}
@@ -70,24 +70,20 @@ public class LocationServiceImpl implements LocationService {
 		Optional<User> creator = userRepo.findById(userId);
 		location.setCreator(creator.get());
 		Location newLocation = null;
-		if (userRepo.findByUsername(username).getUsername().equals(username)) {
+		if (userRepo.findByUsername(username) != null) {
 			newLocation = locationRepo.saveAndFlush(location);
 		}
-		if (newLocation != null) {
-			return newLocation;
-		}
-			return null;			
+		return newLocation;			
 	}
 	
 	@Override
 	public boolean deleteLocation(int id, String username) {
 		boolean answer = false;
 		Optional<Location> location = locationRepo.findById(id);
-		if (location.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
+		if (location.isPresent() && userRepo.findByUsername(username).getRole().equals("admin")) {
 			locationRepo.deleteById(id);
 			answer = true;
-		}
-		
+		}	
 		return answer;
 	}
 

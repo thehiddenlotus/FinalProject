@@ -55,10 +55,9 @@ public class UserServiceImpl implements UserService{
 		}
 
 		@Override
-		public User updateUser(int id, User user) {
-			Optional<User> opt = userRepo.findById(id);
-			if (opt.isPresent()) {
-				User managed = opt.get();
+		public User updateUser(int id, User user, String username) {
+			User managed = userRepo.findByUsername(username);
+			if (managed != null && managed.getId() == id) {
 				managed.setId(id);
 				managed.setUsername(user.getUsername());
 				managed.setEmail(user.getEmail());
@@ -72,10 +71,10 @@ public class UserServiceImpl implements UserService{
 		}
 
 		@Override
-		public boolean deleteUser(int id) {
+		public boolean deleteUser(int id, String username) {
 			boolean result = false;
 			Optional<User> user = userRepo.findById(id);
-			if (user.isPresent()) {
+			if (user.isPresent() && user.get().getUsername().equals(username)) {
 				userRepo.deleteById(id);
 				result = true;
 			}

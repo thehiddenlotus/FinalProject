@@ -54,7 +54,7 @@ public class AddressServiceImpl implements AddressService {
 			managedAddress.setCity(address.getCity());
 			managedAddress.setZip(address.getZip());
 			managedAddress.setState(address.getState());
-			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+			if (userRepo.findByUsername(username).getAddress().getId() == managedAddress.getId()) {
 				return addRepo.saveAndFlush(managedAddress);
 			}
 		}
@@ -65,7 +65,7 @@ public class AddressServiceImpl implements AddressService {
 	public boolean deleteAddress(Integer addressId, String username) {
 		boolean answer = false;
 		Optional<Address> address = addRepo.findById(addressId);
-		if (address.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
+		if (address.isPresent() && userRepo.findByUsername(username).getAddress().getId() == addressId) {
 			addRepo.deleteById(addressId);
 			answer = true;
 		}
