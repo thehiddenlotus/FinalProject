@@ -1,13 +1,12 @@
 export class Rating {
-    id: number;
-    category: string;
+  id: number;
+  category: string;
 
-    constructor(
-        id?: number,
-        category?: string
-    ) {
-        this.id = id;
-        this.category = category;
-    }
-
+  constructor(
+    id?: number,
+    category?: string
+  ){
+    this.id = id;
+    this.category = category;
+  }
 }
