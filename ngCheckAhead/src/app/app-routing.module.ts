@@ -5,6 +5,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { SearchComponent } from './components/search/search.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 
 const routes: Routes = [
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'locations/:id', component: LocationDetailComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'settings', component: UserSettingsComponent }
   // { path: '**', component: NotFoundComponent }
 ];
 
