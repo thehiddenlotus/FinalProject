@@ -43,6 +43,28 @@ public class AddressController {
 		}
 		return address;
 	}
+
+	@GetMapping("locations/{locId}/address")
+	public Address showByLocation(@PathVariable("locId") Integer locId, HttpServletRequest request, HttpServletResponse response) {
+		Address address = addressSvc.findAddressByLocationId(locId);
+		if (address == null) {
+			response.setStatus(404);
+		} else {
+			response.setStatus(201);
+		}
+		return address;
+	}
+	
+	@GetMapping("users/{userId}/address")
+	public Address showByUser(@PathVariable("userId") Integer userId, HttpServletRequest request, HttpServletResponse response) {
+		Address address = addressSvc.findAddressByUserId(userId);
+		if (address == null) {
+			response.setStatus(404);
+		} else {
+			response.setStatus(201);
+		}
+		return address;
+	}
 	
 	@PostMapping("addresses")
     public Address createReview(@RequestBody Address address,HttpServletRequest request, HttpServletResponse response) { 

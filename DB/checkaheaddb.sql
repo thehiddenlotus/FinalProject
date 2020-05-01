@@ -68,6 +68,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `name` VARCHAR(500) NULL,
   `date_created` DATETIME NULL,
   `description` TEXT NULL,
+  `google_place_id` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   INDEX `fk_location_usercreator_idx` (`creator_id` ASC),
@@ -249,10 +250,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (2, 5, 3, '2020-04-27', 'Target Grocery', '2020-04-27', 'Grocery delivery and fresh produce');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (3, 6, 3, '2020-04-27', 'Natural Grocers Aurora South', '2020-04-27', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.', 'ChIJuSN4swWJbIcRtkpQ6cjAzWg');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (2, 5, 3, '2020-04-27', 'Target Grocery', '2020-04-27', 'Grocery delivery and fresh produce', 'ChIJT5X5NASJbIcRBLMprihvsOA');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (3, 6, 3, '2020-04-27', 'Natural Grocers Aurora South', '2020-04-27', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood', 'ChIJ956jnEWIbIcRqxLVZjPVHNY');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union', NULL);
 
 COMMIT;
 

@@ -9,6 +9,10 @@ public interface AddressService {
 	List<Address> findAllAddresses();
 	
 	Address findAddressById(Integer addressId);
+
+	Address findAddressByUserId(Integer userId);
+
+	Address findAddressByLocationId(Integer locId);
 	
 	Address createAddress(Address address);
 

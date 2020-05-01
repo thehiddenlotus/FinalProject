@@ -58,6 +58,7 @@ public class LocationServiceImpl implements LocationService {
 			managedLocation.setDescription(location.getDescription());
 			managedLocation.setDateUpdated(location.getDateUpdated());//LocalDateTime.now()
 			managedLocation.setAddress(location.getAddress());
+			managedLocation.setGoogleId(location.getGoogleId());
 			if (userRepo.findByUsername(username) != null) {
 				return locationRepo.saveAndFlush(managedLocation);
 			}			

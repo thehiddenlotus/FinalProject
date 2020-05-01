@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Address;
+import com.skilldistillery.checkahead.entities.Location;
+import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.AddressRepository;
+import com.skilldistillery.checkahead.repositories.LocationRepository;
 import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
@@ -18,6 +21,9 @@ public class AddressServiceImpl implements AddressService {
 	
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private LocationRepository locRepo;
 
 	@Override
 	public List<Address> findAllAddresses() {
@@ -65,12 +71,35 @@ public class AddressServiceImpl implements AddressService {
 	public boolean deleteAddress(Integer addressId, String username) {
 		boolean answer = false;
 		Optional<Address> address = addRepo.findById(addressId);
-		if (address.isPresent() && userRepo.findByUsername(username).getAddress().getId() == addressId) {
+		if (address.isPresent() && (
+				userRepo.findByUsername(username).getAddress().getId() == addressId 
+				|| userRepo.findByUsername(username).getRole().equals("admin"))
+			) {
 			addRepo.deleteById(addressId);
 			answer = true;
 		}
 
 		return answer;
+	}
+
+	@Override
+	public Address findAddressByUserId(Integer userId) {
+		Optional<User> user = userRepo.findById(userId);
+		if (user.isPresent()) {
+			Address foundAddress = user.get().getAddress();
+			return foundAddress;
+		}
+		return null;
+	}
+
+	@Override
+	public Address findAddressByLocationId(Integer locId) {
+		Optional<Location> opt = locRepo.findById(locId);
+		if (opt.isPresent()) {
+			Address foundAddress = opt.get().getAddress();
+			return foundAddress;
+		}
+		return null;
 	}
 
 }
