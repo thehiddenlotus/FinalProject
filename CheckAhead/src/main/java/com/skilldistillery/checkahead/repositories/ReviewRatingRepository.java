@@ -10,4 +10,6 @@ import com.skilldistillery.checkahead.entities.ReviewRatingId;
 public interface ReviewRatingRepository extends JpaRepository<ReviewRating, ReviewRatingId> {
 	
 		List<ReviewRating> findByReviewLocationId(int locationId);
+
+		List<ReviewRating> findByReviewId(int reviewId);
 }

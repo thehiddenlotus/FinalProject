@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +57,7 @@ public class LocationServiceImpl implements LocationService {
 			managedLocation.setId(id);
 			managedLocation.setName(location.getName());
 			managedLocation.setDescription(location.getDescription());
-			managedLocation.setDateUpdated(location.getDateUpdated());//LocalDateTime.now()
+			managedLocation.setDateUpdated(LocalDateTime.now());//LocalDateTime.now()
 			managedLocation.setAddress(location.getAddress());
 			managedLocation.setGoogleId(location.getGoogleId());
 			if (userRepo.findByUsername(username) != null) {
@@ -70,6 +71,7 @@ public class LocationServiceImpl implements LocationService {
 	public Location createLocation(Location location, String username) {
 		User creator = userRepo.findByUsername(username);
 		location.setCreator(creator);
+		location.setDateCreated(LocalDateTime.now());
 		Location newLocation = null;
 		if (userRepo.findByUsername(username) != null) {
 			newLocation = locationRepo.saveAndFlush(location);

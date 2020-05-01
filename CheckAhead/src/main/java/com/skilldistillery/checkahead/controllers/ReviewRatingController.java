@@ -39,9 +39,21 @@ public class ReviewRatingController {
 		}
 	}
 	
-	@GetMapping("reviewratings/locations/{id}")
-	public List<ReviewRating> getRRsByLocation(@PathVariable int id, HttpServletResponse response){
-		List<ReviewRating> rrs = rrServ.findByLocation(id);
+	@GetMapping("locations/{locId}/reviews/reviewratings")
+	public List<ReviewRating> getRRsByLocation(@PathVariable int locId, HttpServletResponse response){
+		List<ReviewRating> rrs = rrServ.findByLocation(locId);
+		if (rrs.size() > 0) {
+			return rrs;
+		}
+		else {
+			response.setStatus(404);
+			return null;
+		}
+	}
+
+	@GetMapping("locations/reviews/{revId}/reviewratings")
+	public List<ReviewRating> getRRsByReviews(@PathVariable int revId, HttpServletResponse response){
+		List<ReviewRating> rrs = rrServ.findByReview(revId);
 		if (rrs.size() > 0) {
 			return rrs;
 		}
@@ -51,7 +63,7 @@ public class ReviewRatingController {
 		}
 	}
 	
-	@PostMapping("reviewratings/{ratingid}/{reviewid}")
+	@PostMapping("locations/reviews/{reviewid}/ratings/{ratingid}/reviewratings")
 	public ReviewRating createNewRR(
 			@PathVariable Integer ratingid, 
 			@PathVariable Integer reviewid, 

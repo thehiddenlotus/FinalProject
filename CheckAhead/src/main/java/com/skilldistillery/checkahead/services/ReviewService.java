@@ -2,7 +2,6 @@ package com.skilldistillery.checkahead.services;
 
 import java.util.List;
 
-import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Review;
 
 public interface ReviewService {
@@ -10,11 +9,13 @@ public interface ReviewService {
 	
 	Review findById(Integer reviewId);
 	
-	Review createReview(Review review, Location location, String username);
+	Review createReview(Review review, Integer locationId, String username);
 	
 	Review updateReview(Integer reviewId, Review review, String username);
 	
 	boolean deleteReview(Integer reviewId, String username);
 
 	public List<Review> findByLocation(Integer locId);
+
+	public List<Review> findByUser(Integer userId);
 }

@@ -10,6 +10,7 @@ import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.ReviewRating;
 import com.skilldistillery.checkahead.entities.ReviewRatingId;
+import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
@@ -35,7 +36,7 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 	
 	@Override
 	public ReviewRating createRR(int reviewId, int ratingId, ReviewRating rr, String username) {
-//		User user = userRepo.findByUsername(username);
+		User user = userRepo.findByUsername(username);
 		try {
 			Optional<Review> review = reviewRepo.findById(reviewId);
 			if (review.isPresent()) {
@@ -51,7 +52,7 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 			else {
 				return null;
 			}
-			if(rr.getReview().getUser().getUsername().equals(username)){
+			if(user != null){
 				ReviewRating newrr = rrRepo.saveAndFlush(rr);
 				if (newrr != null) {
 					return newrr;
@@ -71,7 +72,7 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 		if (oldRR.isPresent()) {
 			managedRR = oldRR.get();
 			managedRR.setRatingValue(rr.getRatingValue());
-			if(managedRR.getReview().getUser().getUsername().equals(username)){
+			if(managedRR.getReview().getUser().getUsername().equals(username) || userRepo.findByUsername(username).getRole().equals("admin")){
 				return rrRepo.saveAndFlush(managedRR);							
 			}
 		}
@@ -83,7 +84,7 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 		boolean answer = false;
 		ReviewRatingId rrId = new ReviewRatingId(reviewId,ratingId);
 		Optional<ReviewRating> rr = rrRepo.findById(rrId);
-		if (rr.isPresent() && rr.get().getReview().getUser().getUsername().equals(username)) {
+		if (rr.isPresent() && (rr.get().getReview().getUser().getUsername().equals(username) || userRepo.findByUsername(username).getRole().equals("admin"))) {
 			rrRepo.deleteById(rrId);
 			answer = true;
 		}
@@ -93,6 +94,11 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 	@Override
 	public List<ReviewRating> findByLocation(int locationId) {
 		return rrRepo.findByReviewLocationId(locationId);
+	}
+
+	@Override
+	public List<ReviewRating> findByReview(int reviewId) {
+		return rrRepo.findByReviewId(reviewId);
 	}
 
 }

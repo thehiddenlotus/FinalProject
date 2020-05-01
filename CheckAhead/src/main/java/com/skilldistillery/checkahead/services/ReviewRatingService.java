@@ -16,4 +16,6 @@ public interface ReviewRatingService {
 	
 	List<ReviewRating> findByLocation(int locationId);
 
+	List<ReviewRating> findByReview(int reviewId);
+
 }

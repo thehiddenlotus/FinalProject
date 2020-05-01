@@ -47,10 +47,32 @@ public class ReviewController {
 		}
 		return review;
 	}
+	
+//	@GetMapping("locations/{locId}/reviews/{reviewId}")
+//	public Review show(
+//			@PathVariable("reviewId") Integer reviewId, 
+//			HttpServletRequest request, 
+//			HttpServletResponse response
+//			) {
+//		Review review = reviewSvc.findById(reviewId);
+//		if (review == null) {
+//			response.setStatus(404);
+//		} else {
+//			response.setStatus(201);
+//		}
+//		return review;
+//	}
 
 	@GetMapping("locations/{locationId}/reviews")
-	public List<Review> index(
+	public List<Review> findByLocation(
 			@PathVariable("locationId") Integer locationId
+			) {
+		return reviewSvc.findByLocation(locationId);
+	}
+	
+	@GetMapping("user/{userId}/reviews")
+	public List<Review> findByUser(
+			@PathVariable("userId") Integer locationId
 			) {
 		return reviewSvc.findByLocation(locationId);
 	}
@@ -58,11 +80,12 @@ public class ReviewController {
 	@PostMapping("locations/{locationId}/reviews")
     public Review createReview(
     		@RequestBody Review review,
+    		@PathVariable("locationId") Integer locationId,
     		HttpServletRequest request, 
     		HttpServletResponse response,
     		Principal principal) { 
         try {
-           review = reviewSvc.createReview(review, review.getLocation(), principal.getName());
+           review = reviewSvc.createReview(review, locationId, principal.getName());
            if(review == null) {
                response.setStatus(400);
                return null;

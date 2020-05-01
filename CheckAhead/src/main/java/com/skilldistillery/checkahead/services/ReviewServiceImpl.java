@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,13 +52,24 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		return null;
 	}
+	
+	@Override
+	public List<Review> findByUser(Integer userId){
+		Optional<User> opt = userRepo.findById(userId);
+		if(opt.isPresent()) {
+			return reviewRepo.findByUser_Username(opt.get().getUsername());
+		}
+		return null;
+	}
 
 	@Override
-	public Review createReview(Review review, Location location, String username) {
+	public Review createReview(Review review, Integer locationId, String username) {
 		User user = userRepo.findByUsername(username);
-		if (user != null) {
+		Optional<Location> loc = locRepo.findById(locationId);
+		if (user != null && loc.isPresent()) {
 			review.setUser(user);
-			review.setLocation(location);
+			review.setLocation(loc.get());
+			review.setDateCreated(LocalDateTime.now());
 //			if (review.getUser().getUsername().equals(username)) {
 				reviewRepo.saveAndFlush(review);
 //			}
@@ -82,9 +94,10 @@ public class ReviewServiceImpl implements ReviewService {
 			managedReview = optReview.get();
 			managedReview.setId(reviewId);
 			managedReview.setContent(review.getContent());
-			managedReview.setUser(review.getUser());
-			managedReview.setLocation(review.getLocation());
-			if (managedReview.getUser().getUsername().equals(username)) {
+//			managedReview.setUser(review.getUser());
+//			managedReview.setLocation(review.getLocation());
+			managedReview.setDateUpdated(LocalDateTime.now());
+			if (managedReview.getUser().getUsername().equals(username) || userRepo.findByUsername(username).getRole().equals("admin")) {
 				return reviewRepo.saveAndFlush(managedReview);
 			}			
 		}
@@ -95,7 +108,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public boolean deleteReview(Integer reviewId, String username) {
 		boolean answer = false;
 		Optional<Review> optReview = reviewRepo.findById(reviewId);
-		if (optReview.isPresent() && optReview.get().getUser().getUsername().equals(username)) {
+		if (optReview.isPresent() && 
+				(optReview.get().getUser().getUsername().equals(username)
+				|| userRepo.findByUsername(username).getRole().equals("admin")
+			)) {
 			reviewRepo.deleteById(reviewId);
 			answer = true;
 		}

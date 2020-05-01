@@ -1,10 +1,10 @@
 package com.skilldistillery.checkahead.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import com.skilldistillery.checkahead.entities.Rating;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
@@ -18,6 +18,11 @@ public class RatingServiceImpl implements RatingService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Override
+	public List<Rating> findAllRatings() {
+		return rateRepo.findAll();
+	}
 
 	@Override
 	public Rating updateRating(Rating rating, int id, String username) {
@@ -39,7 +44,7 @@ public class RatingServiceImpl implements RatingService {
 		boolean answer = false;
 		if (userRepo.findByUsername(username).getRole().equals("admin")) {
 			Optional<Rating> rating = rateRepo.findById(id);
-			if (rating.isPresent() && userRepo.findByUsername(username).getUsername().equals(username)) {
+			if (rating.isPresent() && userRepo.findByUsername(username).getRole().equals("admin")) {
 				rateRepo.deleteById(id);
 				answer = true;
 			} 
@@ -62,9 +67,9 @@ public class RatingServiceImpl implements RatingService {
 	public Rating createRating(Rating rating, String username) {
 		Rating newRating = null;
 		if (userRepo.findByUsername(username).getRole().equals("admin")) {
-			if (userRepo.findByUsername(username).getUsername().equals(username)) {
+
 				newRating = rateRepo.saveAndFlush(rating);
-			} 
+
 		}
 		return newRating;
 	}

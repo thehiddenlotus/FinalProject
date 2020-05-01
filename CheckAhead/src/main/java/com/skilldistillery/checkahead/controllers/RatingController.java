@@ -1,6 +1,7 @@
 package com.skilldistillery.checkahead.controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,6 +26,11 @@ public class RatingController {
 
 	@Autowired
 	private RatingService ratingServ;
+	
+	@GetMapping("ratings")
+	public List<Rating> index() {
+		return ratingServ.findAllRatings();
+	}
 
 	@GetMapping("ratings/{id}")
 	public Rating getRatingById(
