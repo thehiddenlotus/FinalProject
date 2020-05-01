@@ -16,4 +16,7 @@ public interface ReviewCommentService {
 
 	boolean deleteComment(int id, String username);
 	
+	public List<ReviewComment> findByUser(Integer userId);
+
+	public List<ReviewComment> findByReview(Integer revId);
 }

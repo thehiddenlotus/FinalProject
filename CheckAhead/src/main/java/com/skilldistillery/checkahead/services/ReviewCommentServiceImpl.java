@@ -57,7 +57,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 		comment.setCreatedAt(LocalDateTime.now());
 		comment.setActive(true);
 		ReviewComment newComment = null;
-		if (comment.getUser().getUsername().equals(username)) {
+		if (comment.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
 			newComment = repo.saveAndFlush(comment);
 		}
 		return newComment;
@@ -73,7 +73,7 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 			managed.setReviewRating(comment.getReviewRating());
 			managed.setActive(comment.isActive());
 			managed.setUpdatedAt(LocalDateTime.now());
-			if (managed.getUser().getUsername().equals(username)) {
+			if (managed.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
 				return repo.saveAndFlush(managed);
 			}
 		}
@@ -84,10 +84,20 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	public boolean deleteComment(int id, String username) {
 		boolean result = false;
 		Optional<ReviewComment> comment = repo.findById(id);
-		if (comment.isPresent() && comment.get().getUser().getUsername().equals(username)) {
+		if (comment.isPresent() && (comment.get().getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin"))) {
 			repo.deleteById(id);
 			result = true;
 		}
 		return result;
+	}
+
+	@Override
+	public List<ReviewComment> findByUser(Integer userId) {
+		return repo.findByUser_Id(userId);
+	}
+
+	@Override
+	public List<ReviewComment> findByReview(Integer revId) {
+		return repo.findByReview_Id(revId);
 	}
 }

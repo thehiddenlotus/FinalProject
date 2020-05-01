@@ -50,8 +50,22 @@ public class ReviewCommentController {
 		}
 	}
 	
+	@GetMapping("locations/reviews/{reviewId}/comments")
+	public List<ReviewComment> findByReview(
+			@PathVariable("reviewId") Integer reviewId
+			) {
+		return svc.findByReview(reviewId);
+	}
+	
+	@GetMapping("user/{userId}/comments")
+	public List<ReviewComment> findByUser(
+			@PathVariable("userId") Integer userId
+			) {
+		return svc.findByUser(userId);
+	}
+	
 
-	@PostMapping("comments/{reviewid}")
+	@PostMapping("locations/reviews/{reviewid}/comments")
 	public ReviewComment createNewComment(
 			@RequestBody ReviewComment comment,
 			@PathVariable Integer reviewid,
