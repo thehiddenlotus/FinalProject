@@ -10,7 +10,7 @@ public interface ReviewCommentService {
 
 	ReviewComment findCommentById(int id);
 
-	ReviewComment createComment(ReviewComment comment, int userId, int reviewId, String username);
+	ReviewComment createComment(ReviewComment comment, int reviewId, String username);
 
 	ReviewComment updateComment(int id, ReviewComment comment, String username);
 

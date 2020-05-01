@@ -41,20 +41,21 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	}
 
 	@Override
-	public ReviewComment createComment(ReviewComment comment, int userId, int reviewId, String username) {
+	public ReviewComment createComment(ReviewComment comment, int reviewId, String username) {
 		Optional<Review> rOpt = rRepo.findById(reviewId);
 		if (rOpt.isPresent()) {
 			comment.setReview(rOpt.get());			
 		}else {
 			return null;
 		}
-		Optional<User> uOpt = uRepo.findById(userId);
-		if (uOpt.isPresent()) {
-			comment.setUser(uOpt.get());	
+		User managed = uRepo.findByUsername(username);
+		if (managed != null) {
+			comment.setUser(managed);	
 		}else {
 			return null;
 		}
 		comment.setCreatedAt(LocalDateTime.now());
+		comment.setActive(true);
 		ReviewComment newComment = null;
 		if (comment.getUser().getUsername().equals(username)) {
 			newComment = repo.saveAndFlush(comment);

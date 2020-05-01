@@ -24,6 +24,7 @@ import com.skilldistillery.checkahead.services.ReviewService;
 @RequestMapping("api")
 @CrossOrigin({ "*", "http://localhost:4220" }) // Angular local port
 public class ReviewController {
+	
 	@Autowired
 	private ReviewService reviewSvc;
 
@@ -31,7 +32,7 @@ public class ReviewController {
 	public List<Review> index() {
 		return reviewSvc.findAllReviews();
 	}
-	
+
 	@GetMapping("reviews/{reviewId}")
 	public Review show(
 			@PathVariable("reviewId") Integer reviewId, 
@@ -46,15 +47,22 @@ public class ReviewController {
 		}
 		return review;
 	}
+
+	@GetMapping("locations/{locationId}/reviews")
+	public List<Review> index(
+			@PathVariable("locationId") Integer locationId
+			) {
+		return reviewSvc.findByLocation(locationId);
+	}
 	
-	@PostMapping("reviews")
+	@PostMapping("locations/{locationId}/reviews")
     public Review createReview(
     		@RequestBody Review review,
     		HttpServletRequest request, 
     		HttpServletResponse response,
     		Principal principal) { 
         try {
-           review = reviewSvc.createReview(review.getUser(), review, review.getLocation(), principal.getName());
+           review = reviewSvc.createReview(review, review.getLocation(), principal.getName());
            if(review == null) {
                response.setStatus(400);
                return null;

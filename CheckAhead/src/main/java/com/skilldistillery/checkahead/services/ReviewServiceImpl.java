@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.entities.User;
+import com.skilldistillery.checkahead.repositories.LocationRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Transactional
 @Service
@@ -21,8 +23,11 @@ public class ReviewServiceImpl implements ReviewService {
 	@Autowired
 	private ReviewRepository reviewRepo;
 
-//	@Autowired
-//	private UserRepository userRepo;
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private LocationRepository locRepo;
 
 	@Override
 	public List<Review> findAllReviews() {
@@ -40,14 +45,22 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Review createReview(User user, Review review, Location location, String username) {
-//		User user = userRepo.findByUsername(username);
+	public List<Review> findByLocation(Integer locId) {
+		if (locRepo.findById(locId).isPresent()) {
+			return reviewRepo.findByLocation_Id(locId);
+		}
+		return null;
+	}
+
+	@Override
+	public Review createReview(Review review, Location location, String username) {
+		User user = userRepo.findByUsername(username);
 		if (user != null) {
 			review.setUser(user);
 			review.setLocation(location);
-			if (review.getUser().getUsername().equals(username)) {
+//			if (review.getUser().getUsername().equals(username)) {
 				reviewRepo.saveAndFlush(review);
-			}
+//			}
 		} else {
 			review = null;
 		}
