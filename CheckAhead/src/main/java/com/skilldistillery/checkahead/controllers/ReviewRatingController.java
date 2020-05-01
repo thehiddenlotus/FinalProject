@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,9 +39,21 @@ public class ReviewRatingController {
 		}
 	}
 	
-	@GetMapping("reviewratings/locations/{id}")
-	public List<ReviewRating> getRRsByLocation(@PathVariable int id, HttpServletResponse response){
-		List<ReviewRating> rrs = rrServ.findByLocation(id);
+	@GetMapping("locations/{locId}/reviews/reviewratings")
+	public List<ReviewRating> getRRsByLocation(@PathVariable int locId, HttpServletResponse response){
+		List<ReviewRating> rrs = rrServ.findByLocation(locId);
+		if (rrs.size() > 0) {
+			return rrs;
+		}
+		else {
+			response.setStatus(404);
+			return null;
+		}
+	}
+
+	@GetMapping("locations/reviews/{revId}/reviewratings")
+	public List<ReviewRating> getRRsByReviews(@PathVariable int revId, HttpServletResponse response){
+		List<ReviewRating> rrs = rrServ.findByReview(revId);
 		if (rrs.size() > 0) {
 			return rrs;
 		}
@@ -50,13 +63,15 @@ public class ReviewRatingController {
 		}
 	}
 	
-	@PostMapping("reviewratings/{ratingid}/{reviewid}")
+	@PostMapping("locations/reviews/{reviewid}/ratings/{ratingid}/reviewratings")
 	public ReviewRating createNewRR(
 			@PathVariable Integer ratingid, 
 			@PathVariable Integer reviewid, 
 			@RequestBody ReviewRating rr, 
-			HttpServletResponse response){
-		ReviewRating newRR = rrServ.createRR(reviewid, ratingid, rr);
+			HttpServletResponse response,
+			Principal principal
+		){
+		ReviewRating newRR = rrServ.createRR(reviewid, ratingid, rr, principal.getName());
 		if (newRR != null) {
 			return newRR;
 		}
@@ -67,8 +82,13 @@ public class ReviewRatingController {
 	}
 	
 	@PutMapping("reviewratings/{id}")
-	public ReviewRating updateExistingRR(@RequestBody ReviewRating rr, @PathVariable int id, HttpServletResponse response){
-		ReviewRating editRR = rrServ.updateRR(id, rr);
+	public ReviewRating updateExistingRR(
+			@RequestBody ReviewRating rr, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		ReviewRating editRR = rrServ.updateRR(id, rr, principal.getName());
 		if (editRR != null) {
 			return editRR;
 		}
@@ -79,10 +99,15 @@ public class ReviewRatingController {
 	}
 	
 	@DeleteMapping("reviewratings/{reviewid}/{ratingid}")
-	public void deleteRR(@PathVariable int reviewid, @PathVariable int ratingid, HttpServletResponse response){
+	public void deleteRR(
+			@PathVariable int reviewid, 
+			@PathVariable int ratingid, 
+			HttpServletResponse response,
+			Principal principal
+		){
 		boolean deleted = false;
 		try {
-			deleted = rrServ.deleteRR(reviewid, ratingid);
+			deleted = rrServ.deleteRR(reviewid, ratingid, principal.getName());
 			if (deleted == true) {
 				response.setStatus(204);
 			}

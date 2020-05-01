@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -50,8 +51,8 @@ public class LocationController {
 		}
 	}
 	
-	@GetMapping("locations/users/{id}")
-	public List<Location> getLocationByUserId(@PathVariable Integer id, HttpServletResponse response){
+	@GetMapping("users/{id}/locations")
+	public List<Location> getLocationsByCreator(@PathVariable Integer id, HttpServletResponse response){
 		List<Location> locations = locationServ.findLocationByCreatorId(id);
 		if (locations != null) {
 			return locations;
@@ -62,9 +63,13 @@ public class LocationController {
 		}
 	}
 	
-	@PostMapping("locations/{userid}")
-	public Location createNewLocation(@PathVariable Integer userid, @RequestBody Location location, HttpServletResponse response){
-		Location newLocation = locationServ.createLocation(userid, location);
+	@PostMapping("locations")
+	public Location createNewLocation(
+			@RequestBody Location location, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		Location newLocation = locationServ.createLocation(location, principal.getName());
 		if (newLocation != null) {
 			return newLocation;
 		}
@@ -75,8 +80,13 @@ public class LocationController {
 	}
 	
 	@PutMapping("locations/{id}")
-	public Location updateExistingLocation(@RequestBody Location location, @PathVariable int id, HttpServletResponse response){
-		Location editLocation = locationServ.updateLocation(id, location);
+	public Location updateExistingLocation(
+			@RequestBody Location location, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		Location editLocation = locationServ.updateLocation(id, location, principal.getName());
 		if (editLocation != null) {
 			return editLocation;
 		}
@@ -87,10 +97,14 @@ public class LocationController {
 	}
 	
 	@DeleteMapping("locations/{id}")
-	public void deleteLocation(@PathVariable int id, HttpServletResponse response){
+	public void deleteLocation(
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
 		boolean deleted = false;
 		try {
-			deleted = locationServ.deleteLocation(id);
+			deleted = locationServ.deleteLocation(id, principal.getName());
 			if (deleted == true) {
 				response.setStatus(204);
 			}

@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -49,16 +50,30 @@ public class ReviewCommentController {
 		}
 	}
 	
+	@GetMapping("locations/reviews/{reviewId}/comments")
+	public List<ReviewComment> findByReview(
+			@PathVariable("reviewId") Integer reviewId
+			) {
+		return svc.findByReview(reviewId);
+	}
+	
+	@GetMapping("user/{userId}/comments")
+	public List<ReviewComment> findByUser(
+			@PathVariable("userId") Integer userId
+			) {
+		return svc.findByUser(userId);
+	}
+	
 
-	@PostMapping("comments/{userid}/{reviewid}")
+	@PostMapping("locations/reviews/{reviewid}/comments")
 	public ReviewComment createNewComment(
 			@RequestBody ReviewComment comment,
-			@PathVariable Integer userid,
 			@PathVariable Integer reviewid,
-			HttpServletResponse resp
+			HttpServletResponse resp,
+			Principal principal
 		){
 		System.out.println(comment.getReview());
-		ReviewComment newComment = svc.createComment(comment, userid, reviewid);
+		ReviewComment newComment = svc.createComment(comment, reviewid, principal.getName());
 		if (newComment != null) {
 			return newComment;
 		}
@@ -69,8 +84,13 @@ public class ReviewCommentController {
 	}
 	
 	@PutMapping("comments/{id}")
-	public ReviewComment updateComment(@RequestBody ReviewComment comment, @PathVariable int id, HttpServletResponse response){
-		ReviewComment editComment = svc.updateComment(id, comment);
+	public ReviewComment updateComment(
+			@RequestBody ReviewComment comment, 
+			@PathVariable int id, 
+			HttpServletResponse response,
+			Principal principal
+			){
+		ReviewComment editComment = svc.updateComment(id, comment, principal.getName());
 		if (editComment != null) {
 			return editComment;
 		}
@@ -81,10 +101,14 @@ public class ReviewCommentController {
 	}
 	
 	@DeleteMapping("comments/{id}")
-	public void deleteComment(@PathVariable int id, HttpServletResponse resp){
+	public void deleteComment(
+			@PathVariable int id, 
+			HttpServletResponse resp,
+			Principal principal
+			){
 		boolean result = false;
 		try {
-			result = svc.deleteComment(id);
+			result = svc.deleteComment(id, principal.getName());
 			if (result == true) {
 				resp.setStatus(204);
 			}

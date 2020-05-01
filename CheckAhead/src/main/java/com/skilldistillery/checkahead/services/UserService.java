@@ -15,8 +15,8 @@ public interface UserService {
 
 	User createUser(User user, Address address);
 
-	User updateUser(int id, User user);
+	User updateUser(int id, User user, String username);
 
-	boolean deleteUser(int id);
+	boolean deleteUser(int id, String username);
 
 }

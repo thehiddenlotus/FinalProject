@@ -1,5 +1,6 @@
 package com.skilldistillery.checkahead.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.checkahead.entities.Address;
-import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.services.AddressService;
 
 @RestController
@@ -36,6 +36,28 @@ public class AddressController {
 	@GetMapping("addresses/{addressId}")
 	public Address show(@PathVariable("addressId") Integer addressId, HttpServletRequest request, HttpServletResponse response) {
 		Address address = addressSvc.findAddressById(addressId);
+		if (address == null) {
+			response.setStatus(404);
+		} else {
+			response.setStatus(201);
+		}
+		return address;
+	}
+
+	@GetMapping("locations/{locId}/address")
+	public Address showByLocation(@PathVariable("locId") Integer locId, HttpServletRequest request, HttpServletResponse response) {
+		Address address = addressSvc.findAddressByLocationId(locId);
+		if (address == null) {
+			response.setStatus(404);
+		} else {
+			response.setStatus(201);
+		}
+		return address;
+	}
+	
+	@GetMapping("users/{userId}/address")
+	public Address showByUser(@PathVariable("userId") Integer userId, HttpServletRequest request, HttpServletResponse response) {
+		Address address = addressSvc.findAddressByUserId(userId);
 		if (address == null) {
 			response.setStatus(404);
 		} else {
@@ -63,8 +85,13 @@ public class AddressController {
         
 	}
 	@PutMapping("addresses/{addressId}")
-	public Address updateAddress(@RequestBody Address address, @PathVariable Integer addressId, HttpServletResponse response) {
-		Address editAddress = addressSvc.updateAddress(addressId, address);
+	public Address updateAddress(
+			@RequestBody Address address, 
+			@PathVariable Integer addressId, 
+			HttpServletResponse response,
+			Principal principal
+			) {
+		Address editAddress = addressSvc.updateAddress(addressId, address, principal.getName());
 		if (editAddress != null) {
 			return editAddress;
 		} else {
@@ -74,10 +101,14 @@ public class AddressController {
 	}
 	
 	@DeleteMapping("addresses/{addressId}")
-	public void deleteAddress(@PathVariable Integer addressId, HttpServletResponse response) {
+	public void deleteAddress(
+			@PathVariable Integer addressId, 
+			HttpServletResponse response,
+			Principal principal
+			) {
 		boolean deleted = false;
 		try {
-			deleted = addressSvc.deleteAddress(addressId);
+			deleted = addressSvc.deleteAddress(addressId, principal.getName());
 			if (deleted == true) {
 				response.setStatus(204);
 			}

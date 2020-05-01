@@ -45,8 +45,9 @@ class LocationTest {
 		assertNotNull(location);
 		assertEquals("King Soopers", location.getName());
 		assertEquals("Aurora", location.getAddress().getCity());
-		assertEquals("admin", location.getCreator().getUsername());
-		assertEquals(1, location.getReviews().size());
+		assertEquals("new", location.getCreator().getUsername());
+		assertEquals(3, location.getReviews().size());
+		assertEquals("ChIJuSN4swWJbIcRtkpQ6cjAzWg", location.getGoogleId());
 	}
 
 }
