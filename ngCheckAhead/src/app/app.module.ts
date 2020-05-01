@@ -1,3 +1,11 @@
+import { UserService } from './services/user.service';
+import { ReviewService } from './services/review.service';
+import { ReviewRatingService } from './services/review-rating.service';
+import { ReviewCommentService } from './services/review-comment.service';
+import { RatingService } from './services/rating.service';
+import { AddressService } from './services/address.service';
+import { LocationService } from './services/location.service';
+import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +21,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +33,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +43,16 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    LocationService,
+    AddressService,
+    RatingService,
+    ReviewCommentService,
+    ReviewRatingService,
+    ReviewService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
