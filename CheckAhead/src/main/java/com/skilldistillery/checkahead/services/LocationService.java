@@ -12,10 +12,10 @@ public interface LocationService {
 
 	List<Location> findLocationByCreatorId(int id);
 
-	Location createLocation(int userId, Location location);
+	Location createLocation(Location location, String username);
 
-	Location updateLocation(int id, Location location);
+	Location updateLocation(int id, Location location, String username);
 
-	boolean deleteLocation(int id);
+	boolean deleteLocation(int id, String username);
 
 }

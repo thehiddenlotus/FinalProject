@@ -29,6 +29,9 @@ public class Location {
 	private String name;
 	
 	private String description;
+	
+	@Column(name="google_place_id")
+	private String googleId;
 
 	@Column(name="date_updated")
 	private LocalDateTime dateUpdated;
@@ -59,12 +62,14 @@ public class Location {
 		super();
 	}
 
-	public Location(int id, String name, String description, LocalDateTime dateUpdated, LocalDateTime dateCreated,
-			Address address, User creator, Set<User> usersFavoritedBy, List<Review> reviews) {
+	public Location(int id, String name, String description, String googleId, LocalDateTime dateUpdated,
+			LocalDateTime dateCreated, Address address, User creator, Set<User> usersFavoritedBy,
+			List<Review> reviews) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
+		this.googleId = googleId;
 		this.dateUpdated = dateUpdated;
 		this.dateCreated = dateCreated;
 		this.address = address;
@@ -87,6 +92,14 @@ public class Location {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getGoogleId() {
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId) {
+		this.googleId = googleId;
 	}
 
 	public String getDescription() {

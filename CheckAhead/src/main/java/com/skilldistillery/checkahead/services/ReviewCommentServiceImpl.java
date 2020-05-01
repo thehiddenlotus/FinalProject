@@ -41,29 +41,30 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 	}
 
 	@Override
-	public ReviewComment createComment(ReviewComment comment, int userId, int reviewId) {
+	public ReviewComment createComment(ReviewComment comment, int reviewId, String username) {
 		Optional<Review> rOpt = rRepo.findById(reviewId);
 		if (rOpt.isPresent()) {
 			comment.setReview(rOpt.get());			
 		}else {
 			return null;
 		}
-		Optional<User> uOpt = uRepo.findById(userId);
-		if (uOpt.isPresent()) {
-			comment.setUser(uOpt.get());	
+		User managed = uRepo.findByUsername(username);
+		if (managed != null) {
+			comment.setUser(managed);	
 		}else {
 			return null;
 		}
 		comment.setCreatedAt(LocalDateTime.now());
-		ReviewComment newComment = repo.saveAndFlush(comment);
-		if (newComment != null) {
-			return newComment;
+		comment.setActive(true);
+		ReviewComment newComment = null;
+		if (comment.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
+			newComment = repo.saveAndFlush(comment);
 		}
-		return null;
+		return newComment;
 	}
 
 	@Override
-	public ReviewComment updateComment(int id, ReviewComment comment) {
+	public ReviewComment updateComment(int id, ReviewComment comment, String username) {
 		Optional<ReviewComment> opt = repo.findById(id);
 		if (opt.isPresent()) {
 			ReviewComment managed = opt.get();
@@ -72,20 +73,31 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 			managed.setReviewRating(comment.getReviewRating());
 			managed.setActive(comment.isActive());
 			managed.setUpdatedAt(LocalDateTime.now());
-			return repo.saveAndFlush(managed);
+			if (managed.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
+				return repo.saveAndFlush(managed);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean deleteComment(int id) {
+	public boolean deleteComment(int id, String username) {
 		boolean result = false;
 		Optional<ReviewComment> comment = repo.findById(id);
-		if (comment.isPresent()) {
+		if (comment.isPresent() && (comment.get().getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin"))) {
 			repo.deleteById(id);
 			result = true;
 		}
-		
 		return result;
+	}
+
+	@Override
+	public List<ReviewComment> findByUser(Integer userId) {
+		return repo.findByUser_Id(userId);
+	}
+
+	@Override
+	public List<ReviewComment> findByReview(Integer revId) {
+		return repo.findByReview_Id(revId);
 	}
 }

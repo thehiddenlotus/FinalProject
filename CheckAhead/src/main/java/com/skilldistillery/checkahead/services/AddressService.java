@@ -9,12 +9,16 @@ public interface AddressService {
 	List<Address> findAllAddresses();
 	
 	Address findAddressById(Integer addressId);
+
+	Address findAddressByUserId(Integer userId);
+
+	Address findAddressByLocationId(Integer locId);
 	
 	Address createAddress(Address address);
 
-	Address updateAddress(Integer addressId, Address address);
+	Address updateAddress(Integer addressId, Address address, String username);
 	
-	boolean deleteAddress(Integer addressId);
+	boolean deleteAddress(Integer addressId, String username);
 	
 	
 	

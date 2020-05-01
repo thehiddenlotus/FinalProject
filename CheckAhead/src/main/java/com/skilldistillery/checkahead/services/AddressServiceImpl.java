@@ -7,13 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Address;
+import com.skilldistillery.checkahead.entities.Location;
+import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.AddressRepository;
+import com.skilldistillery.checkahead.repositories.LocationRepository;
+import com.skilldistillery.checkahead.repositories.UserRepository;
 
 @Service
 public class AddressServiceImpl implements AddressService {
 
 	@Autowired
-	AddressRepository addRepo;
+	private AddressRepository addRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
+
+	@Autowired
+	private LocationRepository locRepo;
 
 	@Override
 	public List<Address> findAllAddresses() {
@@ -41,7 +51,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public Address updateAddress(Integer addressId, Address address) {
+	public Address updateAddress(Integer addressId, Address address, String username) {
 		Optional<Address> optAddress = addRepo.findById(addressId);
 		Address managedAddress = null;
 		if (optAddress.isPresent()) {
@@ -50,21 +60,48 @@ public class AddressServiceImpl implements AddressService {
 			managedAddress.setCity(address.getCity());
 			managedAddress.setZip(address.getZip());
 			managedAddress.setState(address.getState());
-			return addRepo.saveAndFlush(managedAddress);
+			if ((userRepo.findByUsername(username).getAddress().getId() == managedAddress.getId()
+					|| userRepo.findByUsername(username).getRole().equals("admin")
+				)) {
+				return addRepo.saveAndFlush(managedAddress);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean deleteAddress(Integer addressId) {
+	public boolean deleteAddress(Integer addressId, String username) {
 		boolean answer = false;
 		Optional<Address> address = addRepo.findById(addressId);
-		if (address.isPresent()) {
+		if (address.isPresent() && (
+				userRepo.findByUsername(username).getAddress().getId() == addressId 
+				|| userRepo.findByUsername(username).getRole().equals("admin"))
+			) {
 			addRepo.deleteById(addressId);
 			answer = true;
 		}
 
 		return answer;
+	}
+
+	@Override
+	public Address findAddressByUserId(Integer userId) {
+		Optional<User> user = userRepo.findById(userId);
+		if (user.isPresent()) {
+			Address foundAddress = user.get().getAddress();
+			return foundAddress;
+		}
+		return null;
+	}
+
+	@Override
+	public Address findAddressByLocationId(Integer locId) {
+		Optional<Location> opt = locRepo.findById(locId);
+		if (opt.isPresent()) {
+			Address foundAddress = opt.get().getAddress();
+			return foundAddress;
+		}
+		return null;
 	}
 
 }
