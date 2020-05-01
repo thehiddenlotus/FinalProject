@@ -1,5 +1,5 @@
 <div class="container register-form">
-  <form>
+  <form #form="ngForm">
     <div class="note">
       <p>Please Login Here</p>
     </div>
@@ -25,13 +25,13 @@
               class="form-control"
               placeholder="Password *"
               name="password"
-              for="password"
+              type="password"
               ngModel
             />
           </div>
         </div>
       </div>
-      <button type="submit" class="btnSubmit">
+      <button type="submit" class="btnSubmit" (click)="login(form)">
         Login
       </button>
     </div>
