@@ -67,9 +67,9 @@ public class LocationServiceImpl implements LocationService {
 	}
 	
 	@Override
-	public Location createLocation(int userId, Location location, String username) {
-		Optional<User> creator = userRepo.findById(userId);
-		location.setCreator(creator.get());
+	public Location createLocation(Location location, String username) {
+		User creator = userRepo.findByUsername(username);
+		location.setCreator(creator);
 		Location newLocation = null;
 		if (userRepo.findByUsername(username) != null) {
 			newLocation = locationRepo.saveAndFlush(location);

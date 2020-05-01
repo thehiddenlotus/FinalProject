@@ -60,7 +60,9 @@ public class AddressServiceImpl implements AddressService {
 			managedAddress.setCity(address.getCity());
 			managedAddress.setZip(address.getZip());
 			managedAddress.setState(address.getState());
-			if (userRepo.findByUsername(username).getAddress().getId() == managedAddress.getId()) {
+			if ((userRepo.findByUsername(username).getAddress().getId() == managedAddress.getId()
+					|| userRepo.findByUsername(username).getRole().equals("admin")
+				)) {
 				return addRepo.saveAndFlush(managedAddress);
 			}
 		}

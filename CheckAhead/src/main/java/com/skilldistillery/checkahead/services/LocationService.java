@@ -12,7 +12,7 @@ public interface LocationService {
 
 	List<Location> findLocationByCreatorId(int id);
 
-	Location createLocation(int userId, Location location, String username);
+	Location createLocation(Location location, String username);
 
 	Location updateLocation(int id, Location location, String username);
 

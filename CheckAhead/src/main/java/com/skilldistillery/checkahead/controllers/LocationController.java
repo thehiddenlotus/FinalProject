@@ -51,8 +51,8 @@ public class LocationController {
 		}
 	}
 	
-	@GetMapping("locations/users/{id}")
-	public List<Location> getLocationByUserId(@PathVariable Integer id, HttpServletResponse response){
+	@GetMapping("users/{id}/locations")
+	public List<Location> getLocationsByCreator(@PathVariable Integer id, HttpServletResponse response){
 		List<Location> locations = locationServ.findLocationByCreatorId(id);
 		if (locations != null) {
 			return locations;
@@ -63,14 +63,13 @@ public class LocationController {
 		}
 	}
 	
-	@PostMapping("locations/{userid}")
+	@PostMapping("locations")
 	public Location createNewLocation(
-			@PathVariable Integer userid, 
 			@RequestBody Location location, 
 			HttpServletResponse response,
 			Principal principal
 			){
-		Location newLocation = locationServ.createLocation(userid, location, principal.getName());
+		Location newLocation = locationServ.createLocation(location, principal.getName());
 		if (newLocation != null) {
 			return newLocation;
 		}
