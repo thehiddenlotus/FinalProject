@@ -9,29 +9,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  accessDenied = false;
+  // accessDenied = false;
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private router: Router
+    // private auth: AuthService
   ) { }
 
   ngOnInit(): void {
   }
 
-  login(form: NgForm) {
-    const user = form.value;
-    this.auth.login(user.username, user.password).subscribe(
-      success => {
-        console.log('LoginComponent.login(): Logged in');
+  // login(form: NgForm) {
+  //   const user = form.value;
+  //   this.auth.login(user.username, user.password).subscribe(
+  //     success => {
+  //       console.log('LoginComponent.login(): Logged in');
 
-        this.router.navigate(['/search']);
-      },
-      failed => {
-        console.log('LoginComponent.login(): Login Failed');
-        this.accessDenied = true;
-        this.router.navigateByUrl('/login');
-      }
-    );
-  }
+  //       this.router.navigate(['/search']);
+  //     },
+  //     failed => {
+  //       console.log('LoginComponent.login(): Login Failed');
+  //       this.accessDenied = true;
+  //       this.router.navigateByUrl('/login');
+  //     }
+  //   );
+  // }
 
 }
