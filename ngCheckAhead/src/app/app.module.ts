@@ -21,14 +21,19 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { TeamComponent } from './components/team/team.component';
 
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { TeamComponent } from './components/team/team.component';
+
 import { LogoutComponent } from './components/logout/logout.component';
 import { ReviewComponent } from './components/review/review.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+
 
 
 @NgModule({
@@ -55,7 +60,11 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule,
+    BrowserAnimationsModule 
+
+  
   ],
   providers: [
     AuthService,
