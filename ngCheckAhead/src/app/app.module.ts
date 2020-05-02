@@ -1,6 +1,14 @@
+import { UserService } from './services/user.service';
+import { ReviewService } from './services/review.service';
+import { ReviewRatingService } from './services/review-rating.service';
+import { ReviewCommentService } from './services/review-comment.service';
+import { RatingService } from './services/rating.service';
+import { AddressService } from './services/address.service';
+import { LocationService } from './services/location.service';
+import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,9 +21,19 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+
+import { TeamComponent } from './components/team/team.component';
+
+import { LogoutComponent } from './components/logout/logout.component';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
+
 
 
 @NgModule({
@@ -28,7 +46,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     LoginComponent,
     RegisterComponent,
     NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    TeamComponent,
+    LogoutComponent,
+    ReviewComponent,
+    ReviewFormComponent,
+    CommentComponent,
+    CommentFormComponent
+
   ],
   imports: [
     BrowserModule,
@@ -38,8 +63,19 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule,
     NgxChartsModule,
     BrowserAnimationsModule 
+
+  
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    LocationService,
+    AddressService,
+    RatingService,
+    ReviewCommentService,
+    ReviewRatingService,
+    ReviewService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
