@@ -22,6 +22,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LogoutComponent } from './components/logout/logout.component';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { CommentComponent } from './components/comment/comment.component';
+import { CommentFormComponent } from './components/comment-form/comment-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
-    LogoutComponent
+    LogoutComponent,
+    ReviewComponent,
+    ReviewFormComponent,
+    CommentComponent,
+    CommentFormComponent
   ],
   imports: [
     BrowserModule,
