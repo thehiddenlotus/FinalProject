@@ -33,6 +33,7 @@ import { ReviewComponent } from './components/review/review.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 
 
@@ -52,7 +53,8 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     ReviewComponent,
     ReviewFormComponent,
     CommentComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    FavoritesComponent
 
   ],
   imports: [
