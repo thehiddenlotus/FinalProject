@@ -1,5 +1,5 @@
 <div class="container register-form">
-  <form #form="ngForm">
+  <form>
     <div class="note">
       <p>Please Register Here</p>
     </div>
@@ -10,67 +10,75 @@
           <div class="form-group">
             <input
               type="text"
+              name="username"
               class="form-control"
               placeholder="Username *"
-              ngModel
+              [(ngModel)]="newUser.username"
             />
           </div>
 
           <div class="form-group">
             <input
               type="password"
+              name="password"
               class="form-control"
               placeholder="Password *"
-              ngModel
+              [(ngModel)]="newUser.password"
             />
           </div>
 
           <div class="form-group">
             <input
               type="text"
+              name="email"
               class="form-control"
               placeholder="Email *"
-              ngModel
+              [(ngModel)]="newUser.email"
             />
           </div>
 
           <div class="form-group">
             <input
               type="text"
+              name="address"
               class="form-control"
               placeholder="Street Address *"
+              [(ngModel)]="newAddress.address"
             />
           </div>
 
           <div class="form-group">
             <input
               type="text"
+              name="city"
               class="form-control"
               placeholder="City *"
-              ngModel
+              [(ngModel)]="newAddress.city"
             />
           </div>
 
           <div class="form-group">
             <input
               type="text"
+              name="zip"
               class="form-control"
               placeholder="Zip *"
-              ngModel
+              [(ngModel)]="newAddress.zip"
             />
           </div>
 
           <div class="form-group">
             <input
               type="text"
+              name="state"
               class="form-control"
               placeholder="State *"
-              ngModel
+              [(ngModel)]="newAddress.state"
             />
           </div>
         </div>
       </div>
-      <button type="submit" class="btnSubmit" (click)="register(form)">
+      <button type="submit" class="btnSubmit" (click)="register()">
         Submit
       </button>
     </div>
