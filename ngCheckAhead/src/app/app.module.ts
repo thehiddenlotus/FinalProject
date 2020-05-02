@@ -42,9 +42,7 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
-
-    TeamComponent
-
+    TeamComponent,
     LogoutComponent,
     ReviewComponent,
     ReviewFormComponent,
