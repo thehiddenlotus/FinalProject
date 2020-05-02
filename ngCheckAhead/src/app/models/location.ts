@@ -1,3 +1,5 @@
+import { Address } from './address';
+
 export class Location {
     id: number;
     addressId: number;
@@ -6,6 +8,7 @@ export class Location {
     name: string;
     dateCreated: string;
     description: string;
+    address: Address;
 
     constructor(
         id?: number,
@@ -14,7 +17,8 @@ export class Location {
         dateUpdated?: string,
         name?: string,
         dateCreated?: string,
-        description?: string
+        description?: string,
+        address?: Address
     ) {
         this.id = id;
         this.addressId = addressId;
@@ -23,5 +27,6 @@ export class Location {
         this.name = name;
         this.dateCreated = dateCreated;
         this.description = description;
+        this.address = address;
     }
 }

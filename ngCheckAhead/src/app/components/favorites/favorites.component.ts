@@ -13,7 +13,8 @@ export class FavoritesComponent implements OnInit {
   favorites: Location[];
 
   constructor(
-    private locSvc: LocationService
+    private locSvc: LocationService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,6 +28,10 @@ export class FavoritesComponent implements OnInit {
 
       }
     )
+  }
+
+  showDetail(id: number){
+    this.router.navigateByUrl('locations/'+id);
   }
 
 }
