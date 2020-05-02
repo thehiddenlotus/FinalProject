@@ -1,3 +1,5 @@
+import { Address } from './address';
+
 export class User {
 
   id: number;
@@ -8,6 +10,7 @@ export class User {
   role: string;
   dateCreated: string;
   dateUpdated: string;
+  address: Address;
 
   constructor(
     id?: number,
