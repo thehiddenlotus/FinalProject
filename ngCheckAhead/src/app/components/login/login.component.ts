@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       success => {
         console.log('LoginComponent.login(): Logged in');
 
-        this.router.navigate(['/search']);
+        this.router.navigateByUrl('/search');
       },
       failed => {
         console.log('LoginComponent.login(): Login Failed');
