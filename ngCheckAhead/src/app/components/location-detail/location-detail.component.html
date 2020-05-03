@@ -2,14 +2,15 @@
   <div class="col-md-6">
     <div class="card flex-md-row mb-2 h-md-250">
       <div class="card-body d-flex flex-column align-items-center">
-        <h3> King Soopers West Michigan Ave </h3>
-        <div class="mb-1 text-muted text-center">123 West Michigan Ave<br>Aurora, CO 80011</div>
+        <h3> {{location.name}} </h3>
+        <div class="mb-1 text-muted text-center">{{location.address.address}}<br>{{location.address.city}}, {{location.address.state}} {{location.address.zip}}</div>
         <ul class="list-group">
-          <li class="list-group-item">Cleanliness: 8.3</li>
-          <li class="list-group-item">Traffic: 8.9</li>
-          <li class="list-group-item">Checkout: 5.3</li>
+          <li class="list-group-item">Cleanliness: {{cleanlinessAvg}}</li>
+          <li class="list-group-item">Traffic: {{trafficAvg}}</li>
+          <li class="list-group-item">Checkout: {{checkoutAvg}}</li>
+          <li class="list-group-item">Stock: {{stockAvg}}</li>
         </ul>
-        <p>This location is not very busy at the moment</p>
+        <p>{{location.description}}</p>
         <button class='btb btn-secondary'>Add Review</button>
       </div>
     </div>

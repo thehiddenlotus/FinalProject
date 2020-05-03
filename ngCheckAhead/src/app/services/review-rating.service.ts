@@ -23,7 +23,16 @@ export class ReviewRatingService {
       })
     );
   }
-  public show(id) {
+  public findByLocation(id: number) {
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<ReviewRating[]>(`${environment.baseUrl}api/locations/${id}/reviews/reviewratings`, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('ReviewRatingService.index: error retrieving review-rating: ' + err);
+      })
+    );
+  }
+  public show(id: number) {
     const httpOptions = this.getHttpOptions();
     return this.http.get<ReviewRating>(`${this.url}/${id}`, httpOptions).pipe(
       catchError((err: any) => {

@@ -93,7 +93,7 @@ public class ReviewRatingServiceImpl implements ReviewRatingService {
 
 	@Override
 	public List<ReviewRating> findByLocation(int locationId) {
-		return rrRepo.findByReviewLocationId(locationId);
+		return rrRepo.findByReview_Location_Id(locationId);
 	}
 
 	@Override
