@@ -1,4 +1,5 @@
 import { Address } from './address';
+
 export class Location {
     id: number;
     address: Address;
@@ -15,7 +16,7 @@ export class Location {
         dateUpdated?: string,
         name?: string,
         dateCreated?: string,
-        description?: string
+        description?: string,
     ) {
         this.id = id;
         this.address = address;
