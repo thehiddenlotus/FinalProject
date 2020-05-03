@@ -1,6 +1,6 @@
 import { ReviewRatingId } from './review-rating-id';
 export class ReviewRating {
-        id: ReviewRatingId;
+    id: ReviewRatingId;
     ratingId: number;
     reviewId: number;
     ratingValue: number;
