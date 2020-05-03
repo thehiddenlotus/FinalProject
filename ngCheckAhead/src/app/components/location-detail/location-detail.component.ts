@@ -70,6 +70,7 @@ export class LocationDetailComponent implements OnInit {
   stockAvg: number;
   urlParam = parseInt(this.route.snapshot.paramMap.get("id"));
   urlId = +this.urlParam;
+  newReview: Review = null;
 
   constructor(
     private locSvc: LocationService,
@@ -92,6 +93,10 @@ export class LocationDetailComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  addReview(){
+    this.newReview = new Review;
   }
 
   //function to populate reviewRatings to get averages
@@ -139,7 +144,7 @@ export class LocationDetailComponent implements OnInit {
     sum = stock.length > 0 ? stock.reduce((previous, current) => current += previous) : 0;
     this.stockAvg = stock.length > 0 ? sum / stock.length : 0;
   }
-  
+
   //function to populate reviews
   populateReviews(id: number): void{
     this.reviewServ.getReviewsByLocationId(id).subscribe(
