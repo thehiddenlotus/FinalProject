@@ -265,7 +265,7 @@ START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (1, 1, 1, 'Looked great and speedy checkout', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (2, 2, 2, 'Fast as usual and not too busy', true, '2020-04-27', NULL, '2020-04-27');
-INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (3, 3, 3, 'Not the best time to go at 6pm', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (3, 3, 1, 'Not the best time to go at 6pm', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (4, 3, 2, 'Lack of fresh produce this time around', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (5, 3, 1, 'It was great', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (6, 2, 1, 'It was a bad experience', true, '2020-04-27', NULL, '2020-04-27');
@@ -304,6 +304,10 @@ INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 3, 3);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 3, 2);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 3, 5);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 4, 3);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 4, 5);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 4, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 4, 7);
 
 COMMIT;
 
@@ -326,9 +330,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 2, 1, 'Thanks for the input', '2020-04-27', NULL, 9, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 2, 1, 'During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that ', '2020-04-27', NULL, 0, NULL, true);
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'This is trash', '2020-04-27', NULL, 4, 1, true);
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'I was there', '2020-04-27', NULL, 9, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (4, 1, 3, 'This was the greatests time at the store This was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the store', '2020-04-27', NULL, 0, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (5, 1, 2, 'Na ah', '2020-04-27', NULL, 3, 4, true);
 
 COMMIT;
 

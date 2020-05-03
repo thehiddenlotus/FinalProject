@@ -56,7 +56,7 @@ public class Review {
 	@OneToMany(mappedBy = "review")
 	private List<ReviewRating> ratings;
 
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "review")
 	private List<ReviewComment> comments;
 	
