@@ -9,7 +9,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AddressService {
-  private url = environment.baseUrl + 'api/address'
+  private url = environment.baseUrl + 'api/addresses'
   private address : Address [] = [];
   constructor(
     private http: HttpClient
