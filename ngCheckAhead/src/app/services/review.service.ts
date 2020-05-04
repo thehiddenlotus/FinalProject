@@ -10,7 +10,7 @@ import { Review } from '../models/review';
 })
 export class ReviewService {
   private url = environment.baseUrl + 'api/reviews'
-  private review : Review [] = [];
+  private review: Review[] = [];
   constructor(
     private http: HttpClient
   ) { }
@@ -42,7 +42,7 @@ export class ReviewService {
     );
   }
   public create(review: Review) {
-   this.review.push(review);
+    this.review.push(review);
     const httpOptions = this.getHttpOptions();
     return this.http.post<Review>(this.url, review, httpOptions).pipe(
       catchError((err: any) => {
@@ -75,7 +75,7 @@ export class ReviewService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
+        'Authorization': 'my-auth-token'
       })
     };
     return httpOptions;
