@@ -18,7 +18,7 @@ public class ReviewRating {
 	// f i e l d s
 	
 	@EmbeddedId
-	private ReviewRatingId id;
+	private ReviewRatingId id = new ReviewRatingId();
 	
 	@Column(name="rating_value")
 	private int ratingValue;
@@ -41,6 +41,13 @@ public class ReviewRating {
 		super();
 	}
 	
+	public ReviewRating(int ratingValue, Review review, Rating rating) {
+		super();
+		this.ratingValue = ratingValue;
+		this.review = review;
+		this.rating = rating;
+	}
+
 	public ReviewRating(ReviewRatingId id, int ratingValue, Review review, Rating rating) {
 		super();
 		this.id = id;
