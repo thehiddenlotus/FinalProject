@@ -77,28 +77,56 @@ public class ReviewController {
 		return reviewSvc.findByLocation(locationId);
 	}
 	
-	@PostMapping("locations/{locationId}/reviews")
-    public Review createReview(
-    		@RequestBody Review review,
-    		@PathVariable("locationId") Integer locationId,
-    		HttpServletRequest request, 
-    		HttpServletResponse response,
-    		Principal principal) { 
-        try {
-           review = reviewSvc.createReview(review, locationId, principal.getName());
-           if(review == null) {
-               response.setStatus(400);
-               return null;
-           }else {
-               response.setStatus(201);
-               return review;
-           }
-       } catch (Exception e) {
-           e.printStackTrace();
-           response.setStatus(400);
-           return null;
-       }
-        
+//	@PostMapping("locations/{locationId}/reviews")
+//    public Review createReview(
+//    		@RequestBody Review review,
+//    		@PathVariable("locationId") Integer locationId,
+//    		HttpServletRequest request, 
+//    		HttpServletResponse response,
+//    		Principal principal) { 
+//        try {
+//           review = reviewSvc.oldCreateReview(review, locationId, principal.getName());
+//           if(review == null) {
+//               response.setStatus(400);
+//               return null;
+//           }else {
+//               response.setStatus(201);
+//               return review;
+//           }
+//       } catch (Exception e) {
+//           e.printStackTrace();
+//           response.setStatus(400);
+//           return null;
+//       }
+//        
+//	}
+
+	@PostMapping("locations/{locId}/reviews/{cleanRating}/{trafficRating}/{checkoutRating}/{stockRating}")
+	public Review createReviewWithRatings(
+			@RequestBody Review review,
+			@PathVariable("locId") Integer locId,
+			@PathVariable("cleanRating") Integer cleanRating,
+			@PathVariable("trafficRating") Integer trafficRating,
+			@PathVariable("checkoutRating") Integer checkoutRating,
+			@PathVariable("stockRating") Integer stockRating,
+			HttpServletRequest request, 
+			HttpServletResponse response,
+			Principal principal) { 
+		try {
+			review = reviewSvc.createReview(review, locId, cleanRating, trafficRating, checkoutRating, stockRating, principal.getName());
+			if(review == null) {
+				response.setStatus(400);
+				return null;
+			}else {
+				response.setStatus(201);
+				return review;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			response.setStatus(400);
+			return null;
+		}
+		
 	}
 	
 	@PutMapping("reviews/{reviewId}")
