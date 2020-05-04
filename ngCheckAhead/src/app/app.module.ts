@@ -30,6 +30,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { ReviewComponent } from './components/review/review.component';
 import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ReviewCommentService,
     ReviewRatingService,
     ReviewService,
-    UserService
+    UserService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
