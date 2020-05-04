@@ -1,3 +1,4 @@
+import { PopulartimesData } from './../models/populartimes-data';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -26,6 +27,7 @@ export class LocationService {
       })
     );
   }
+
   public show(id) {
     const httpOptions = this.getHttpOptions();
     return this.http.get<Location>(`${this.url}/${id}`, httpOptions).pipe(
