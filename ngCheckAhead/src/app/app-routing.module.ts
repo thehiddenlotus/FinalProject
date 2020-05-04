@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SearchComponent } from './components/search/search.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { ChangeAddressComponent } from './components/change-address/change-address.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'locations/:id', component: LocationDetailComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'settings', component: UserSettingsComponent }
+  { path: 'settings', component: UserSettingsComponent },
+  { path: 'changeAddress', component: ChangeAddressComponent }
   // { path: '**', component: NotFoundComponent }
 ];
 
