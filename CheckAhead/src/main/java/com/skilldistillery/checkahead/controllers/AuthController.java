@@ -13,13 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.services.AuthService;
+import com.skilldistillery.checkahead.services.UserService;
 
 @RestController
 @CrossOrigin({ "*", "http://localhost:4220" }) // Angular local port
 public class AuthController {
 
 	@Autowired
-	AuthService svc;
+	private AuthService svc;
+	
+	@Autowired
+	private UserService userSvc;
 	
 	@RequestMapping(path = "/register", method = RequestMethod.POST)
 	public User register(
@@ -34,7 +38,7 @@ public class AuthController {
 	}
 
 	@RequestMapping(path = "/authenticate", method = RequestMethod.GET)
-	public Principal authenticate(Principal principal) {
-	    return principal;
+	public User authenticate(Principal principal) {
+	    return userSvc.findUserByName(principal.getName());
 	}
 }
