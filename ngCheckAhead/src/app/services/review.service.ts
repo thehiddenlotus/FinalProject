@@ -44,10 +44,10 @@ export class ReviewService {
       })
     );
   }
-  public create(review: Review, ratings: number[], location: Location) {
+  public create(review: Review, ratings: number[], locationId: number) {
     this.review.push(review);
     const httpOptions = this.getHttpOptions();
-    return this.http.post<Review>(environment.baseUrl+'api/locations/'+`${location.id}/${ratings[0]}/${ratings[1]}/${ratings[2]}/${ratings[3]}`, review, httpOptions).pipe(
+    return this.http.post<Review>(environment.baseUrl+'api/locations/'+`${locationId}/reviews/${ratings[0]}/${ratings[1]}/${ratings[2]}/${ratings[3]}`, review, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('ReviewService.create: error creating entry: ' + err);
