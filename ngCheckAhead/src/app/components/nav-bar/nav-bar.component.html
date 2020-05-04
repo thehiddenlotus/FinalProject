@@ -15,5 +15,7 @@
       <a [routerLink]="['/settings']" class="nav-item nav-link active">Settings</a>
     </div>
   </div>
-  <app-logout></app-logout>
+  <div *ngIf="checkLogin()">
+    <app-logout></app-logout>
+  </div>
 </nav>
