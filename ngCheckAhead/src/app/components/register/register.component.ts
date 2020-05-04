@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(){
+  register() {
     console.log(this.newAddress, this.newUser);
     this.newUser.address = this.newAddress;
     this.auth.register(this.newUser).subscribe(
@@ -33,8 +33,8 @@ export class RegisterComponent implements OnInit {
         console.log('RegisterComponent.register(): user registered.');
         this.auth.login(this.newUser.username, this.newUser.password).subscribe(
           next => {
-            console.log('RegisterComponent.register(): user logged in, routing to /todo.');
-            this.router.navigateByUrl('/todo');
+            console.log('RegisterComponent.register(): user logged in, routing to /home.');
+            this.router.navigateByUrl('/home');
           },
           error => {
             console.error('RegisterComponent.register(): error logging in.');
