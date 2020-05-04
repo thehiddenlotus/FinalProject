@@ -25,6 +25,7 @@ import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -48,8 +49,8 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 
 
 
-   //LogoutComponent,
-   // ReviewComponent,
+    //LogoutComponent,
+    // ReviewComponent,
     //ReviewFormComponent,
     CommentComponent,
     CommentFormComponent,
@@ -75,7 +76,8 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     ReviewCommentService,
     ReviewRatingService,
     ReviewService,
-    UserService
+    UserService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
