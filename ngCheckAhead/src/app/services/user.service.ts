@@ -31,7 +31,7 @@ export class UserService {
     return this.http.get<User>(`${this.url}/${id}`, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('UserService.show: error retrieving entry: ' + err);
+        return throwError('UserService.show: error retrieving user: ' + err);
       })
     );
   }
