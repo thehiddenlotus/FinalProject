@@ -21,7 +21,7 @@ USE `checkaheaddb` ;
 DROP TABLE IF EXISTS `address` ;
 
 CREATE TABLE IF NOT EXISTS `address` (
-  `id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL,
   `address` VARCHAR(1000) NULL,
   `city` VARCHAR(500) NULL,
   `zip` INT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `name` VARCHAR(500) NULL,
   `date_created` DATETIME NULL,
   `description` TEXT NULL,
-  `google_place_id` VARCHAR(1000) NULL,
+  `google_place_id` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   INDEX `fk_location_usercreator_idx` (`creator_id` ASC),
@@ -226,7 +226,7 @@ INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (1, '3932
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (2, '4271 South Buckley Road', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (3, '12200 E Mississippi Ave', 'Aurora', 80012, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (4, '12800 E Mississippi Ave', 'Aurora', 80012, 'CO');
-INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (5, '16910 E Quincy Ave', 'Aurora', 80015, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (5, '16746 E Smoky Hill Rd', 'Centennial', 80015, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (6, '3440 S Tower Rd', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (7, '1200 S Buckley Rd', 'Aurora', 80017, 'CO');
 
@@ -250,10 +250,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.', 'ChIJuSN4swWJbIcRtkpQ6cjAzWg');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (2, 5, 3, '2020-04-27', 'Target Grocery', '2020-04-27', 'Grocery delivery and fresh produce', 'ChIJT5X5NASJbIcRBLMprihvsOA');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.', 'ChIJ5ZyMLQGJbIcRg8wCW2q6dx8');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (2, 5, 3, '2020-04-27', 'Walmart ', '2020-04-27', 'Grocery delivery and fresh produce', 'ChIJgXdlxR6JbIcR8l3Vcs6w2gM');
 INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (3, 6, 3, '2020-04-27', 'Natural Grocers Aurora South', '2020-04-27', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood', 'ChIJ956jnEWIbIcRqxLVZjPVHNY');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union', NULL);
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union', 'ChIJU5F43GRibIcR9uY-58eK6KI');
 
 COMMIT;
 
@@ -270,6 +270,9 @@ INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (5, 3, 1, 'It was great', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (6, 2, 1, 'It was a bad experience', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (7, 1, 2, 'It was the best shopping experience of my life! Go early', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (8, 2, 3, 'Favorite store', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (9, 3, 3, 'This is my favorite', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (10, 3, 4, 'This is an ok one', true, '2020-04-27', NULL, '2020-04-27');
 
 COMMIT;
 
