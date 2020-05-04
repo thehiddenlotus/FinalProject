@@ -1,6 +1,7 @@
 package com.skilldistillery.checkahead.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,8 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Review;
+import com.skilldistillery.checkahead.entities.ReviewRating;
 import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.LocationRepository;
+import com.skilldistillery.checkahead.repositories.RatingRepository;
+import com.skilldistillery.checkahead.repositories.ReviewRatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
 import com.skilldistillery.checkahead.repositories.UserRepository;
 
@@ -25,7 +29,13 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewRepository reviewRepo;
 
 	@Autowired
+	private ReviewRatingRepository rrRepo;
+
+	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private RatingRepository ratingRepo;
 
 	@Autowired
 	private LocationRepository locRepo;
@@ -63,7 +73,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public Review createReview(Review review, Integer locationId, String username) {
+	public Review createReview(Review review, Integer locationId, Integer cleanRating, Integer trafficRating, Integer checkoutRating, Integer stockRating, String username) {
 		User user = userRepo.findByUsername(username);
 		Optional<Location> loc = locRepo.findById(locationId);
 		if (user != null && loc.isPresent()) {
@@ -71,7 +81,22 @@ public class ReviewServiceImpl implements ReviewService {
 			review.setLocation(loc.get());
 			review.setDateCreated(LocalDateTime.now());
 //			if (review.getUser().getUsername().equals(username)) {
-				reviewRepo.saveAndFlush(review);
+			reviewRepo.saveAndFlush(review);
+			ReviewRating clean = new ReviewRating(cleanRating, review, ratingRepo.getOne(1));
+			ReviewRating traffic = new ReviewRating(trafficRating, review, ratingRepo.getOne(2));
+			ReviewRating checkout = new ReviewRating(checkoutRating, review, ratingRepo.getOne(3));
+			ReviewRating stock = new ReviewRating(stockRating, review, ratingRepo.getOne(4));
+			rrRepo.saveAndFlush(clean);
+			rrRepo.saveAndFlush(traffic);
+			rrRepo.saveAndFlush(checkout);
+			rrRepo.saveAndFlush(stock);
+			List<ReviewRating> ratings = new ArrayList<>();
+			ratings.add(clean);
+			ratings.add(traffic);
+			ratings.add(checkout);
+			ratings.add(stock);
+			review.setRatings(ratings);
+			return reviewRepo.saveAndFlush(review);
 //			}
 		} else {
 			review = null;

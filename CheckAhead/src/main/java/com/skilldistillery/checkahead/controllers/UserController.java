@@ -25,7 +25,7 @@ import com.skilldistillery.checkahead.services.UserService;
 public class UserController {
 
 	@Autowired
-	UserService userServ;
+	private UserService userServ;
 
 	@GetMapping("users")
 	public List<User> showAllUsers(HttpServletResponse resp){

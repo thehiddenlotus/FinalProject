@@ -1,9 +1,10 @@
 import { TrafficData } from './../../models/traffic-data';
 import { TrafficDataService } from './../../services/traffic-data.service';
+import { UserService } from './../../services/user.service';
 import { ReviewService } from './../../services/review.service';
 import { ReviewRating } from './../../models/review-rating';
 import { ReviewRatingService } from './../../services/review-rating.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { LocationService } from './../../services/location.service';
 import { Location } from 'src/app/models/location';
 import { ActivatedRoute } from "@angular/router";
@@ -17,6 +18,8 @@ import { multi } from './data';
 import { Review } from 'src/app/models/review';
 import { Rating } from 'src/app/models/rating';
 import { Comment } from 'src/app/models/comment';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-location-detail',
@@ -77,10 +80,15 @@ export class LocationDetailComponent implements OnInit {
   newReview: Review = null;
   newComment: Comment = null;
   popTimes: TrafficData;
+  currentUser: User = null;
+  userId = null;
+  opt: Optional = null;
 
   //M E T H O D S
   constructor(
     private locSvc: LocationService,
+    private userSvc: UserService,
+    private auth: AuthService,
     private rrServ: ReviewRatingService,
     private route: ActivatedRoute,
     private reviewServ: ReviewService,
@@ -101,14 +109,32 @@ export class LocationDetailComponent implements OnInit {
         console.log(error);
       }
     )
+    this.userId = this.auth.getCurrentUserId();
+
+    this.userSvc.show(this.userId).subscribe(
+      success => {
+        this.currentUser = success;
+        console.log(this.currentUser);
+
+      },
+      fail => {
+        console.log("no user logged in");
+
+      }
+    )
   }
 
   addReview() {
     this.newReview = new Review();
+    this.newReview.location = this.location;
+    this.newReview.user = this.currentUser;
   }
 
-  addComment() {
+
+  addComment(review: Review){
     this.newComment = new Comment();
+    this.newComment.user = this.currentUser;
+    this.newComment.review = review;
   }
 
   //function to populate reviewRatings to get averages

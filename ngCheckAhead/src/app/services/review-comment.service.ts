@@ -4,15 +4,22 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Comment } from '../models/comment';
+import { AuthService } from './auth.service';
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReviewCommentService {
+
   private url = environment.baseUrl + 'api/comment'
   private comment : Comment [] = [];
+
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
+
   public index() {
     const httpOptions = this.getHttpOptions();
     return this.http.get<Comment[]>(this.url, httpOptions).pipe(
@@ -34,7 +41,11 @@ export class ReviewCommentService {
   public create(comment: Comment) {
    this.comment.push(comment);
     const httpOptions = this.getHttpOptions();
-    return this.http.post<Comment>(this.url, comment, httpOptions).pipe(
+    return this.http.post<Comment>(environment.baseUrl+'api/locations/reviews/'
+          + comment.review.id
+          + '/comments',
+          comment,
+          httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('CommentService.create: error creating entry: ' + err);
@@ -62,12 +73,25 @@ export class ReviewCommentService {
     );
   }
   private getHttpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
-      })
-    };
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (credentials) {
+
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest',
+          'Authorization': `Basic ${credentials}`
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        })
+      };
+    }
     return httpOptions;
   }
 }

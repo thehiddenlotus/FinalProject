@@ -4,15 +4,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../models/user';
+import { Address } from '../models/address';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = environment.baseUrl + 'api/user'
-  private user : User [] = [];
+  private url = environment.baseUrl + 'api/users'
+  private user: User[] = [];
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
   public index() {
     const httpOptions = this.getHttpOptions();
@@ -28,12 +31,12 @@ export class UserService {
     return this.http.get<User>(`${this.url}/${id}`, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
-        return throwError('UserService.show: error retrieving entry: ' + err);
+        return throwError('UserService.show: error retrieving user: ' + err);
       })
     );
   }
   public create(user: User) {
-   this.user.push(user);
+    this.user.push(user);
     const httpOptions = this.getHttpOptions();
     return this.http.post<User>(this.url, user, httpOptions).pipe(
       catchError((err: any) => {
@@ -63,12 +66,25 @@ export class UserService {
     );
   }
   private getHttpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
-      })
-    };
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (credentials) {
+
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest',
+          'Authorization': `Basic ${credentials}`
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        })
+      };
+    }
     return httpOptions;
   }
 }

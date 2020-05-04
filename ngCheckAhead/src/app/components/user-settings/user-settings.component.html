@@ -7,10 +7,14 @@
         <div class="card-body">
           <h5 class="card-title">Change Address</h5>
           <p class="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
+            Moved or at a different location?
           </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a
+            [routerLink]="['/changeAddress']"
+            *ngIf="checkLogin()"
+            class="btn btn-primary"
+            >Update Address</a
+          >
         </div>
       </div>
     </div>
@@ -18,12 +22,9 @@
     <div class="col-sm-6">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">More Settings</h5>
-          <p class="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
-          </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <h5 class="card-title">Delete Account</h5>
+          <p class="card-text">Sad to see you go...</p>
+          <a href="#" *ngIf="checkLogin()" class="btn btn-primary">Delete</a>
         </div>
       </div>
     </div>

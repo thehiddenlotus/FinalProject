@@ -1,0 +1,60 @@
+<div class="container register-form">
+  <form>
+    <div class="note">
+      <p>Update Address</p>
+    </div>
+
+    <div class="form-content">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              name="address"
+              class="form-control"
+              placeholder="Street Address *"
+              [(ngModel)]="changeAddress.address"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="city"
+              class="form-control"
+              placeholder="City *"
+              [(ngModel)]="changeAddress.city"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="zip"
+              class="form-control"
+              placeholder="Zip *"
+              [(ngModel)]="changeAddress.zip"
+            />
+          </div>
+
+          <div class="form-group">
+            <input
+              type="text"
+              name="state"
+              class="form-control"
+              placeholder="State *"
+              [(ngModel)]="changeAddress.state"
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btnSubmit"
+        (click)="updateAddress(changeAddress)"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

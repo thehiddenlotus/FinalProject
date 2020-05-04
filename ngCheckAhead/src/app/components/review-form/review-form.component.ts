@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Review } from 'src/app/models/review';
+import { ReviewService } from 'src/app/services/review.service';
+import { Router } from '@angular/router';
+import { ReviewRating } from 'src/app/models/review-rating';
+import { Location } from 'src/app/models/location';
 
 @Component({
   selector: 'app-review-form',
@@ -8,17 +12,31 @@ import { Review } from 'src/app/models/review';
 })
 export class ReviewFormComponent implements OnInit {
 
-  newReview: Review = new Review;
+  @Input() newReview: Review;
+  @Input() location: Location;
+  ratingValues = [];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private svc: ReviewService
+  ) { }
 
   ngOnInit(): void {
-    this.newReview.active = true;
-    this.newReview.reviewRatings[0].ratingId = 1;
-    this.newReview.reviewRatings[1].ratingId = 2;
-    this.newReview.reviewRatings[2].ratingId = 3;
-    this.newReview.reviewRatings[3].ratingId = 4;
+    // this.newReview.active = true;
+    // this.newReview.reviewRatings[0] = new ReviewRating;
 
   }
 
+  postReview(){
+    this.svc.create(this.newReview, this.ratingValues, this.location).subscribe(
+      data => {
+        console.log('ReviewComponent.create(): Review created.');
+        this.router.navigateByUrl('/locations/'+ this.newReview.location.id)
+      },
+      err => {
+        console.error('ReviewComponent.create(): ERROR.');
+        console.error(err);
+      }
+    );
+  }
 }

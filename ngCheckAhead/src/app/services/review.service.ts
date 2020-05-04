@@ -4,15 +4,18 @@ import { environment } from 'src/environments/environment';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Review } from '../models/review';
+import { AuthService } from './auth.service';
+import { Location } from '../models/location';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
   private url = environment.baseUrl + 'api/reviews'
-  private review : Review [] = [];
+  private review: Review[] = [];
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
   public index() {
     const httpOptions = this.getHttpOptions();
@@ -41,10 +44,10 @@ export class ReviewService {
       })
     );
   }
-  public create(review: Review) {
-   this.review.push(review);
+  public create(review: Review, ratings: number[], location: Location) {
+    this.review.push(review);
     const httpOptions = this.getHttpOptions();
-    return this.http.post<Review>(this.url, review, httpOptions).pipe(
+    return this.http.post<Review>(environment.baseUrl+'api/locations/'+`${location.id}/${ratings[0]}/${ratings[1]}/${ratings[2]}/${ratings[3]}`, review, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('ReviewService.create: error creating entry: ' + err);
@@ -72,12 +75,26 @@ export class ReviewService {
     );
   }
   private getHttpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
-      })
-    };
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (credentials) {
+
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest',
+          'Authorization': `Basic ${credentials}`
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        })
+      };
+    }
     return httpOptions;
   }
+
 }

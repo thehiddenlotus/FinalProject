@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ReviewRating } from '../models/review-rating';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ReviewRatingService {
   private url = environment.baseUrl + 'api/reviewrating'
   private reviewrating : ReviewRating [] = [];
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
   public index() {
     const httpOptions = this.getHttpOptions();
@@ -72,12 +74,26 @@ export class ReviewRatingService {
     );
   }
   private getHttpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
-      })
-    };
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (credentials) {
+
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest',
+          'Authorization': `Basic ${credentials}`
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        })
+      };
+    }
     return httpOptions;
   }
+
 }

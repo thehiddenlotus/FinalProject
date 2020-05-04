@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Location } from '../models/location';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class LocationService {
   private url = environment.baseUrl + 'api/locations'
   private address : Location [] = [];
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
   public index() {
     const httpOptions = this.getHttpOptions();
@@ -66,14 +68,28 @@ export class LocationService {
     );
   }
   private getHttpOptions() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Athorization': 'my-auth-token'
-      })
-    };
+    const credentials = this.auth.getCredentials();
+    let httpOptions = {};
+    if (credentials) {
+
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest',
+          'Authorization': `Basic ${credentials}`
+        })
+      };
+    } else {
+      httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        })
+      };
+    }
     return httpOptions;
   }
+
 }
 
 
