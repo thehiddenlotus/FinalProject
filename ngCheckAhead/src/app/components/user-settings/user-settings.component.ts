@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-user-settings',
@@ -9,14 +12,34 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UserSettingsComponent implements OnInit {
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
+    private userSvc: UserService
   ) { }
 
   ngOnInit(): void {
+    const userId = this.auth.getCurrentUserId();
+    console.log("Current user id is " + userId);
+
   }
 
   checkLogin(): boolean {
     return this.auth.checkLogin();
+  }
+
+  deleteUser(userId: number) {
+    console.log(userId);
+
+    this.userSvc.destroy(userId).subscribe(
+      success => {
+        this.router.navigateByUrl('/search');
+      },
+      fail => {
+        console.error("This user failed to delete");
+
+      }
+    )
+
   }
 
 }
