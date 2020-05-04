@@ -9,7 +9,7 @@ import { Review } from '../models/review';
   providedIn: 'root'
 })
 export class ReviewService {
-  private url = environment.baseUrl + 'api/review'
+  private url = environment.baseUrl + 'api/reviews'
   private review : Review [] = [];
   constructor(
     private http: HttpClient
@@ -29,6 +29,15 @@ export class ReviewService {
       catchError((err: any) => {
         console.log(err);
         return throwError('ReviewService.show: error retrieving entry: ' + err);
+      })
+    );
+  }
+  public getReviewsByLocationId(id) {
+    const httpOptions = this.getHttpOptions();
+    return this.http.get<Review[]>(`${environment.baseUrl}api/locations/${id}/reviews`, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(' error retrieving location: ' + err);
       })
     );
   }

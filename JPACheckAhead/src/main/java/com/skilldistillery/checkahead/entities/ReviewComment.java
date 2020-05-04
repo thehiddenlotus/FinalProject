@@ -36,7 +36,6 @@ public class ReviewComment {
 
 	private boolean active;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="user_id")
 	private User user;

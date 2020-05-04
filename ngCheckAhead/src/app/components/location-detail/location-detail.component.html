@@ -1,254 +1,143 @@
+<div class="row mb-1 align-items-center">
+  <div class="col-md-6">
+    <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card-body d-flex flex-column align-items-center">
+        <h3> {{location.name}} </h3>
+        <div class="mb-1 text-muted text-center">{{location.address.address}}<br>{{location.address.city}},
+          {{location.address.state}} {{location.address.zip}}</div>
+        <ul class="list-group">
+          <li class="list-group-item">Cleanliness: {{cleanlinessAvg}}</li>
+          <li class="list-group-item">Traffic: {{trafficAvg}}</li>
+          <li class="list-group-item">Checkout: {{checkoutAvg}}</li>
+          <li class="list-group-item">Stock: {{stockAvg}}</li>
+        </ul>
+        <p>{{location.description}}</p>
+        <button class='btb btn-secondary' *ngIf='!newReview' (click)="addReview()">Add Review</button>
+        <button class='btb btn-secondary' *ngIf='newReview' (click)="newReview = null">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 ">
+    <div class="card flex-md-row mb-4 box-shadow h-md-450">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12288.854800478415!2d-104.8098737!3d39.6449049!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c8854f22a4bc7%3A0xdc5ae92be99b03ba!2s3932%20S%20Joplin%20Way%2C%20Aurora%2C%20CO%2080013!5e0!3m2!1sen!2sus!4v1588260595430!5m2!1sen!2sus"
+        width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+    </div>
+  </div>
+</div>
 
-    <div class="row mb-1">
-        <div class="col-md-6">
+<div *ngIf='newReview'>
+  <hr>
+  <app-review-form></app-review-form>
+</div>
+<hr>
+
+<div class="row mb-1">
+  <div class="col-md-12">
+    <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card-body d-flex flex-column align-items-center">
+        <h3>Store Traffic Details </h3>
+        <p>You can view below to find preferable times to go to the store
+        </p>
+        <p>green = recommended | blue = good | orange = high traffic
+        </p>
+        <ngx-charts-heat-map [view]="view" [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel" [results]="multi" (select)="onSelect($event)" (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)">
+        </ngx-charts-heat-map>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+
+<div class="row mb-1" *ngFor="let review of reviews">
+  <div class="col-md-4">
+    <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card-body d-flex flex-column align-items-center">
+        <ul class="list-group w-100 text-center" *ngFor="let reviewRating of reviewRatings">
+          <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
+            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+          <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
+            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+          <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
+            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+          <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
+            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8" >
+    <div class="card flex-md-row mb-4 box-shadow h-md-450">
+      <div class="card-body d-flex flex-column align-items-start">
+        <strong class="d-inline-block mb-2 text-success">Review by {{review.user.username}}</strong>
+        <h3 class="mb-0">
+          <a class="text-dark" href="#">{{review.content}}</a>
+        </h3>
+        <div class="mb-1 text-muted">{{review.dateCreated}}</div>
+        <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p>
+        <button (click)="ratingReviewSelected2=true" *ngIf='review.comments.length > 1'>View comments</button>
+        <button (click)="ratingReviewSelected2=true" *ngIf='review.comments.length < 2'>Add comment</button>
+      </div>
+    </div>
+    <div class="container-fluid"  *ngFor="let comment of review.comments">
+      <div *ngIf='ratingReviewSelected2 && review.comments.length > 1' class="row mb-1">
+        <div class="col-md-3" *ngIf='comment.id !== 1'>
           <div class="card flex-md-row mb-2 h-md-250">
             <div class="card-body d-flex flex-column align-items-center">
-              <h3> King Soopers West Michigan Ave </h3>
-              <div class="mb-1 text-muted text-center">123 West Michigan Ave<br>Aurora, CO 80011</div>
               <ul class="list-group">
-                  <li class="list-group-item">Cleanliness: 8.3</li>
-                  <li class="list-group-item">Traffic: 8.9</li>
-                  <li class="list-group-item">Checkout: 5.3</li>
+                <li class="list-group-item">Rating Review: {{comment.reviewRating}}</li>
               </ul>
-              <p>This location is not very busy at the moment</p>
-              <button class='btb btn-secondary'>Add Review</button>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9" *ngIf='comment.id !== 1' >
           <div class="card flex-md-row mb-4 box-shadow h-md-450">
-            <!-- <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success">Design</strong>
+            <div class="card-body d-flex flex-column align-items-start">
+              <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
               <h3 class="mb-0">
-                <a class="text-dark" href="#">Post title</a>
+                <a class="text-dark" href="#">Review Comments need a title</a>
               </h3>
-              <div class="mb-1 text-muted">Nov 11</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div> -->
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12288.854800478415!2d-104.8098737!3d39.6449049!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c8854f22a4bc7%3A0xdc5ae92be99b03ba!2s3932%20S%20Joplin%20Way%2C%20Aurora%2C%20CO%2080013!5e0!3m2!1sen!2sus!4v1588260595430!5m2!1sen!2sus" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+              <div class="mb-1 text-muted">{{comment.createdAt}}</div>
+              <p class="card-text mb-auto">{{comment.content}}</p>
+              <button (click)="ratingReviewSelected2=false">Hide comments</button>
+            </div>
           </div>
         </div>
       </div>
-
-      <hr>
-
-      <div class="row mb-1">
-        <div class="col-md-12">
-          <div class="card flex-md-row mb-2 h-md-250">
-            <div class="card-body d-flex flex-column align-items-center">
-              <h3> Store Data </h3>
-              <p>This is where some explanation is going to go and below this some awesome
-                  data that will be way cool
-              </p>              
-              <div class="row mb-1">
-                <div class="col-md-4">
-                  <div class="card flex-md-row mb-2 h-md-250">
-                    <div class="card-body d-flex flex-column align-items-center">
-                      <ul class="list-group">
-                          <li class="list-group-item">Cleanliness: 8.3</li>
-                          <li class="list-group-item">Traffic: 8.9</li>
-                          <li class="list-group-item">Checkout: 5.3</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card flex-md-row mb-2 h-md-250">
-                      <div class="card-body d-flex flex-column align-items-center">
-                        <ul class="list-group">
-                            <li class="list-group-item">Cleanliness: 8.3</li>
-                            <li class="list-group-item">Traffic: 8.9</li>
-                            <li class="list-group-item">Checkout: 5.3</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                <div class="col-md-4">
-                    <div class="card flex-md-row mb-2 h-md-250">
-                        <div class="card-body d-flex flex-column align-items-center">
-                          <ul class="list-group">
-                              <li class="list-group-item">Cleanliness: 8.3</li>
-                              <li class="list-group-item">Traffic: 8.9</li>
-                              <li class="list-group-item">Checkout: 5.3</li>
-                          </ul>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cleanliness: 8.3</li>
-                        <li class="list-group-item">Traffic: 8.9</li>
-                        <li class="list-group-item">Checkout: 5.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Randy</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Clean and stocked every time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">Lorem ipsum dolor sit amet, consectetur adipiscing 
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                  <button  (click)="ratingReviewSelected2=true">View comments</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf='ratingReviewSelected2' class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Rating Review: 8.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Clean and stocked every time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">I found this very helpful.</p>
-                      <button  (click)="ratingReviewSelected2=false">Hide comments</button>
-                    </div>
-              </div>
-            </div>
-          </div>
+    </div>
+  </div>
+</div>
 
 
-          <hr>
 
-        <div class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cleanliness: 8.3</li>
-                        <li class="list-group-item">Traffic: 8.9</li>
-                        <li class="list-group-item">Checkout: 5.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Gary</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Not so great this last time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">Lorem ipsum dolor sit amet, consectetur adipiscing 
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                      <button  (click)="ratingReviewSelected=true">View comments</button>
-                    </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf='ratingReviewSelected' class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Rating Review: 8.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Clean and stocked every time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">I found this very helpful.</p>
-                      <button  (click)="ratingReviewSelected=false">Hide comments</button>
-                    </div>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-
-        <div  class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cleanliness: 8.3</li>
-                        <li class="list-group-item">Traffic: 8.9</li>
-                        <li class="list-group-item">Checkout: 5.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Clean and stocked every time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">Lorem ipsum dolor sit amet, consectetur adipiscing 
-                      elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.</p>
-                      <button  (click)="ratingReviewSelected1=true">View comments</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngIf='ratingReviewSelected1' class="row mb-1">
-            <div class="col-md-4">
-              <div class="card flex-md-row mb-2 h-md-250">
-                <div class="card-body d-flex flex-column align-items-center">
-                    <ul class="list-group">
-                        <li class="list-group-item">Rating Review: 8.3</li>
-                    </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card flex-md-row mb-4 box-shadow h-md-450">
-                <div class="card-body d-flex flex-column align-items-start">
-                  <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
-                  <h3 class="mb-0">
-                    <a class="text-dark" href="#">Clean and stocked every time</a>
-                  </h3>
-                  <div class="mb-1 text-muted">April 15, 2020</div>
-                  <p class="card-text mb-auto">I found this very helpful.</p>
-                      <button  (click)="ratingReviewSelected1=false">Hide comments</button>
-                    </div>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-
+<!-- <div *ngIf='ratingReviewSelected2' class="row mb-1">
+  <div class="col-md-4">
+    <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card-body d-flex flex-column align-items-center">
+        <ul class="list-group">
+          <li class="list-group-item">Rating Review: 8.3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card flex-md-row mb-4 box-shadow h-md-450">
+      <div class="card-body d-flex flex-column align-items-start">
+        <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
+        <h3 class="mb-0">
+          <a class="text-dark" href="#">Clean and stocked every time</a>
+        </h3>
+        <div class="mb-1 text-muted">April 15, 2020</div>
+        <p class="card-text mb-auto">I found this very helpful.</p>
+        <button (click)="ratingReviewSelected2=false">Hide comments</button>
+      </div>
+    </div>
+  </div>
+</div> -->

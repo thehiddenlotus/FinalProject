@@ -20,7 +20,8 @@ export class User {
     active?: boolean,
     role?: string,
     dateCreated?: string,
-    dateUpdated?: string
+    dateUpdated?: string,
+    address?: Address
     ){
       this.id = id;
       this.username = username;
@@ -30,5 +31,6 @@ export class User {
       this.role = role;
       this.dateCreated = dateCreated;
       this.dateUpdated = dateUpdated;
+      this.address = address;
     }
 }

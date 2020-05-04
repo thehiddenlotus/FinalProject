@@ -20,21 +20,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< HEAD
 import { TeamComponent } from './components/team/team.component';
 import { FormsModule } from '@angular/forms';
-=======
-
-import { TeamComponent } from './components/team/team.component';
-
-import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './components/logout/logout.component';
-import { ReviewComponent } from './components/review/review.component';
-import { ReviewFormComponent } from './components/review-form/review-form.component';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
->>>>>>> 5771a54b6c8cd963f4a1b208d9aa1dba01cc89fa
+
+
 
 @NgModule({
   declarations: [
@@ -47,26 +40,32 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
-<<<<<<< HEAD
-    TeamComponent
-=======
 
-    TeamComponent
+    TeamComponent,
 
-    LogoutComponent,
-    ReviewComponent,
-    ReviewFormComponent,
+
+
+
+
+
+   //LogoutComponent,
+   // ReviewComponent,
+    //ReviewFormComponent,
     CommentComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    FavoritesComponent
 
->>>>>>> 5771a54b6c8cd963f4a1b208d9aa1dba01cc89fa
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    //NgxChartsModule,
+    //BrowserAnimationsModule
+
+
   ],
   providers: [
     AuthService,

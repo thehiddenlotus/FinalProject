@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light" style="background-color:#C7CFD9">
   <a href="#" class="navbar-brand">Check Ahead</a>
   <button
     type="button"
@@ -13,15 +13,11 @@
     <div class="navbar-nav">
       <a [routerLink]="['/home']" class="nav-item nav-link active">Home</a>
       <a [routerLink]="['/search']" class="nav-item nav-link active">Search</a>
-      <a [routerLink]="['/login']" class="nav-item nav-link active">Login</a>
-      <a [routerLink]="['/register']" class="nav-item nav-link active"
-        >Register</a
-      >
+      <a [routerLink]="['/login']" class="nav-item nav-link active" *ngIf="!checkLogin()">Login</a>
+      <a [routerLink]="['/register']" class="nav-item nav-link active" *ngIf="!checkLogin()">Register</a>
     </div>
     <div class="navbar-nav ml-auto">
-      <a [routerLink]="['/settings']" class="nav-item nav-link active"
-        >Settings</a
-      >
+      <a [routerLink]="['/settings']" class="nav-item nav-link active">Settings</a>
     </div>
   </div>
   <!-- <app-logout></app-logout> -->
