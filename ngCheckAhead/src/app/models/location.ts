@@ -8,6 +8,7 @@ export class Location {
     name: string;
     dateCreated: string;
     description: string;
+    googleId: string;
 
     constructor(
         id?: number,
@@ -17,6 +18,7 @@ export class Location {
         name?: string,
         dateCreated?: string,
         description?: string,
+        googleId?:string
     ) {
         this.id = id;
         this.address = address;
@@ -25,5 +27,6 @@ export class Location {
         this.name = name;
         this.dateCreated = dateCreated;
         this.description = description;
+        this.googleId = googleId;
     }
 }
