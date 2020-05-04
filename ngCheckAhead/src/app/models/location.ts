@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { Address } from './address';
 
 export class Location {
@@ -9,6 +10,7 @@ export class Location {
     dateCreated: string;
     description: string;
     googleId: string;
+    creator: User;
 
     constructor(
         id?: number,
@@ -18,7 +20,8 @@ export class Location {
         name?: string,
         dateCreated?: string,
         description?: string,
-        googleId?:string
+        googleId?:string,
+        creator?: User
     ) {
         this.id = id;
         this.address = address;
@@ -28,5 +31,6 @@ export class Location {
         this.dateCreated = dateCreated;
         this.description = description;
         this.googleId = googleId;
+        this.creator = creator;
     }
 }

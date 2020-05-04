@@ -11,6 +11,7 @@
           <li class="list-group-item">Checkout: {{checkoutAvg}}</li>
           <li class="list-group-item">Stock: {{stockAvg}}</li>
         </ul>
+        <br>
         <p>{{location.description}}</p>
         <button class='btb btn-secondary' *ngIf='!newReview && currentUser' (click)="addReview()">Add Review</button>
         <button class='btb btn-secondary' *ngIf='newReview' (click)="newReview = null">Cancel</button>
@@ -29,7 +30,7 @@
 
 <div *ngIf='newReview'>
   <hr>
-  <app-review-form [newReview]='newReview'></app-review-form>
+  <app-review-form [location]='location' [newReview]='newReview'></app-review-form>
 </div>
 <hr>
 
@@ -87,10 +88,10 @@
         <button *ngIf='!newComment && currentUser' (click)="addComment(review)">Add comment</button>
         <button *ngIf='newComment' (click)="newComment = null">Cancel</button>
       </div>
-    </div>
-    <div *ngIf='newComment'>
-      <hr>
-      <app-comment-form [newComment]='newComment'></app-comment-form>
+      <div *ngIf='newComment'>
+        <hr>
+        <app-comment-form [newComment]='newComment'></app-comment-form>
+      </div>
     </div>
     <div class="container-fluid"  *ngFor="let comment of review.comments">
       <div *ngIf='ratingReviewSelected2 && review.comments.length > 1' class="row mb-1">
