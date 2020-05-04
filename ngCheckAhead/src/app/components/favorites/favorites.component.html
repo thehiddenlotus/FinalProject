@@ -18,7 +18,7 @@
               </div>
               <div class="col-sm-9">
                 <h3 class="mb-0">
-                  <a class="text-dark" href="#">{{location.name}}</a>
+                  <a class="text-dark" [routerLink]="['/locations/'+location.id]">{{location.name}}</a>
                 </h3>
                 <div class="mb-1 text-muted">{{location.address.address}}, {{location.address.city}}</div>
                 <p class="card-text mb-auto">{{location.description}}</p>
