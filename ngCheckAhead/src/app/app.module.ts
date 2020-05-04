@@ -20,20 +20,12 @@ import { RegisterComponent } from './components/register/register.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
-import { FormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-
 import { TeamComponent } from './components/team/team.component';
-
-import { LogoutComponent } from './components/logout/logout.component';
-import { ReviewComponent } from './components/review/review.component';
-import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+
 
 
 
@@ -48,10 +40,17 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
+
     TeamComponent,
-    LogoutComponent,
-    ReviewComponent,
-    ReviewFormComponent,
+
+
+
+
+
+
+   //LogoutComponent,
+   // ReviewComponent,
+    //ReviewFormComponent,
     CommentComponent,
     CommentFormComponent,
     FavoritesComponent
@@ -63,10 +62,10 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    NgxChartsModule,
-    BrowserAnimationsModule 
+    //NgxChartsModule,
+    //BrowserAnimationsModule
 
-  
+
   ],
   providers: [
     AuthService,
