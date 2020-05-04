@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './services/user.service';
 import { ReviewService } from './services/review.service';
 import { ReviewRatingService } from './services/review-rating.service';
@@ -25,10 +26,11 @@ import { FormsModule } from '@angular/forms';
 import { CommentComponent } from './components/comment/comment.component';
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
-
-
-
 
 @NgModule({
   declarations: [
@@ -41,17 +43,10 @@ import { DatePipe } from '@angular/common';
     RegisterComponent,
     NavBarComponent,
     FooterComponent,
-
     TeamComponent,
-
-
-
-
-
-
-    //LogoutComponent,
-    // ReviewComponent,
-    //ReviewFormComponent,
+    LogoutComponent,
+    ReviewComponent,
+    ReviewFormComponent,
     CommentComponent,
     CommentFormComponent,
     FavoritesComponent
@@ -63,10 +58,8 @@ import { DatePipe } from '@angular/common';
     NgbModule,
     HttpClientModule,
     FormsModule,
-    //NgxChartsModule,
-    //BrowserAnimationsModule
-
-
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
