@@ -1,3 +1,4 @@
+import { Comment } from './../../models/comment';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentFormComponent implements OnInit {
 
+  newComment: Comment = new Comment();
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

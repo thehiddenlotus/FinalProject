@@ -1,6 +1,7 @@
 import { User } from './user';
 import { Location } from './location';
 import { Comment } from './comment';
+import { ReviewRating } from './review-rating';
 
 export class Review {
     id: number;
@@ -12,6 +13,7 @@ export class Review {
     dateUpdated: string;
     dateVisited: string;
     comments: Comment[];
+    reviewRatings: ReviewRating[];
 
     constructor(
         id?: number,
@@ -22,7 +24,8 @@ export class Review {
         dateCreated?: string,
         dateUpdated?: string,
         dateVisited?: string,
-        comments?: Comment[]
+        comments?: Comment[],
+        reviewRatings?: ReviewRating[]
     ) {
         this.id = id;
         this.user = user;
@@ -33,5 +36,6 @@ export class Review {
         this.dateUpdated = dateUpdated;
         this.dateVisited = dateVisited;
         this.comments = comments;
+        this.reviewRatings = reviewRatings;
     }
 }
