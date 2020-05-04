@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'settings', component: UserSettingsComponent },
 
-  { path: 'team', component: TeamComponent}
+  { path: 'team', component: TeamComponent},
 
   { path: 'changeAddress', component: ChangeAddressComponent }
 
