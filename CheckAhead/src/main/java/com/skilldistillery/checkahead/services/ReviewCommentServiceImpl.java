@@ -57,9 +57,9 @@ public class ReviewCommentServiceImpl implements ReviewCommentService {
 		comment.setCreatedAt(LocalDateTime.now());
 		comment.setActive(true);
 		ReviewComment newComment = null;
-		if (comment.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
+//		if (comment.getUser().getUsername().equals(username) || uRepo.findByUsername(username).getRole().equals("admin")) {
 			newComment = repo.saveAndFlush(comment);
-		}
+//		}
 		return newComment;
 	}
 
