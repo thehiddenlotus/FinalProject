@@ -4,13 +4,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { User } from '../models/user';
+import { Address } from '../models/address';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private url = environment.baseUrl + 'api/user'
-  private user : User [] = [];
+  private url = environment.baseUrl + 'api/users'
+  private user: User[] = [];
   constructor(
     private http: HttpClient
   ) { }
@@ -33,7 +34,7 @@ export class UserService {
     );
   }
   public create(user: User) {
-   this.user.push(user);
+    this.user.push(user);
     const httpOptions = this.getHttpOptions();
     return this.http.post<User>(this.url, user, httpOptions).pipe(
       catchError((err: any) => {
@@ -71,4 +72,6 @@ export class UserService {
     };
     return httpOptions;
   }
+
+
 }

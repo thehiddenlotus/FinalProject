@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { tap, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +26,12 @@ export class AuthService {
 
     // create request to authenticate credentials
     return this.http
-      .get(this.baseUrl + 'authenticate', httpOptions)
+      .get<User>(this.baseUrl + 'authenticate', httpOptions)
       .pipe(
-        tap((res) => {
+        tap((user) => {
           localStorage.setItem('credentials', credentials);
-          return res;
+          localStorage.setItem('currentUserId', user.id + "");
+          return user;
         }),
         catchError((err: any) => {
           console.log(err);
@@ -51,6 +53,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('credentials');
+    localStorage.removeItem('currentUserId');
   }
 
   checkLogin() {
@@ -67,4 +70,8 @@ export class AuthService {
   getCredentials() {
     return localStorage.getItem('credentials');
   }
+  getCurrentUserId() {
+    return localStorage.getItem('currentUserId');
+  }
+
 }

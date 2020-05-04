@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Review } from 'src/app/models/review';
+import { ReviewService } from 'src/app/services/review.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review-form',
@@ -8,9 +10,12 @@ import { Review } from 'src/app/models/review';
 })
 export class ReviewFormComponent implements OnInit {
 
-  newReview: Review = new Review;
+  @Input() newReview: Review = new Review;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private svc: ReviewService
+  ) { }
 
   ngOnInit(): void {
     this.newReview.active = true;
@@ -21,4 +26,16 @@ export class ReviewFormComponent implements OnInit {
 
   }
 
+  postReview(){
+    this.svc.create(this.newReview).subscribe(
+      data => {
+        console.log('ReviewComponent.create(): Review created.');
+        this.router.navigateByUrl('/locations/'+ this.newReview.location.id)
+      },
+      err => {
+        console.error('ReviewComponent.create(): ERROR.');
+        console.error(err);
+      }
+    );
+  }
 }

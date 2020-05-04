@@ -6,7 +6,11 @@ import { LoginComponent } from './components/login/login.component';
 import { SearchComponent } from './components/search/search.component';
 import { LocationDetailComponent } from './components/location-detail/location-detail.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+
 import { TeamComponent } from './components/team/team.component';
+
+import { ChangeAddressComponent } from './components/change-address/change-address.component';
+
 
 
 const routes: Routes = [
@@ -17,7 +21,11 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'settings', component: UserSettingsComponent },
+
   { path: 'team', component: TeamComponent}
+
+  { path: 'changeAddress', component: ChangeAddressComponent }
+
   // { path: '**', component: NotFoundComponent }
 ] ;
 
