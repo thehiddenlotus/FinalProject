@@ -14,6 +14,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { multi } from './data';
 import { Review } from 'src/app/models/review';
 import { Rating } from 'src/app/models/rating';
+import { Comment } from 'src/app/models/comment';
 
 @Component({
   selector: 'app-location-detail',
@@ -71,6 +72,7 @@ export class LocationDetailComponent implements OnInit {
   urlParam = parseInt(this.route.snapshot.paramMap.get("id"));
   urlId = +this.urlParam;
   newReview: Review = null;
+  newComment: Comment = null;
 
   constructor(
     private locSvc: LocationService,
@@ -96,7 +98,11 @@ export class LocationDetailComponent implements OnInit {
   }
 
   addReview(){
-    this.newReview = new Review;
+    this.newReview = new Review();
+  }
+
+  addComment(){
+    this.newComment = new Comment();
   }
 
   //function to populate reviewRatings to get averages
