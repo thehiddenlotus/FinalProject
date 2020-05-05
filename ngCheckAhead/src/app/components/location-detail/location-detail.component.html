@@ -62,13 +62,13 @@
       <div class="card-body d-flex flex-column align-items-center">
         <ul class="list-group w-100 text-center" *ngFor="let reviewRating of reviewRatings">
           <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
-            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+            {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
           <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
-            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+            {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
           <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
-            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+            {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
           <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
-            {{reviewRating.rating.category}}: {{reviewRating.ratingValue}}</li>
+            {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
         </ul>
       </div>
     </div>

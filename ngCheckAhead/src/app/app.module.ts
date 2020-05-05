@@ -32,9 +32,11 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
 import { ChangeAddressComponent } from './components/change-address/change-address.component';
-import { LocationFormComponent } from './components/location-form/location-form.component';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 import { EditCommentFormComponent } from './components/edit-comment-form/edit-comment-form.component';
 import { EditReviewFormComponent } from './components/edit-review-form/edit-review-form.component';
+import { LocationFormComponent } from './components/location-form/location-form.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { EditReviewFormComponent } from './components/edit-review-form/edit-revi
     CommentFormComponent,
     FavoritesComponent,
     ChangeAddressComponent,
+    CapitalizePipe,
+    SearchPipe,
     LocationFormComponent,
     EditCommentFormComponent,
     EditReviewFormComponent
