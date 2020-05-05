@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.checkahead.entities.Review;
+import com.skilldistillery.checkahead.entities.ReviewComment;
+import com.skilldistillery.checkahead.entities.ReviewRating;
+import com.skilldistillery.checkahead.services.ReviewCommentService;
+import com.skilldistillery.checkahead.services.ReviewRatingService;
 import com.skilldistillery.checkahead.services.ReviewService;
 
 @RestController
@@ -27,6 +31,12 @@ public class ReviewController {
 	
 	@Autowired
 	private ReviewService reviewSvc;
+	
+	@Autowired
+	private ReviewRatingService rrSvc;
+
+	@Autowired
+	private ReviewCommentService comSvc;
 
 	@GetMapping("reviews")
 	public List<Review> index() {
@@ -151,9 +161,11 @@ public class ReviewController {
 			Principal principal
 			){
 		boolean deleted = false;
+		Review rev = reviewSvc.findById(reviewId);
 		try {
 			deleted = reviewSvc.deleteReview(reviewId, principal.getName());
 			if (deleted == true) {
+				System.out.println("REVIEW DELETED");
 				response.setStatus(204);
 			}
 		} catch (Exception e) {			

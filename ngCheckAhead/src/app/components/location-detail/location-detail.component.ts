@@ -139,8 +139,41 @@ export class LocationDetailComponent implements OnInit {
   }
 
   deleteReview(review: Review){
-    this.reviewServ.destroy(review.id).subscribe(
-      data => {
+    console.log(review);
+
+    console.log(review.comments);
+    console.log(review.reviewRatings);
+    // if(review.comments != undefined){
+      // for (let index = 0; index < review.comments.length; index++) {
+      //   const comment = review.comments[index];
+
+      //   this.comSvc.destroy(comment.id).subscribe(
+      //     data => {
+      //       console.log("review comment deleted");
+      //     },
+      //     err => {
+      //       console.log("error in locationdetail deleteReview comment");
+      //       console.log(err);
+      //     }
+      //     )
+      //   }
+      // // }
+      // for (let index = 0; index < review.reviewRatings.length; index++) {
+      //   const rating = review.reviewRatings[index];
+
+      //   this.rrServ.destroy(rating).subscribe(
+      //     data => {
+      //       console.log("review rating deleted");
+
+      //     },
+      //     err => {
+      //       console.log("error in locationdetail deleteReview rating");
+      //       console.log(err);
+      //     }
+      //   )
+      // }
+      this.reviewServ.destroy(review.id).subscribe(
+        data => {
         console.log("review deleted");
 
       },
