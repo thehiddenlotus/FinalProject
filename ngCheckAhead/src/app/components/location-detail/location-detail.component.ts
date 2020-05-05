@@ -252,7 +252,7 @@ export class LocationDetailComponent implements OnInit {
         //this.popTimes = good;
         console.log(this.popTimes)
         for (let i = 0; i < this.popTimes.populartimes.length; i++) {
-          for (let index = 8, h = 0; h < multi.length; index++, h++) {
+          for (let index = 7, h = 0; h < multi.length; index++, h++) {
               multi[h].series[i].value = this.popTimes.populartimes[i].data[index]
           }
         }
