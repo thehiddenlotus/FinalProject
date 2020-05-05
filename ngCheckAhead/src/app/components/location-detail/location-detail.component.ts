@@ -7,7 +7,7 @@ import { ReviewRatingService } from './../../services/review-rating.service';
 import { Component, OnInit, Optional } from '@angular/core';
 import { LocationService } from './../../services/location.service';
 import { Location } from 'src/app/models/location';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 
@@ -97,7 +97,8 @@ export class LocationDetailComponent implements OnInit {
     private rrServ: ReviewRatingService,
     private route: ActivatedRoute,
     private reviewServ: ReviewService,
-    private trafficServ: TrafficDataService
+    private trafficServ: TrafficDataService,
+    private router: Router
   ) {
     Object.assign(this, { multi });//for chart
   }
@@ -129,6 +130,10 @@ export class LocationDetailComponent implements OnInit {
     )
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   addReview() {
     this.newReview = new Review();
     this.newReview.location = this.location;
@@ -148,7 +153,7 @@ export class LocationDetailComponent implements OnInit {
       this.reviewServ.destroy(review.id).subscribe(
         data => {
         console.log("review deleted");
-
+        this.reload();
       },
       err => {
         console.log("error in locationdetail deleteReview");
@@ -172,7 +177,7 @@ export class LocationDetailComponent implements OnInit {
     this.comSvc.destroy(comment.id).subscribe(
       data => {
         console.log("comment deleted");
-
+        this.reload();
       },
       err => {
         console.log("error in locationdetail deleteComment");

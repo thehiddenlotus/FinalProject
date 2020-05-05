@@ -2,6 +2,7 @@ package com.skilldistillery.checkahead.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.checkahead.entities.Location;
+import com.skilldistillery.checkahead.entities.Review;
 import com.skilldistillery.checkahead.services.LocationService;
+import com.skilldistillery.checkahead.services.ReviewService;
 
 @RestController
 @RequestMapping ("api")
@@ -26,6 +29,9 @@ public class LocationController {
 	
 	@Autowired
 	private LocationService locationServ;
+	
+	@Autowired
+	private ReviewService revSvc;
 	
 	@GetMapping("locations")
 	private List<Location> getAllLocations(HttpServletResponse response){
@@ -103,6 +109,12 @@ public class LocationController {
 			Principal principal
 			){
 		boolean deleted = false;
+		Location loc = locationServ.findLocationById(id);
+		if(loc.getReviews().size() > 0) {
+			for (Review review : loc.getReviews()) {
+				revSvc.deleteReview(review.getId(), principal.getName());
+			}
+		}
 		try {
 			deleted = locationServ.deleteLocation(id, principal.getName());
 			if (deleted == true) {

@@ -21,11 +21,15 @@ export class EditCommentFormComponent implements OnInit {
 
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   postComment(){
     this.svc.update(this.editComment).subscribe(
       data => {
         console.log('CommentComponent.create(): comment created.');
-        // this.router.navigateByUrl('/locations/'+ this.editComment.review.location.id)
+        this.reload();
       },
       err => {
         console.error('CommentComponent.create(): ERROR.');

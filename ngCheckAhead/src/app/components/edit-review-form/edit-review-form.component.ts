@@ -28,17 +28,21 @@ export class EditReviewFormComponent implements OnInit {
 
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   postReview(){
 
     this.svc.update(this.editReview).subscribe(
       data => {
         console.log('ReviewComponent.create(): Review created.');
-        this.locSvc.show(this.location.id);
+        this.reload();
       },
       err => {
         console.error('ReviewComponent.create(): ERROR.');
         console.error(err);
       }
-    );
+      );
   }
 }
