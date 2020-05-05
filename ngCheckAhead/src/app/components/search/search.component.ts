@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SearchComponent implements OnInit {
 
+  searchKey: string = null;
+
   currentUser: User = null;
   newLocation: Location = null;
   userId = null;
@@ -34,6 +36,10 @@ export class SearchComponent implements OnInit {
 
       }
     )
+  }
+
+  searchByKeyword(){
+    // this.searchKey = this.searchByKeyword;
   }
 
   addLocation() {

@@ -3,7 +3,7 @@
   <div class="d-flex flex-column align-items-center">
     <H3>Favorites</H3>
   </div>
-  <div *ngFor="let location of favorites">
+  <div *ngFor="let location of favorites | search:searchKey">
     <div class="row mb-1">
       <div class="col-md-12">
       <div class="card flex-md-row h-md-250">
