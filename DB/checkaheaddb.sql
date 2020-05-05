@@ -240,7 +240,7 @@ START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (1, 1, 'admin', '$2a$10$9hwcGWMMTAHGf776ilxDR.BlOEYzhNLy38F1GjdLlC86naOrD9qFe\n\n', true, '2020-04-28', 'admin', 'admin@admin.com', NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (2, 4, 'carefulShopper', '$2a$10$RrDMn0It5d0rz2OfC5TkOu2rGO3z4KIEss6YqQTVfPS/JLQTueUSW\n\n', true, '2020-04-28', 'user', 'rob@robsoftheworld.com', NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'user', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'admin', NULL, NULL);
 
 COMMIT;
 
