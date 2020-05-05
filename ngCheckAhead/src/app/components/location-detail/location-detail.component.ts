@@ -82,6 +82,7 @@ export class LocationDetailComponent implements OnInit {
   editReview: Review = null;
   newComment: Comment = null;
   editComment: Comment = null;
+  editLoc: Location = null;
   popTimes: TrafficData;
   currentUser: User = null;
   userId = null;
@@ -143,35 +144,7 @@ export class LocationDetailComponent implements OnInit {
 
     console.log(review.comments);
     console.log(review.reviewRatings);
-    // if(review.comments != undefined){
-      // for (let index = 0; index < review.comments.length; index++) {
-      //   const comment = review.comments[index];
 
-      //   this.comSvc.destroy(comment.id).subscribe(
-      //     data => {
-      //       console.log("review comment deleted");
-      //     },
-      //     err => {
-      //       console.log("error in locationdetail deleteReview comment");
-      //       console.log(err);
-      //     }
-      //     )
-      //   }
-      // // }
-      // for (let index = 0; index < review.reviewRatings.length; index++) {
-      //   const rating = review.reviewRatings[index];
-
-      //   this.rrServ.destroy(rating).subscribe(
-      //     data => {
-      //       console.log("review rating deleted");
-
-      //     },
-      //     err => {
-      //       console.log("error in locationdetail deleteReview rating");
-      //       console.log(err);
-      //     }
-      //   )
-      // }
       this.reviewServ.destroy(review.id).subscribe(
         data => {
         console.log("review deleted");
@@ -208,6 +181,9 @@ export class LocationDetailComponent implements OnInit {
     )
   }
 
+  updateLoc(location: Location){
+    this.editLoc = location;
+  }
   //function to populate reviewRatings to get averages
   populateReviewRatings(id: number): void {
     this.rrServ.findByLocation(id).subscribe(

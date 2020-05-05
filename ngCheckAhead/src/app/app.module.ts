@@ -37,6 +37,7 @@ import { SearchPipe } from './pipes/search.pipe';
 import { EditCommentFormComponent } from './components/edit-comment-form/edit-comment-form.component';
 import { EditReviewFormComponent } from './components/edit-review-form/edit-review-form.component';
 import { LocationFormComponent } from './components/location-form/location-form.component';
+import { EditLocationFormComponent } from './components/edit-location-form/edit-location-form.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { LocationFormComponent } from './components/location-form/location-form.
     SearchPipe,
     LocationFormComponent,
     EditCommentFormComponent,
-    EditReviewFormComponent
+    EditReviewFormComponent,
+    EditLocationFormComponent
 
   ],
   imports: [
