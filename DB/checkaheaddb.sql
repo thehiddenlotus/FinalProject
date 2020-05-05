@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `location` (
   `name` VARCHAR(500) NULL,
   `date_created` DATETIME NULL,
   `description` TEXT NULL,
-  `google_place_id` VARCHAR(45) NULL,
+  `google_place_id` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_location_address1_idx` (`address_id` ASC),
   INDEX `fk_location_usercreator_idx` (`creator_id` ASC),
@@ -311,6 +311,14 @@ INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 4, 5);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 4, 6);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 4, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 9, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 9, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 9, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 9, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 10, 2);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 10, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 10, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 10, 6);
 
 COMMIT;
 
