@@ -27,15 +27,18 @@ export class UserSettingsComponent implements OnInit {
     return this.auth.checkLogin();
   }
 
-  deleteUser(id: number) {
-    console.log(id);
+  deleteUser() {
+    const userIdStr = this.auth.getCurrentUserId();
+    const userId = Number.parseInt(userIdStr);
+    console.log(userId);
 
-    this.userSvc.destroy(id).subscribe(
+    this.userSvc.destroy(userId).subscribe(
       success => {
         this.router.navigateByUrl('/search');
       },
       fail => {
         console.error("This user failed to delete");
+        console.error(fail);
 
       }
     )

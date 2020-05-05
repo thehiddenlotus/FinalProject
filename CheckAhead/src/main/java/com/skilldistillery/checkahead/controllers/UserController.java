@@ -85,7 +85,7 @@ public class UserController {
 	
 	@DeleteMapping("users/{id}")
 	public void deleteUser(
-			@PathVariable int id, 
+			@PathVariable Integer id, 
 			HttpServletResponse resp,
 			Principal principal
 			){
