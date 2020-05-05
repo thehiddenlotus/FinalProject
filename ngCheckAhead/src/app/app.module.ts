@@ -32,6 +32,8 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
 import { ChangeAddressComponent } from './components/change-address/change-address.component';
+import { CapitalizePipe } from './pipes/capitalize.pipe';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { ChangeAddressComponent } from './components/change-address/change-addre
     CommentComponent,
     CommentFormComponent,
     FavoritesComponent,
-    ChangeAddressComponent
+    ChangeAddressComponent,
+    CapitalizePipe,
+    SearchPipe
 
   ],
   imports: [
