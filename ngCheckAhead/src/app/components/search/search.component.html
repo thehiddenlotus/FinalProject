@@ -17,8 +17,10 @@
   />
 
 <div>
-  <button class='btb btn-secondary' *ngIf='!newLocation && currentUser' (click)="addLocation()">Add Location</button>
-  <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
+  <div style="justify-content: center;">
+    <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New Location</button>
+    <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
+  </div>
   <div *ngIf='newLocation'>
     <app-location-form [newLoc]='newLocation'></app-location-form>
   </div>
