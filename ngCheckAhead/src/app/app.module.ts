@@ -34,6 +34,9 @@ import { DatePipe } from '@angular/common';
 import { ChangeAddressComponent } from './components/change-address/change-address.component';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { SearchPipe } from './pipes/search.pipe';
+import { EditCommentFormComponent } from './components/edit-comment-form/edit-comment-form.component';
+import { EditReviewFormComponent } from './components/edit-review-form/edit-review-form.component';
+import { LocationFormComponent } from './components/location-form/location-form.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { SearchPipe } from './pipes/search.pipe';
     FavoritesComponent,
     ChangeAddressComponent,
     CapitalizePipe,
-    SearchPipe
+    SearchPipe,
+    LocationFormComponent,
+    EditCommentFormComponent,
+    EditReviewFormComponent
 
   ],
   imports: [

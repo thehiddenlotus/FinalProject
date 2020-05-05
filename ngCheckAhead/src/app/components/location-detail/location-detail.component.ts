@@ -20,6 +20,7 @@ import { Rating } from 'src/app/models/rating';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { ReviewCommentService } from 'src/app/services/review-comment.service';
 
 @Component({
   selector: 'app-location-detail',
@@ -78,7 +79,9 @@ export class LocationDetailComponent implements OnInit {
   urlParam = parseInt(this.route.snapshot.paramMap.get("id"));
   urlId = +this.urlParam;
   newReview: Review = null;
+  editReview: Review = null;
   newComment: Comment = null;
+  editComment: Comment = null;
   popTimes: TrafficData;
   currentUser: User = null;
   userId = null;
@@ -88,6 +91,7 @@ export class LocationDetailComponent implements OnInit {
   constructor(
     private locSvc: LocationService,
     private userSvc: UserService,
+    private comSvc: ReviewCommentService,
     private auth: AuthService,
     private rrServ: ReviewRatingService,
     private route: ActivatedRoute,
@@ -130,11 +134,45 @@ export class LocationDetailComponent implements OnInit {
     this.newReview.user = this.currentUser;
   }
 
+  updateReview(review: Review){
+    this.editReview = review;
+  }
+
+  deleteReview(review: Review){
+    this.reviewServ.destroy(review.id).subscribe(
+      data => {
+        console.log("review deleted");
+
+      },
+      err => {
+        console.log("error in locationdetail deleteReview");
+        console.log(err);
+      }
+    )
+  }
+
 
   addComment(review: Review){
     this.newComment = new Comment();
     this.newComment.user = this.currentUser;
     this.newComment.review = review;
+  }
+
+  updateComment(comment: Comment){
+    this.editComment = comment;
+  }
+
+  deleteComment(comment: Comment){
+    this.comSvc.destroy(comment.id).subscribe(
+      data => {
+        console.log("comment deleted");
+
+      },
+      err => {
+        console.log("error in locationdetail deleteComment");
+        console.log(err);
+      }
+    )
   }
 
   //function to populate reviewRatings to get averages
@@ -202,11 +240,11 @@ export class LocationDetailComponent implements OnInit {
     this.trafficServ.getTransitData(this.location.googleId).subscribe(
       good => {
         console.log(multi)
-        this.popTimes = good;
+        //this.popTimes = good;
         console.log(this.popTimes)
         for (let i = 0; i < this.popTimes.populartimes.length; i++) {
           for (let index = 8, h = 0; h < multi.length; index++, h++) {
-              multi[h].series[i].value = this.popTimes.populartimes[i].data[index]         
+              multi[h].series[i].value = this.popTimes.populartimes[i].data[index]
           }
         }
         console.log(multi)

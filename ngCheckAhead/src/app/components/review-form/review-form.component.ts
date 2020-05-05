@@ -4,6 +4,7 @@ import { ReviewService } from 'src/app/services/review.service';
 import { Router } from '@angular/router';
 import { ReviewRating } from 'src/app/models/review-rating';
 import { Location } from 'src/app/models/location';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
   selector: 'app-review-form',
@@ -18,7 +19,8 @@ export class ReviewFormComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private svc: ReviewService
+    private svc: ReviewService,
+    private locSvc: LocationService
   ) { }
 
   ngOnInit(): void {
@@ -28,10 +30,10 @@ export class ReviewFormComponent implements OnInit {
   }
 
   postReview(){
-    this.svc.create(this.newReview, this.ratingValues, this.location).subscribe(
+    this.svc.create(this.newReview, this.ratingValues, this.location.id).subscribe(
       data => {
         console.log('ReviewComponent.create(): Review created.');
-        this.router.navigateByUrl('/locations/'+ this.newReview.location.id)
+        this.locSvc.show(this.location.id);
       },
       err => {
         console.error('ReviewComponent.create(): ERROR.');
