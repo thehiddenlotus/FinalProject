@@ -33,6 +33,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DatePipe } from '@angular/common';
 import { ChangeAddressComponent } from './components/change-address/change-address.component';
 import { LocationFormComponent } from './components/location-form/location-form.component';
+import { EditCommentFormComponent } from './components/edit-comment-form/edit-comment-form.component';
+import { EditReviewFormComponent } from './components/edit-review-form/edit-review-form.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { LocationFormComponent } from './components/location-form/location-form.
     CommentFormComponent,
     FavoritesComponent,
     ChangeAddressComponent,
-    LocationFormComponent
+    LocationFormComponent,
+    EditCommentFormComponent,
+    EditReviewFormComponent
 
   ],
   imports: [
