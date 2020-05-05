@@ -26,7 +26,7 @@
   <button class='btb btn-secondary' *ngIf='!newLocation && currentUser' (click)="addLocation()">Add Location</button>
   <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
   <div *ngIf='newLocation'>
-    <app-location-form></app-location-form>
+    <app-location-form [newLoc]='newLocation'></app-location-form>
   </div>
 </div>
 
