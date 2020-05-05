@@ -27,10 +27,10 @@ export class UserSettingsComponent implements OnInit {
     return this.auth.checkLogin();
   }
 
-  deleteUser(userId: number) {
-    console.log(userId);
+  deleteUser(id: number) {
+    console.log(id);
 
-    this.userSvc.destroy(userId).subscribe(
+    this.userSvc.destroy(id).subscribe(
       success => {
         this.router.navigateByUrl('/search');
       },
