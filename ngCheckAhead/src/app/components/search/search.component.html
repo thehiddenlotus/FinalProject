@@ -10,20 +10,12 @@
     tabindex="0"
   ></iframe>
 </div>
-<form class="form-inline">
   <input
     class="form-control mr-sm-2"
-    type="search"
-    name="search"
-    placeholder="Search"
-    aria-label="Search"
-    [(ngModel)]="searchKeywword"
+    [(ngModel)]='searchKey'
+    placeholder="Type in name or address to search"
   />
-  <button (click)="searchByKeyword()" class="btn btn-outline-success my-2 my-sm-0" type="submit">
-    Search
-  </button>
 
-</form>
 <div>
   <button class='btb btn-secondary' *ngIf='!newLocation && currentUser' (click)="addLocation()">Add Location</button>
   <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
