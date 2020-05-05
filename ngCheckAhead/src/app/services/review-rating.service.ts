@@ -64,9 +64,9 @@ export class ReviewRatingService {
         })
       );
   }
-  public destroy(ratingId: number) {
+  public destroy(rating: ReviewRating) {
     const httpOptions = this.getHttpOptions();
-    return this.http.delete(`${this.url}/${ratingId}`, httpOptions).pipe(
+    return this.http.delete(`${this.url}/${rating.reviewId}/${rating.ratingId}`, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('ReviewRatingService.delete: error deleting entry: ' + err);
