@@ -50,7 +50,7 @@ export class LocationService {
   public update(location: Location) {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .put<Location>(`${this.url}/${location.id}`, Location, httpOptions)
+      .put<Location>(`${this.url}/${location.id}`, location, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);
