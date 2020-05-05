@@ -1,1 +1,47 @@
-<p>edit-review-form works!</p>
+<form>
+  <!-- <div class="row row-sm-offset">
+    <div class="col-md-3 multi-horizontal">
+      <div class="form-group" style="text-align: center;">
+        <label class="form-control-label mbr-fonts-style display-7" for="clean-form1-4t">Cleanliness</label>
+        <input type="number" min="1" max="10" class="form-control" name="cleanliness"
+          [(ngModel)]="ratingValues[0]" required="" id="clean-form1-4t">
+      </div>
+    </div>
+    <div class="col-md-3 multi-horizontal">
+      <div class="form-group" style="text-align: center;">
+        <label class="form-control-label mbr-fonts-style display-7" for="traffic-form1-4t">Traffic</label>
+        <input type="number" min="1" max="10" class="form-control" name="traffic"
+        [(ngModel)]="ratingValues[1]" id="traffic-form1-4t">
+      </div>
+    </div>
+    <div class="col-md-3 multi-horizontal">
+      <div class="form-group" style="text-align: center;">
+        <label class="form-control-label mbr-fonts-style display-7" for="checkout-form1-4t">Checkout</label>
+        <input type="number" min="1" max="10" class="form-control" name="checkout"
+        [(ngModel)]="ratingValues[2]"  id="checkout-form1-4t">
+      </div>
+    </div>
+    <div class="col-md-3 multi-horizontal">
+      <div class="form-group" style="text-align: center;">
+        <label class="form-control-label mbr-fonts-style display-7" for="stock-form1-4t">Stock</label>
+        <input type="number" min="1" max="10" class="form-control" name="stock"
+        [(ngModel)]="ratingValues[3]" required="" id="stock-form1-4t">
+      </div>
+    </div>
+  </div> -->
+  <div class="form-group">
+    <label class="form-control-label mbr-fonts-style display-7" for="content-form1-4t">Review</label>
+    <textarea type="text" class="form-control" name="content" rows="7" [(ngModel)]="editReview.content"
+      id="content-form1-4t">{{editReview.content}}</textarea>
+  </div>
+
+  <!-- <div class="col-md-6 multi-horizontal">
+    <label class="form-control-label mbr-fonts-style display-7"for="visitdate">Date of Visit </label>
+    <input type="date" id="visitdate" [(ngModel)]="editReview.dateVisited">
+  </div> -->
+  <div class="col-md-6 multi-horizontal">
+
+      <button (click)="postReview()">Update Review</button>
+
+  </div>
+</form>
