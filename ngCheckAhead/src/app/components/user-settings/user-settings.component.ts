@@ -34,7 +34,7 @@ export class UserSettingsComponent implements OnInit {
 
     this.userSvc.destroy(userId).subscribe(
       success => {
-        this.router.navigateByUrl('/search');
+        this.router.navigateByUrl('/home');
       },
       fail => {
         console.error("This user failed to delete");

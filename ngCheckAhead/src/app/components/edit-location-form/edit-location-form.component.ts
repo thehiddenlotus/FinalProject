@@ -3,6 +3,7 @@ import { Address } from 'src/app/models/address';
 import { LocationService } from 'src/app/services/location.service';
 import { AddressService } from 'src/app/services/address.service';
 import { Location } from 'src/app/models/location';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-location-form',
@@ -16,10 +17,15 @@ export class EditLocationFormComponent implements OnInit {
 
   constructor(
     private svc: LocationService,
-    private addSvc: AddressService
+    private addSvc: AddressService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+  }
+
+  reload() {
+    window.location.reload();
   }
 
   postLocation(){
@@ -31,6 +37,7 @@ export class EditLocationFormComponent implements OnInit {
           yay => {
             console.log('LocationComponent.create(): Location created.');
             this.svc.show(yay.id);
+            this.reload();
           },
           nay => {
             console.error('LocationComponent.create(): ERROR.');
@@ -49,7 +56,7 @@ export class EditLocationFormComponent implements OnInit {
     this.svc.destroy(this.location.id).subscribe(
       data => {
         console.log('LOCATION DELETED');
-
+        this.router.navigateByUrl('/search');
       },
       err => {
         console.error(err);

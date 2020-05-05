@@ -22,10 +22,13 @@ export class LocationFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   postLocation(){
     console.log(this.newAdd);
     console.log(this.newLoc);
-
 
     this.addSvc.create(this.newAdd).subscribe(
       data => {
@@ -35,6 +38,7 @@ export class LocationFormComponent implements OnInit {
           yay => {
             console.log('LocationComponent.create(): Location created.');
             this.svc.show(yay.id);
+            this.reload();
           },
           nay => {
             console.error('LocationComponent.create(): ERROR.');

@@ -15,7 +15,7 @@ export class ReviewFormComponent implements OnInit {
 
   @Input() newReview: Review;
   @Input() location: Location;
-  ratingValues = [];
+  ratingValues = [5,5,5,5];
 
   constructor(
     private router: Router,
@@ -29,16 +29,20 @@ export class ReviewFormComponent implements OnInit {
 
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   postReview(){
     this.svc.create(this.newReview, this.ratingValues, this.location.id).subscribe(
       data => {
         console.log('ReviewComponent.create(): Review created.');
-        this.locSvc.show(this.location.id);
       },
       err => {
         console.error('ReviewComponent.create(): ERROR.');
         console.error(err);
       }
-    );
+      );
+    this.reload();
   }
 }
