@@ -12,7 +12,7 @@ import { AuthService } from './auth.service';
 
 export class ReviewCommentService {
 
-  private url = environment.baseUrl + 'api/comment'
+  private url = environment.baseUrl + 'api/comments'
   private comment : Comment [] = [];
 
   constructor(
@@ -55,7 +55,7 @@ export class ReviewCommentService {
   public update(comment: Comment) {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .put<Comment>(`${this.url}/${comment.id}`, Comment, httpOptions)
+      .put<Comment>(`${this.url}/${comment.id}`, comment, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

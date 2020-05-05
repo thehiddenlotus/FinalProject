@@ -25,7 +25,7 @@ export class EditCommentFormComponent implements OnInit {
     this.svc.update(this.editComment).subscribe(
       data => {
         console.log('CommentComponent.create(): comment created.');
-        this.router.navigateByUrl('/locations/'+ this.editComment.review.location.id)
+        // this.router.navigateByUrl('/locations/'+ this.editComment.review.location.id)
       },
       err => {
         console.error('CommentComponent.create(): ERROR.');

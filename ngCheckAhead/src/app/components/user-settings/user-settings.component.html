@@ -24,7 +24,14 @@
         <div class="card-body">
           <h5 class="card-title">Delete Account</h5>
           <p class="card-text">Sad to see you go...</p>
-          <a href="#" *ngIf="checkLogin()" class="btn btn-primary">Delete</a>
+          <button
+            type="submit"
+            *ngIf="checkLogin()"
+            class="btn btn-primary"
+            (click)="deleteUser()"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>
