@@ -1,11 +1,13 @@
 #jumbotron{
-  background-color: rgb(5, 154, 187);
+  background-image: url('https://image.shutterstock.com/image-photo/abstract-blurred-photo-trolley-department-260nw-604474658.jpg');
   color: black;
 }
 
 #searchbutton{
   float:right;
-
+}
+.jumbotron {
+  background-size: cover;
 }
 #learnmore{
   float:center;
@@ -13,5 +15,17 @@
 #Team{
   background-color: black;
   border-color: black;
+}
 
+.chartContainer {
+  max-height: 300px;
+  max-width: 1000px;
+}
+
+.card {
+  border: none;
+}
+
+.bannerText {
+  font-size: 2em;
 }
