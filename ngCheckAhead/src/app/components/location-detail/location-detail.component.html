@@ -95,15 +95,15 @@
                 <!-- <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p> -->
                 <div class="row align-items-center">
                   <!-- <div class="col mb-1 align-items-center"> -->
-                    <button class='btn btn-secondary btn-sm' *ngIf='!editReview && (currentUser.id === review.user.id || currentUser.role === "admin")' (click)="updateReview(review)">Update Review</button>
-                    <button class='btn btn-secondary btn-sm' *ngIf='editReview' (click)="editReview = null">Cancel</button>
+                    <button class='btn btn-secondary btn-sm' *ngIf='(!editReview || editReview.id != review.id) && (currentUser.id === review.user.id || currentUser.role === "admin")' (click)="updateReview(review)">Update Review</button>
+                    <button class='btn btn-secondary btn-sm' *ngIf='editReview && review.id === editReview.id' (click)="editReview = null">Cancel</button>
                     <button class='btn btn-secondary btn-sm' *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"' (click)="deleteReview(review)">Delete Review</button>
                   <!-- </div> -->
                   <!-- <div class="col mb-1 align-items-center"> -->
                     <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=true" *ngIf='review.comments.length > 0 && !ratingReviewSelected2'>View comments</button>
                     <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=false" *ngIf='ratingReviewSelected2'>Hide comments</button>
-                    <button class='btn btn-secondary btn-sm' *ngIf='!newComment && currentUser' (click)="addComment(review)">Add comment</button>
-                    <button class='btn btn-secondary btn-sm' *ngIf='newComment' (click)="newComment = null">Cancel</button>
+                    <button class='btn btn-secondary btn-sm' *ngIf='(!newComment || newComment.review.id != review.id) && currentUser' (click)="addComment(review)">Add comment</button>
+                    <button class='btn btn-secondary btn-sm' *ngIf='newComment && newComment.review.id === review.id' (click)="newComment = null">Cancel</button>
                   <!-- </div> -->
                 </div>
               </div>
@@ -138,9 +138,9 @@
                       <p class="card-text mb-auto">{{comment.content}}</p>
                       <div class="row mb-1 align-items-center">
                         <div style="padding: 1em;">
-                          <button class='btn btn-secondary btn-sm' *ngIf='(currentUser.id === comment.user.id || currentUser.role === "admin") && !editComment' (click)="updateComment(comment)">Update Comment</button>
+                          <button class='btn btn-secondary btn-sm' *ngIf='(!editComment || comment.id !== editComment.id) && (currentUser.id === comment.user.id || currentUser.role === "admin")' (click)="updateComment(comment)">Update Comment</button>
                         </div>
-                        <button class='btn btn-secondary btn-sm' *ngIf='editComment' (click)="editComment = null">Cancel</button>
+                        <button class='btn btn-secondary btn-sm' *ngIf='editComment && editComment.id === comment.id' (click)="editComment = null">Cancel</button>
                         <button class='btn btn-secondary btn-sm' *ngIf='currentUser.id === comment.user.id || currentUser.role === "admin"' (click)="deleteComment(comment)">Delete Comment</button>
                       </div>
                       <div *ngIf='editComment && editComment.id === comment.id'>
