@@ -112,7 +112,8 @@
               <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
               <div class="mb-1 text-muted">{{comment.createdAt}}</div>
               <p class="card-text mb-auto">{{comment.content}}</p>
-              <button *ngIf='currentUser' (click)="updateComment(comment)">Update Comment</button>
+              <button *ngIf='currentUser && !editComment' (click)="updateComment(comment)">Update Comment</button>
+              <button *ngIf='editComment' (click)="editComment = null">Cancel</button>
               <button *ngIf='currentUser' (click)="deleteComment(comment)">Delete Comment</button>
               <div *ngIf='editComment'>
                 <hr>
