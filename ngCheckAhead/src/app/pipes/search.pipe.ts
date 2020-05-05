@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Location } from 'src/app/models/location';
+import { getLocaleDayNames } from '@angular/common';
 
 
 @Pipe({
@@ -9,13 +10,15 @@ export class SearchPipe implements PipeTransform {
   
   transform(locations: Location[], search: string): Location[] {
     const results = [];
-    
     if(search === null){
       return locations;
     }
-
+    var searchKey: string = search.toLowerCase().toString();
+    
     locations.forEach((location) => {
-      if(location.name.includes(search)||location.address.address.includes(search))
+      var locName: string = location.name.toLowerCase().toString();
+      var locAdd: string = location.address.address.toLowerCase().toString();
+      if(locName.includes(searchKey)||locAdd.includes(searchKey))
         results.push(location);
     })
 
