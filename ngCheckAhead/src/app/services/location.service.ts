@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 export class LocationService {
   [x: string]: any;
   private url = environment.baseUrl + 'api/locations'
-  private address : Location [] = [];
+  private locations : Location [] = [];
   constructor(
     private http: HttpClient,
     private auth: AuthService
@@ -38,7 +38,7 @@ export class LocationService {
     );
   }
   public create(location: Location) {
-   this.location.push(location);
+   this.locations.push(location);
     const httpOptions = this.getHttpOptions();
     return this.http.post<Location>(this.url, location, httpOptions).pipe(
       catchError((err: any) => {
