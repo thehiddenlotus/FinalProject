@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class ReviewRatingService {
-  private url = environment.baseUrl + 'api/reviewrating'
+  private url = environment.baseUrl + 'api/reviewratings'
   private reviewrating : ReviewRating [] = [];
   constructor(
     private http: HttpClient,
