@@ -1,3 +1,5 @@
+import { TrafficData } from './../../models/traffic-data';
+import { TrafficDataService } from './../../services/traffic-data.service';
 import { UserService } from './../../services/user.service';
 import { ReviewService } from './../../services/review.service';
 import { ReviewRating } from './../../models/review-rating';
@@ -18,6 +20,7 @@ import { Rating } from 'src/app/models/rating';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
+import { ReviewCommentService } from 'src/app/services/review-comment.service';
 
 @Component({
   selector: 'app-location-detail',
@@ -28,7 +31,8 @@ export class LocationDetailComponent implements OnInit {
 
   //code for heat map
   multi: any[];
-  view: any[] = [700, 100];
+  newMulti: any[];
+  view: any[] = [700, 200];
 
   // options
   legend: boolean = false;
@@ -60,7 +64,7 @@ export class LocationDetailComponent implements OnInit {
   }
   ////////////end for stuff for chart
 
-
+  //F I E L D S
   ratingReviewSelected = false;
   ratingReviewSelected1 = false;
   ratingReviewSelected2 = false;
@@ -75,18 +79,24 @@ export class LocationDetailComponent implements OnInit {
   urlParam = parseInt(this.route.snapshot.paramMap.get("id"));
   urlId = +this.urlParam;
   newReview: Review = null;
+  editReview: Review = null;
   newComment: Comment = null;
+  editComment: Comment = null;
+  popTimes: TrafficData;
   currentUser: User = null;
   userId = null;
   opt: Optional = null;
 
+  //M E T H O D S
   constructor(
     private locSvc: LocationService,
     private userSvc: UserService,
+    private comSvc: ReviewCommentService,
     private auth: AuthService,
     private rrServ: ReviewRatingService,
     private route: ActivatedRoute,
-    private reviewServ: ReviewService
+    private reviewServ: ReviewService,
+    private trafficServ: TrafficDataService
   ) {
     Object.assign(this, { multi });//for chart
   }
@@ -118,16 +128,51 @@ export class LocationDetailComponent implements OnInit {
     )
   }
 
-  addReview(){
+  addReview() {
     this.newReview = new Review();
     this.newReview.location = this.location;
     this.newReview.user = this.currentUser;
   }
 
+  updateReview(review: Review){
+    this.editReview = review;
+  }
+
+  deleteReview(review: Review){
+    this.reviewServ.destroy(review.id).subscribe(
+      data => {
+        console.log("review deleted");
+
+      },
+      err => {
+        console.log("error in locationdetail deleteReview");
+        console.log(err);
+      }
+    )
+  }
+
+
   addComment(review: Review){
     this.newComment = new Comment();
     this.newComment.user = this.currentUser;
     this.newComment.review = review;
+  }
+
+  updateComment(comment: Comment){
+    this.editComment = comment;
+  }
+
+  deleteComment(comment: Comment){
+    this.comSvc.destroy(comment.id).subscribe(
+      data => {
+        console.log("comment deleted");
+
+      },
+      err => {
+        console.log("error in locationdetail deleteComment");
+        console.log(err);
+      }
+    )
   }
 
   //function to populate reviewRatings to get averages
@@ -177,14 +222,36 @@ export class LocationDetailComponent implements OnInit {
   }
 
   //function to populate reviews
-  populateReviews(id: number): void{
+  populateReviews(id: number): void {
     this.reviewServ.getReviewsByLocationId(id).subscribe(
       good => {
         this.reviews = good;
-        console.log(this.reviews)
+        // this.populateTransitData();
       },
       error => {
         console.log("error in populating reviews in location-detail");
+        console.log(error);
+      }
+    )
+  }
+
+  //function to populate transit data
+  populateTransitData(): void {
+    this.trafficServ.getTransitData(this.location.googleId).subscribe(
+      good => {
+        console.log(multi)
+        //this.popTimes = good;
+        console.log(this.popTimes)
+        for (let i = 0; i < this.popTimes.populartimes.length; i++) {
+          for (let index = 8, h = 0; h < multi.length; index++, h++) {
+              multi[h].series[i].value = this.popTimes.populartimes[i].data[index]
+          }
+        }
+        console.log(multi)
+        this.newMulti= multi;
+      },
+      error => {
+        console.log("error in populating transit data");
         console.log(error);
       }
     )

@@ -4,28 +4,28 @@
       <div class="form-group" style="text-align: center;">
         <label class="form-control-label mbr-fonts-style display-7" for="clean-form1-4t">Cleanliness</label>
         <input type="number" min="1" max="10" class="form-control" name="cleanliness"
-          [(ngModel)]="newReview.reviewRatings[0].ratingValue" required="" id="clean-form1-4t">
+          [(ngModel)]="ratingValues[0]" required="" id="clean-form1-4t">
       </div>
     </div>
     <div class="col-md-3 multi-horizontal">
       <div class="form-group" style="text-align: center;">
         <label class="form-control-label mbr-fonts-style display-7" for="traffic-form1-4t">Traffic</label>
-        <input type="range" min="1" max="10" class="form-control" name="traffic"
-          [(ngModel)]="newReview.reviewRatings[1].ratingValue" id="traffic-form1-4t">
+        <input type="number" min="1" max="10" class="form-control" name="traffic"
+        [(ngModel)]="ratingValues[1]" id="traffic-form1-4t">
       </div>
     </div>
     <div class="col-md-3 multi-horizontal">
       <div class="form-group" style="text-align: center;">
         <label class="form-control-label mbr-fonts-style display-7" for="checkout-form1-4t">Checkout</label>
         <input type="number" min="1" max="10" class="form-control" name="checkout"
-          [(ngModel)]="newReview.reviewRatings[2].ratingValue" id="checkout-form1-4t">
+        [(ngModel)]="ratingValues[2]"  id="checkout-form1-4t">
       </div>
     </div>
     <div class="col-md-3 multi-horizontal">
       <div class="form-group" style="text-align: center;">
         <label class="form-control-label mbr-fonts-style display-7" for="stock-form1-4t">Stock</label>
         <input type="number" min="1" max="10" class="form-control" name="stock"
-          [(ngModel)]="newReview.reviewRatings[3].ratingValue" required="" id="stock-form1-4t">
+        [(ngModel)]="ratingValues[3]" required="" id="stock-form1-4t">
       </div>
     </div>
   </div>

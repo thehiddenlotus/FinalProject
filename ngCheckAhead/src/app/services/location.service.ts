@@ -1,3 +1,4 @@
+import { PopulartimesData } from './../models/populartimes-data';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +13,7 @@ import { AuthService } from './auth.service';
 export class LocationService {
   [x: string]: any;
   private url = environment.baseUrl + 'api/locations'
-  private address : Location [] = [];
+  private locations : Location [] = [];
   constructor(
     private http: HttpClient,
     private auth: AuthService
@@ -26,6 +27,7 @@ export class LocationService {
       })
     );
   }
+
   public show(id) {
     const httpOptions = this.getHttpOptions();
     return this.http.get<Location>(`${this.url}/${id}`, httpOptions).pipe(
@@ -36,7 +38,7 @@ export class LocationService {
     );
   }
   public create(location: Location) {
-   this.location.push(location);
+   this.locations.push(location);
     const httpOptions = this.getHttpOptions();
     return this.http.post<Location>(this.url, location, httpOptions).pipe(
       catchError((err: any) => {

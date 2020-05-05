@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Review } from '../models/review';
 import { AuthService } from './auth.service';
+import { Location } from '../models/location';
 
 @Injectable({
   providedIn: 'root'
@@ -43,10 +44,10 @@ export class ReviewService {
       })
     );
   }
-  public create(review: Review) {
+  public create(review: Review, ratings: number[], locationId: number) {
     this.review.push(review);
     const httpOptions = this.getHttpOptions();
-    return this.http.post<Review>(this.url, review, httpOptions).pipe(
+    return this.http.post<Review>(environment.baseUrl+'api/locations/'+`${locationId}/reviews/${ratings[0]}/${ratings[1]}/${ratings[2]}/${ratings[3]}`, review, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('ReviewService.create: error creating entry: ' + err);

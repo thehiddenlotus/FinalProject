@@ -4,7 +4,31 @@ export var multi = [
       "series": [
         {
           "name": "Monday",
-          "value": 9
+          "value": 0
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -15,6 +39,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 19
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -25,6 +73,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 34
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -35,6 +107,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 47
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -45,6 +141,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 57
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -55,6 +175,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 60
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -65,6 +209,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 58
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -75,6 +243,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 59
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -85,6 +277,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 62
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -95,6 +311,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 60
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -105,6 +345,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 49
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -115,6 +379,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 31
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -125,6 +413,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 15
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     },
@@ -134,6 +446,30 @@ export var multi = [
         {
           "name": "Monday",
           "value": 11
+        },
+        {
+          "name": "Tuesday",
+          "value": 0
+        },
+        {
+          "name": "Wednesday",
+          "value": 0
+        },
+        {
+          "name": "Thursday",
+          "value": 0
+        },
+        {
+          "name": "Friday",
+          "value": 0
+        },
+        {
+          "name": "Saturday",
+          "value": 0
+        },
+        {
+          "name": "Sunday",
+          "value": 0
         }
       ]
     }
