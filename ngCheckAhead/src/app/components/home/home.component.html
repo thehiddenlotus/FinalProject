@@ -4,33 +4,35 @@
     <p class="lead text-center bannerText">Find the status of your favorite grocery store</p>
   </div>
 </div>
-<div class="card flex-md-row h-md-150">
-  <div class="card-body d-flex flex-column align-items-center ">
-    <h4>Aurora King Soopers at 4456 xyz street activity</h4>
+<div class="container">
+  <div class="card flex-md-row h-md-150">
+    <div class="card-body d-flex flex-column align-items-center ">
+      <h4>Aurora King Soopers at 4456 xyz street activity</h4>
+    </div>
   </div>
-</div>
-<div class="row mb-1">
-  <div class="col-md-12">
-    <div class="card flex-md-row mb-2 h-md-250">
-      <div class="card-body d-flex flex-column justify-content-center align-items-center chartContainer">
-        <ngx-charts-heat-map [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
-          [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
-          [yAxisLabel]="yAxisLabel" [results]="multiHome" (select)="onSelect($event)" (activate)="onActivate($event)"
-          (deactivate)="onDeactivate($event)">
-        </ngx-charts-heat-map>
+  <div class="row mb-1">
+    <div class="col-md-12">
+      <div class="card flex-md-row mb-2 h-md-250">
+        <div class="card-body d-flex flex-column justify-content-center align-items-center chartContainer">
+          <ngx-charts-heat-map [scheme]="colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel" [results]="multiHome" (select)="onSelect($event)" (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)">
+          </ngx-charts-heat-map>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="row mb-1">
-  <div class="col-md-12">
-    <div class="card flex-md-row mb-2 h-md-250">
-      <div class="card-body d-flex flex-column-12 justify-content-center chartContainer">
-        <div class="flex-md-row">
-          <div class="d-flex flex-column justify-content-center">
-            <label>Search for your store<br>
-              <input type="text" placeholder="Search.."></label>
-            <button id="searchbutton" type="button" class="btn btn-primary btn-lg pl-2">Find Store</button>
+  <div class="row mb-1">
+    <div class="col-md-12">
+      <div class="card flex-md-row mb-2 h-md-250">
+        <div class="card-body d-flex flex-column-12 justify-content-center chartContainer">
+          <div class="flex-md-row">
+            <div class="d-flex flex-column justify-content-center">
+              <label>Search for your store<br>
+                <input [(ngModel)]='searchKeyword' placeholder="Type Name or Address"></label>
+              <button [routerLink]="['/search/', searchKeyword]" id="searchbutton" type="button" class="btn btn-primary btn-lg pl-2">Find Store</button>
+            </div>
           </div>
         </div>
       </div>

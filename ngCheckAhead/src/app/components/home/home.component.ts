@@ -12,6 +12,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 export class HomeComponent implements OnInit {
   
   multiHome: any[];
+  searchKeyword: string;
   public innerWidth: any;
   constructor() { 
     Object.assign(this, { multiHome });//for chart
@@ -62,7 +63,4 @@ export class HomeComponent implements OnInit {
    }
    ////////////end for stuff for chart
 
-   onResize(event) {
-    this.view = [event.target.innerWidth / 1.1, 300];
-}
 }
