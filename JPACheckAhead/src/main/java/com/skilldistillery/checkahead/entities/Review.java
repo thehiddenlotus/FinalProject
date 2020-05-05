@@ -166,7 +166,7 @@ public class Review {
 	public String toString() {
 		return "Review [id=" + id + ", content=" + content + ", active=" + active + ", dateCreated=" + dateCreated
 				+ ", dateUpdated=" + dateUpdated + ", dateVistied=" + dateVistied + ", location=" + location + ", user="
-				+ user + ", ratings=" + ratings + ", comments=" + comments + "]";
+				+ user + "]";
 	}
 
 	@Override

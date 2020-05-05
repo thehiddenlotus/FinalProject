@@ -57,7 +57,7 @@ export class ReviewService {
   public update(review: Review) {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .put<Review>(`${this.url}/${review.id}`, Review, httpOptions)
+      .put<Review>(`${this.url}/${review.id}`, review, httpOptions)
       .pipe(
         catchError((err: any) => {
           console.log(err);

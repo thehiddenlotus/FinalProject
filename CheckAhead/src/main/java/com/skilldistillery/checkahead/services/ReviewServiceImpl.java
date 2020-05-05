@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.checkahead.entities.Location;
 import com.skilldistillery.checkahead.entities.Review;
+import com.skilldistillery.checkahead.entities.ReviewComment;
 import com.skilldistillery.checkahead.entities.ReviewRating;
 import com.skilldistillery.checkahead.entities.User;
 import com.skilldistillery.checkahead.repositories.LocationRepository;
 import com.skilldistillery.checkahead.repositories.RatingRepository;
+import com.skilldistillery.checkahead.repositories.ReviewCommentRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRatingRepository;
 import com.skilldistillery.checkahead.repositories.ReviewRepository;
 import com.skilldistillery.checkahead.repositories.UserRepository;
@@ -39,6 +41,9 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private LocationRepository locRepo;
+	
+	@Autowired
+	private ReviewCommentRepository comRepo;
 
 	@Override
 	public List<Review> findAllReviews() {
@@ -131,13 +136,35 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public boolean deleteReview(Integer reviewId, String username) {
+		System.out.println(reviewId);
 		boolean answer = false;
 		Optional<Review> optReview = reviewRepo.findById(reviewId);
 		if (optReview.isPresent() && 
 				(optReview.get().getUser().getUsername().equals(username)
 				|| userRepo.findByUsername(username).getRole().equals("admin")
 			)) {
-			reviewRepo.deleteById(reviewId);
+			Review rev = optReview.get();
+			System.out.println(rev);
+			for (ReviewRating rating : rev.getRatings()) {
+				try {
+//					rrSvc.deleteRR(rating.getReview().getId(), rating.getRating().getId(), principal.getName());
+					rrRepo.deleteById(rating.getId());
+				} catch (Exception e) {			
+					e.printStackTrace();
+				}
+			}
+			for (ReviewComment comment : rev.getComments()) {
+				try {
+//					comSvc.deleteComment(comment.getId(), principal.getName());
+					comRepo.deleteById(comment.getId());
+				} catch (Exception e) {			
+					e.printStackTrace();
+				}
+			}
+			System.out.println("DELETING REVIEW");
+//			reviewRepo.deleteById(reviewId);
+			reviewRepo.delete(optReview.get());
+			System.out.println("DONE DELETING");
 			answer = true;
 		}
 		return answer;
