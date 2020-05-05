@@ -21,11 +21,15 @@ export class CommentFormComponent implements OnInit {
 
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   postComment(){
     this.svc.create(this.newComment).subscribe(
       data => {
         console.log('CommentComponent.create(): comment created.');
-        this.router.navigateByUrl('/locations/'+ this.newComment.review.location.id)
+        this.reload();
       },
       err => {
         console.error('CommentComponent.create(): ERROR.');
