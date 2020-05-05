@@ -23,10 +23,10 @@ export class EditLocationFormComponent implements OnInit {
   }
 
   postLocation(){
-    this.addSvc.update(this.newAdd).subscribe(
-      data => {
-        console.log('LocationAddressComponent.create(): LocationAddress created.');
-        this.location.address = data;
+    // this.addSvc.update(this.newAdd).subscribe(
+    //   data => {
+    //     console.log('LocationAddressComponent.create(): LocationAddress created.');
+    //     this.location.address = data;
         this.svc.update(this.location).subscribe(
           yay => {
             console.log('LocationComponent.create(): Location created.');
@@ -37,12 +37,12 @@ export class EditLocationFormComponent implements OnInit {
             console.error(nay);
           }
         );
-      },
-      err => {
-        console.error('LocationAddressComponent.create(): ERROR.');
-        console.error(err);
-      }
-    );
+    //   },
+    //   err => {
+    //     console.error('LocationAddressComponent.create(): ERROR.');
+    //     console.error(err);
+    //   }
+    // );
   }
 
   removeLocation(){

@@ -13,9 +13,9 @@
         </ul>
         <br>
         <p>{{location.description}}</p>
-        <button class='btb btn-secondary' *ngIf='currentUser.role === "admin"' (click)="updateLoc(location)">Update Location</button>
-        <button class='btb btn-secondary' *ngIf='newReview' (click)="editLoc = null">Cancel</button>
-        <button class='btb btn-secondary' *ngIf='!newReview && currentUser' (click)="addReview()">Add Review</button>
+        <button class='btb btn-secondary' *ngIf='currentUser.role === "admin" && !editLoc' (click)="updateLoc(location)">Update Location</button>
+        <button class='btb btn-secondary' *ngIf='editLoc' (click)="editLoc = null">Cancel</button>
+        <button class='btb btn-secondary' *ngIf='!newReview && currentUser && !editLoc' (click)="addReview()">Add Review</button>
         <button class='btb btn-secondary' *ngIf='newReview' (click)="newReview = null">Cancel</button>
       </div>
     </div>
@@ -90,7 +90,7 @@
           <a class="text-dark" href="#">{{review.content}}</a>
         </h3>
         <div class="mb-1 text-muted">{{review.dateCreated}}</div>
-        <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p>
+        <!-- <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p> -->
         <button (click)="ratingReviewSelected2=true" *ngIf='review.comments.length > 1 && !ratingReviewSelected2'>View comments</button>
         <button (click)="ratingReviewSelected2=false" *ngIf='ratingReviewSelected2'>Hide comments</button>
         <button *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"' (click)="updateReview(review)">Update Review</button>
@@ -134,3 +134,30 @@
     </div>
   </div>
 </div>
+
+
+
+<!-- <div *ngIf='ratingReviewSelected2' class="row mb-1">
+  <div class="col-md-4">
+    <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card-body d-flex flex-column align-items-center">
+        <ul class="list-group">
+          <li class="list-group-item">Rating Review: 8.3</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card flex-md-row mb-4 box-shadow h-md-450">
+      <div class="card-body d-flex flex-column align-items-start">
+        <strong class="d-inline-block mb-2 text-success">Review by Wendy</strong>
+        <h3 class="mb-0">
+          <a class="text-dark" href="#">Clean and stocked every time</a>
+        </h3>
+        <div class="mb-1 text-muted">April 15, 2020</div>
+        <p class="card-text mb-auto">I found this very helpful.</p>
+        <button (click)="ratingReviewSelected2=false">Hide comments</button>
+      </div>
+    </div>
+  </div>
+</div> -->
