@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { Location } from 'src/app/models/location';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -38,13 +39,11 @@ export class SearchComponent implements OnInit {
     )
   }
 
-  searchByKeyword(){
-    // this.searchKey = this.searchByKeyword;
-  }
 
   addLocation() {
     this.newLocation = new Location();
     this.newLocation.creator = this.currentUser;
   }
+
 
 }
