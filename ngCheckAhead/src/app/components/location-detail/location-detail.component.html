@@ -85,16 +85,16 @@
         <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p>
         <button (click)="ratingReviewSelected2=true" *ngIf='review.comments.length > 1 && !ratingReviewSelected2'>View comments</button>
         <button (click)="ratingReviewSelected2=false" *ngIf='ratingReviewSelected2'>Hide comments</button>
-        <button *ngIf='currentUser' (click)="updateReview(review)">Update Review</button>
-        <button *ngIf='currentUser' (click)="deleteReview(review)">Delete Review</button>
+        <button *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"' (click)="updateReview(review)">Update Review</button>
+        <button *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"' (click)="deleteReview(review)">Delete Review</button>
         <button *ngIf='!newComment && currentUser' (click)="addComment(review)">Add comment</button>
         <button *ngIf='newComment' (click)="newComment = null">Cancel</button>
       </div>
-      <div *ngIf='newComment'>
-        <hr>
-        <app-comment-form [newComment]='newComment'></app-comment-form>
-      </div>
     </div>
+        <div *ngIf='newComment && newComment.review.id === review.id'>
+          <hr>
+          <app-comment-form [newComment]='newComment'></app-comment-form>
+        </div>
     <div class="container-fluid"  *ngFor="let comment of review.comments">
       <div *ngIf='ratingReviewSelected2 && review.comments.length > 1' class="row mb-1">
         <div class="col-md-3" *ngIf='comment.id !== 1'>
@@ -112,10 +112,10 @@
               <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
               <div class="mb-1 text-muted">{{comment.createdAt}}</div>
               <p class="card-text mb-auto">{{comment.content}}</p>
-              <button *ngIf='currentUser && !editComment' (click)="updateComment(comment)">Update Comment</button>
+              <button *ngIf='(currentUser.id === comment.user.id || currentUser.role === "admin") && !editComment' (click)="updateComment(comment)">Update Comment</button>
               <button *ngIf='editComment' (click)="editComment = null">Cancel</button>
-              <button *ngIf='currentUser' (click)="deleteComment(comment)">Delete Comment</button>
-              <div *ngIf='editComment'>
+              <button *ngIf='currentUser.id === comment.user.id || currentUser.role === "admin"' (click)="deleteComment(comment)">Delete Comment</button>
+              <div *ngIf='editComment && editComment.id === comment.id'>
                 <hr>
                 <app-edit-comment-form [editComment]='comment'></app-edit-comment-form>
               </div>
