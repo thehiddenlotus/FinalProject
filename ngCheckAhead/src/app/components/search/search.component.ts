@@ -15,8 +15,9 @@ import { ActivatedRoute } from "@angular/router";
 export class SearchComponent implements OnInit {
 
   urlParam = ''+this.route.snapshot.paramMap.get("searchKey");
+  aKey: string = this.urlParam;
 
-  searchKey: string = this.urlParam;
+  searchKey: string = '';
   
   currentUser: User = null;
   newLocation: Location = null;
@@ -29,8 +30,8 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.setSearchParamIfExists();
     this.userId = this.auth.getCurrentUserId();
-
     this.userSvc.show(this.userId).subscribe(
       success => {
         this.currentUser = success;
@@ -42,6 +43,12 @@ export class SearchComponent implements OnInit {
 
       }
     )
+  }
+
+  setSearchParamIfExists(){
+    if(this.aKey.length > 1){
+      this.searchKey = this.aKey
+    }
   }
 
 
