@@ -13,11 +13,11 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-
-  urlParam = ''+this.route.snapshot.paramMap.get("searchKey");
+  
+  urlParam = this.route.snapshot.paramMap.get('searchKey');
   aKey: string = this.urlParam;
 
-  searchKey: string = '';
+  searchKey: string = null;
   
   currentUser: User = null;
   newLocation: Location = null;
@@ -46,8 +46,11 @@ export class SearchComponent implements OnInit {
   }
 
   setSearchParamIfExists(){
-    if(this.aKey.length > 1){
+    if(this.route.snapshot.paramMap.has){
       this.searchKey = this.aKey
+    }
+    else{
+      this.searchKey = null
     }
   }
 
