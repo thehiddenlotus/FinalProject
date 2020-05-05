@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { LocationService } from './../../services/location.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Location } from 'src/app/models/location';
 
 @Component({
@@ -10,7 +10,10 @@ import { Location } from 'src/app/models/location';
 })
 export class FavoritesComponent implements OnInit {
 
+  @Input() searchKey: string;
+
   favorites: Location[];
+ 
 
   constructor(
     private locSvc: LocationService,
