@@ -140,7 +140,7 @@
       </div>
 
       <div class="container-fluid" *ngFor="let comment of review.comments">
-        <div *ngIf='ratingReviewSelected2 && review.comments.length > 1' class="row mb-1">
+        <div *ngIf='ratingReviewSelected2 && review.comments.length > 0' class="row mb-1">
           <!-- <div class="col-md-3" *ngIf='comment.id !== 1'>
             <div class="card flex-md-row mb-2 h-md-250">
               <div class="card-body d-flex flex-column align-items-center">
@@ -150,7 +150,7 @@
               </div>
             </div>
           </div> -->
-          <div class="col-md-12" *ngIf='comment.id !== 1'>
+          <div class="col-md-12" >
             <div class="card flex-md-row mb-4 box-shadow h-md-450">
               <div class="card-body d-flex flex-column align-items-start">
                 <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
