@@ -372,10 +372,12 @@ COMMIT;
 START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 2, 1, 'During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that ', '2020-04-27', NULL, 0, NULL, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'This is trash', '2020-04-27', NULL, 4, 1, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'I was there', '2020-04-27', NULL, 9, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'I found it very unclean this time around', '2020-04-27', NULL, 4, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'The prices seem pretty decent, and the store is well kept', '2020-04-27', NULL, 9, 1, true);
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (4, 1, 3, 'This was the greatests time at the store This was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the store', '2020-04-27', NULL, 0, NULL, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (5, 1, 2, 'Na ah', '2020-04-27', NULL, 3, 4, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (5, 1, 2, 'I had the same experience', '2020-04-27', NULL, 3, 4, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (6, 10, 4, 'Friendly staff with a distinct Russian-style of tending to customers.', '2020-04-27', NULL, 9, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (7, 11, 3, 'I am absolutely in love with this place! It reminds of all the wonderful treats my grandmother used to bring me home from Lithuania and Russia', '2020-04-28', NULL, 7, 10, true);
 
 COMMIT;
 
