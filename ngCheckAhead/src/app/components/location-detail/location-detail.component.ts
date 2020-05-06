@@ -108,7 +108,6 @@ export class LocationDetailComponent implements OnInit {
   }
 
   loadLocation() {
-    this.finalMapUrl = this.mapUrl + this.location.googleId;
     this.userId = this.auth.getCurrentUserId();
     this.userSvc.show(this.userId).subscribe(
       (success) => {
@@ -117,6 +116,7 @@ export class LocationDetailComponent implements OnInit {
         this.locSvc.show(this.urlId).subscribe(
           (data) => {
             this.location = data;
+            this.finalMapUrl = this.mapUrl + this.location.googleId;
             this.populateReviewRatings(this.urlId);
             this.populateReviews(this.urlId);
             console.log(this.currentUser);
