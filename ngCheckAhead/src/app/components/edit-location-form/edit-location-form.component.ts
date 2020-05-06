@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Address } from 'src/app/models/address';
 import { LocationService } from 'src/app/services/location.service';
 import { AddressService } from 'src/app/services/address.service';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class EditLocationFormComponent implements OnInit {
 
   @Input() location: Location;
+  @Output() editLoc = new EventEmitter<string>();
   newAdd: Address = new Address();
 
   constructor(
@@ -25,7 +26,7 @@ export class EditLocationFormComponent implements OnInit {
   }
 
   reload() {
-    window.location.reload();
+    this.editLoc.emit('');
   }
 
   postLocation(){

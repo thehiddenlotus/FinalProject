@@ -129,6 +129,7 @@ public class ReviewController {
 				return null;
 			}else {
 				response.setStatus(201);
+				System.out.println(review);
 				return review;
 			}
 		} catch (Exception e) {

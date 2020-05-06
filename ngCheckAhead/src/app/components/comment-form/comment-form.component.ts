@@ -1,7 +1,7 @@
-import { Comment } from './../../models/comment';
-import { Component, OnInit, Input } from '@angular/core';
-import { ReviewCommentService } from 'src/app/services/review-comment.service';
+import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ReviewCommentService } from 'src/app/services/review-comment.service';
+import { Comment } from './../../models/comment';
 
 @Component({
   selector: 'app-comment-form',
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class CommentFormComponent implements OnInit {
 
   @Input() newComment: Comment;
+  @Output() commentAdded = new EventEmitter<string>();
 
   constructor(
     private router: Router,
@@ -22,7 +23,7 @@ export class CommentFormComponent implements OnInit {
   }
 
   reload() {
-    window.location.reload();
+    this.commentAdded.emit('');
   }
 
   postComment(){

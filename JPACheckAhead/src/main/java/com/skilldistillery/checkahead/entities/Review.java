@@ -52,7 +52,7 @@ public class Review {
 	@JoinColumn(name="user_id")
 	private User user;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "review")
 	private List<ReviewRating> ratings;
 

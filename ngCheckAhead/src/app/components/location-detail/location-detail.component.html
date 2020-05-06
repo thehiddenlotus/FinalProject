@@ -37,13 +37,13 @@
 
   <div *ngIf='editLoc'>
     <hr>
-    <app-edit-location-form [location]='location'></app-edit-location-form>
+    <app-edit-location-form [location]='location' (editLoc)='loadLocation()'></app-edit-location-form>
   </div>
   <hr>
 
   <div *ngIf='newReview'>
     <hr>
-    <app-review-form [location]='location' [newReview]='newReview'></app-review-form>
+    <app-review-form [location]='location' [newReview]='newReview' (reviewAdded)='loadLocation()'></app-review-form>
   </div>
 
   <div class="row mb-1">
@@ -131,16 +131,16 @@
 
       <div *ngIf='editReview && editReview.id === review.id'>
         <hr>
-        <app-edit-review-form [editReview]='editReview'></app-edit-review-form>
+        <app-edit-review-form [editReview]='editReview'  (reviewUpdated)='loadLocation()'></app-edit-review-form>
       </div>
 
       <div *ngIf='newComment && newComment.review.id === review.id'>
         <hr>
-        <app-comment-form [newComment]='newComment'></app-comment-form>
+        <app-comment-form [newComment]='newComment' (commentAdded)='loadLocation()'></app-comment-form>
       </div>
 
       <div class="container-fluid" *ngFor="let comment of review.comments">
-        <div *ngIf='ratingReviewSelected2 && review.comments.length > 1' class="row mb-1">
+        <div *ngIf='ratingReviewSelected2 && review.comments.length > 0' class="row mb-1">
           <!-- <div class="col-md-3" *ngIf='comment.id !== 1'>
             <div class="card flex-md-row mb-2 h-md-250">
               <div class="card-body d-flex flex-column align-items-center">
@@ -150,7 +150,7 @@
               </div>
             </div>
           </div> -->
-          <div class="col-md-12" *ngIf='comment.id !== 1'>
+          <div class="col-md-12" >
             <div class="card flex-md-row mb-4 box-shadow h-md-450">
               <div class="card-body d-flex flex-column align-items-start">
                 <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
@@ -170,7 +170,7 @@
                 </div>
                 <div *ngIf='editComment && editComment.id === comment.id'>
                   <hr>
-                  <app-edit-comment-form [editComment]='comment'></app-edit-comment-form>
+                  <app-edit-comment-form [editComment]='comment'  (commentUpdated)='loadLocation()'></app-edit-comment-form>
                 </div>
               </div>
             </div>

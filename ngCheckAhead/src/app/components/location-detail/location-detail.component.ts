@@ -1,5 +1,5 @@
 import { TrafficDetail } from './../../models/traffic-detail';
-import { PopulartimesData } from './../../models/populartimes-data';
+// import { PopulartimesData } from './../../models/populartimes-data';
 import { TrafficData } from './../../models/traffic-data';
 import { TrafficDataService } from './../../services/traffic-data.service';
 import { UserService } from './../../services/user.service';
@@ -9,16 +9,10 @@ import { ReviewRatingService } from './../../services/review-rating.service';
 import { Component, OnInit, Optional } from '@angular/core';
 import { LocationService } from './../../services/location.service';
 import { Location } from 'src/app/models/location';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 
-
-
-import { NgModule } from '@angular/core'; //Ch
-import { BrowserModule } from '@angular/platform-browser';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { multi } from './data';
 import { Review } from 'src/app/models/review';
-import { Rating } from 'src/app/models/rating';
 import { Comment } from 'src/app/models/comment';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user';
@@ -27,10 +21,9 @@ import { ReviewCommentService } from 'src/app/services/review-comment.service';
 @Component({
   selector: 'app-location-detail',
   templateUrl: './location-detail.component.html',
-  styleUrls: ['./location-detail.component.css']
+  styleUrls: ['./location-detail.component.css'],
 })
 export class LocationDetailComponent implements OnInit {
-
   //code for heat map
   multi: any[];
   newMulti: any[];
@@ -49,8 +42,7 @@ export class LocationDetailComponent implements OnInit {
   legendPosition: string = 'below';
 
   colorScheme = {
-    domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5',
-      '#ED7D1D']
+    domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5', '#ED7D1D'],
   };
 
   onSelect(data): void {
@@ -78,7 +70,7 @@ export class LocationDetailComponent implements OnInit {
   trafficAvg: number;
   checkoutAvg: number;
   stockAvg: number;
-  urlParam = parseInt(this.route.snapshot.paramMap.get("id"));
+  urlParam = parseInt(this.route.snapshot.paramMap.get('id'));
   urlId = +this.urlParam;
   newReview: Review = null;
   editReview: Review = null;
@@ -93,8 +85,9 @@ export class LocationDetailComponent implements OnInit {
   userId = null;
   opt: Optional = null;
 
-  mapUrl: string = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAqcHuaRwwqEO0i2thU9Zsh9D7BLogxqbs&q=place_id:'
-  finalMapUrl: string = ''
+  mapUrl: string =
+    'https://www.google.com/maps/embed/v1/place?key=AIzaSyAqcHuaRwwqEO0i2thU9Zsh9D7BLogxqbs&q=place_id:';
+  finalMapUrl: string = '';
   //M E T H O D S
   constructor(
     private locSvc: LocationService,
@@ -107,40 +100,50 @@ export class LocationDetailComponent implements OnInit {
     private trafficServ: TrafficDataService,
     private router: Router
   ) {
-    Object.assign(this, { multi });//for chart
+    Object.assign(this, { multi }); //for chart
   }
 
   ngOnInit(): void {
-    this.locSvc.show(this.urlId).subscribe(
-      data => {
-        this.location = data;
-        this.finalMapUrl = this.mapUrl + this.location.googleId;
-        this.populateReviewRatings(this.urlId);
-        this.populateReviews(this.urlId);
-      },
-      error => {
-        console.log("error in location data for location-detail");
-        console.log(error);
-      }
-    )
-    this.userId = this.auth.getCurrentUserId();
+    this.loadLocation();
+  }
 
+  loadLocation() {
+    this.userId = this.auth.getCurrentUserId();
     this.userSvc.show(this.userId).subscribe(
-      success => {
+      (success) => {
         this.currentUser = success;
         console.log(this.currentUser);
+        this.locSvc.show(this.urlId).subscribe(
+          (data) => {
+            this.location = data;
+            this.finalMapUrl = this.mapUrl + this.location.googleId;
+            this.populateReviewRatings(this.urlId);
+            this.populateReviews(this.urlId);
+            console.log(this.currentUser);
+            console.log(this.newReview);
+            console.log(this.editLoc);
 
+            this.newComment = null;
+            this.editComment = null;
+            this.newReview = null;
+            this.editReview = null;
+            this.editLoc = null;
+          },
+          (error) => {
+            console.log('error in location data for location-detail');
+            console.log(error);
+          }
+        );
       },
-      fail => {
-        console.log("no user logged in");
-
+      (fail) => {
+        console.log('no user logged in');
       }
-    )
+    );
   }
 
-  reload() {
-    window.location.reload();
-  }
+  // reload() {
+  //   window.location.reload();
+  // }
 
   addReview() {
     this.newReview = new Review();
@@ -159,17 +162,16 @@ export class LocationDetailComponent implements OnInit {
     console.log(review.reviewRatings);
 
     this.reviewServ.destroy(review.id).subscribe(
-      data => {
-        console.log("review deleted");
-        this.reload();
+      (data) => {
+        console.log('review deleted');
+        this.loadLocation();
       },
-      err => {
-        console.log("error in locationdetail deleteReview");
+      (err) => {
+        console.log('error in locationdetail deleteReview');
         console.log(err);
       }
-    )
+    );
   }
-
 
   addComment(review: Review) {
     this.newComment = new Comment();
@@ -183,15 +185,15 @@ export class LocationDetailComponent implements OnInit {
 
   deleteComment(comment: Comment) {
     this.comSvc.destroy(comment.id).subscribe(
-      data => {
-        console.log("comment deleted");
-        this.reload();
+      (data) => {
+        console.log('comment deleted');
+        this.loadLocation();
       },
-      err => {
-        console.log("error in locationdetail deleteComment");
+      (err) => {
+        console.log('error in locationdetail deleteComment');
         console.log(err);
       }
-    )
+    );
   }
 
   updateLoc(location: Location) {
@@ -200,15 +202,15 @@ export class LocationDetailComponent implements OnInit {
   //function to populate reviewRatings to get averages
   populateReviewRatings(id: number): void {
     this.rrServ.findByLocation(id).subscribe(
-      good => {
+      (good) => {
         this.reviewRatings = good;
         this.getAverages();
       },
-      error => {
-        console.log("error in populating reviewRatings in location-detail");
+      (error) => {
+        console.log('error in populating reviewRatings in location-detail');
         console.log(error);
       }
-    )
+    );
   }
 
   //function to get averages for current store
@@ -221,59 +223,70 @@ export class LocationDetailComponent implements OnInit {
     for (let i = 0; i < this.reviewRatings.length; i++) {
       if (this.reviewRatings[i].id.ratingId === 1) {
         cleanliness.push(this.reviewRatings[i].ratingValue);
-      }
-      else if (this.reviewRatings[i].id.ratingId === 2) {
+      } else if (this.reviewRatings[i].id.ratingId === 2) {
         traffic.push(this.reviewRatings[i].ratingValue);
-      }
-      else if (this.reviewRatings[i].id.ratingId === 3) {
+      } else if (this.reviewRatings[i].id.ratingId === 3) {
         checkout.push(this.reviewRatings[i].ratingValue);
-      }
-      else if (this.reviewRatings[i].id.ratingId === 4) {
+      } else if (this.reviewRatings[i].id.ratingId === 4) {
         stock.push(this.reviewRatings[i].ratingValue);
       }
     }
     //calculate avg or and return else zero
-    let sum = cleanliness.length > 0 ? cleanliness.reduce((previous, current) => current += previous) : 0;
+    let sum =
+      cleanliness.length > 0
+        ? cleanliness.reduce((previous, current) => (current += previous))
+        : 0;
     this.cleanlinessAvg = cleanliness.length > 0 ? sum / cleanliness.length : 0;
-    sum = traffic.length > 0 ? traffic.reduce((previous, current) => current += previous) : 0;
+    sum =
+      traffic.length > 0
+        ? traffic.reduce((previous, current) => (current += previous))
+        : 0;
     this.trafficAvg = traffic.length > 0 ? sum / traffic.length : 0;
-    sum = checkout.length > 0 ? checkout.reduce((previous, current) => current += previous) : 0;
+    sum =
+      checkout.length > 0
+        ? checkout.reduce((previous, current) => (current += previous))
+        : 0;
     this.checkoutAvg = checkout.length > 0 ? sum / checkout.length : 0;
-    sum = stock.length > 0 ? stock.reduce((previous, current) => current += previous) : 0;
+    sum =
+      stock.length > 0
+        ? stock.reduce((previous, current) => (current += previous))
+        : 0;
     this.stockAvg = stock.length > 0 ? sum / stock.length : 0;
   }
 
   //function to populate reviews
   populateReviews(id: number): void {
     this.reviewServ.getReviewsByLocationId(id).subscribe(
-      good => {
+      (good) => {
         this.reviews = good;
         // this.populateTransitData();
       },
-      error => {
-        console.log("error in populating reviews in location-detail");
+      (error) => {
+        console.log('error in populating reviews in location-detail');
         console.log(error);
       }
-    )
+    );
   }
 
   //function to populate transit data
   populateTransitData(): void {
     this.trafficServ.getTransitData(this.location.googleId).subscribe(
-      good => {
+      (good) => {
         this.popTimes = good;
         for (let i = 0; i < this.popTimes.populartimes.length; i++) {
           for (let index = 7, h = 0; h < multi.length; index++, h++) {
-            multi[h].series[i].value = this.popTimes.populartimes[i].data[index];
+            multi[h].series[i].value = this.popTimes.populartimes[i].data[
+              index
+            ];
           }
         }
-        console.log(multi)
+        console.log(multi);
         this.newMulti = multi;
       },
-      error => {
-        console.log("error in populating transit data");
+      (error) => {
+        console.log('error in populating transit data');
         console.log(error);
       }
-    )
+    );
   }
 }

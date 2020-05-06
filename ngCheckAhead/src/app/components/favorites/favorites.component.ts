@@ -98,7 +98,7 @@ export class FavoritesComponent implements OnInit, OnChanges {
           stockA.push(this.reviewRatings[i].ratingValue);
         }
       }
-      
+
 
       //calculate avg or and return else zero
       let rating = new AverageRatings();
