@@ -85,6 +85,9 @@ export class LocationDetailComponent implements OnInit {
   userId = null;
   opt: Optional = null;
 
+  mapUrl: string =
+    'https://www.google.com/maps/embed/v1/place?key=AIzaSyAqcHuaRwwqEO0i2thU9Zsh9D7BLogxqbs&q=place_id:';
+  finalMapUrl: string = '';
   //M E T H O D S
   constructor(
     private locSvc: LocationService,
@@ -105,31 +108,32 @@ export class LocationDetailComponent implements OnInit {
   }
 
   loadLocation() {
+    this.finalMapUrl = this.mapUrl + this.location.googleId;
     this.userId = this.auth.getCurrentUserId();
     this.userSvc.show(this.userId).subscribe(
       (success) => {
         this.currentUser = success;
         console.log(this.currentUser);
-              this.locSvc.show(this.urlId).subscribe(
-                (data) => {
-                  this.location = data;
-                  this.populateReviewRatings(this.urlId);
-                  this.populateReviews(this.urlId);
-                  console.log(this.currentUser);
-                  console.log(this.newReview);
-                  console.log(this.editLoc);
+        this.locSvc.show(this.urlId).subscribe(
+          (data) => {
+            this.location = data;
+            this.populateReviewRatings(this.urlId);
+            this.populateReviews(this.urlId);
+            console.log(this.currentUser);
+            console.log(this.newReview);
+            console.log(this.editLoc);
 
-                  this.newComment = null;
-                  this.editComment = null;
-                  this.newReview = null;
-                  this.editReview = null;
-                  this.editLoc = null;
-                },
-                (error) => {
-                  console.log('error in location data for location-detail');
-                  console.log(error);
-                }
-              );
+            this.newComment = null;
+            this.editComment = null;
+            this.newReview = null;
+            this.editReview = null;
+            this.editLoc = null;
+          },
+          (error) => {
+            console.log('error in location data for location-detail');
+            console.log(error);
+          }
+        );
       },
       (fail) => {
         console.log('no user logged in');
