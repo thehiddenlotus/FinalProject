@@ -1,3 +1,11 @@
 .card {
     border: none;
 }
+.chartContainer {
+    max-height: 300px;
+    max-width: 1000px;
+  }
+
+.btn {
+    margin-left: 1em;
+}  
