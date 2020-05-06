@@ -1,3 +1,5 @@
+import { TrafficDetail } from './../../models/traffic-detail';
+import { PopulartimesData } from './../../models/populartimes-data';
 import { TrafficData } from './../../models/traffic-data';
 import { TrafficDataService } from './../../services/traffic-data.service';
 import { UserService } from './../../services/user.service';
@@ -83,7 +85,10 @@ export class LocationDetailComponent implements OnInit {
   newComment: Comment = null;
   editComment: Comment = null;
   editLoc: Location = null;
+
   popTimes: TrafficData;
+  jsonTimes: TrafficDetail;
+
   currentUser: User = null;
   userId = null;
   opt: Optional = null;
@@ -140,18 +145,18 @@ export class LocationDetailComponent implements OnInit {
     this.newReview.user = this.currentUser;
   }
 
-  updateReview(review: Review){
+  updateReview(review: Review) {
     this.editReview = review;
   }
 
-  deleteReview(review: Review){
+  deleteReview(review: Review) {
     console.log(review);
 
     console.log(review.comments);
     console.log(review.reviewRatings);
 
-      this.reviewServ.destroy(review.id).subscribe(
-        data => {
+    this.reviewServ.destroy(review.id).subscribe(
+      data => {
         console.log("review deleted");
         this.reload();
       },
@@ -163,17 +168,17 @@ export class LocationDetailComponent implements OnInit {
   }
 
 
-  addComment(review: Review){
+  addComment(review: Review) {
     this.newComment = new Comment();
     this.newComment.user = this.currentUser;
     this.newComment.review = review;
   }
 
-  updateComment(comment: Comment){
+  updateComment(comment: Comment) {
     this.editComment = comment;
   }
 
-  deleteComment(comment: Comment){
+  deleteComment(comment: Comment) {
     this.comSvc.destroy(comment.id).subscribe(
       data => {
         console.log("comment deleted");
@@ -186,7 +191,7 @@ export class LocationDetailComponent implements OnInit {
     )
   }
 
-  updateLoc(location: Location){
+  updateLoc(location: Location) {
     this.editLoc = location;
   }
   //function to populate reviewRatings to get averages
@@ -253,16 +258,14 @@ export class LocationDetailComponent implements OnInit {
   populateTransitData(): void {
     this.trafficServ.getTransitData(this.location.googleId).subscribe(
       good => {
-        console.log(multi)
-        //this.popTimes = good;
-        console.log(this.popTimes)
+        this.popTimes = good;
         for (let i = 0; i < this.popTimes.populartimes.length; i++) {
           for (let index = 7, h = 0; h < multi.length; index++, h++) {
-              multi[h].series[i].value = this.popTimes.populartimes[i].data[index]
+            multi[h].series[i].value = this.popTimes.populartimes[i].data[index];
           }
         }
         console.log(multi)
-        this.newMulti= multi;
+        this.newMulti = multi;
       },
       error => {
         console.log("error in populating transit data");
@@ -270,5 +273,4 @@ export class LocationDetailComponent implements OnInit {
       }
     )
   }
-
 }
