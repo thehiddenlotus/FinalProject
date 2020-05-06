@@ -38,6 +38,7 @@ import { EditCommentFormComponent } from './components/edit-comment-form/edit-co
 import { EditReviewFormComponent } from './components/edit-review-form/edit-review-form.component';
 import { LocationFormComponent } from './components/location-form/location-form.component';
 import { EditLocationFormComponent } from './components/edit-location-form/edit-location-form.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EditLocationFormComponent } from './components/edit-location-form/edit-
     LocationFormComponent,
     EditCommentFormComponent,
     EditReviewFormComponent,
-    EditLocationFormComponent
+    EditLocationFormComponent,
+    SafePipe
 
   ],
   imports: [

@@ -93,6 +93,8 @@ export class LocationDetailComponent implements OnInit {
   userId = null;
   opt: Optional = null;
 
+  mapUrl: string = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyAqcHuaRwwqEO0i2thU9Zsh9D7BLogxqbs&q=place_id:'
+  finalMapUrl: string = ''
   //M E T H O D S
   constructor(
     private locSvc: LocationService,
@@ -112,6 +114,7 @@ export class LocationDetailComponent implements OnInit {
     this.locSvc.show(this.urlId).subscribe(
       data => {
         this.location = data;
+        this.finalMapUrl = this.mapUrl + this.location.googleId;
         this.populateReviewRatings(this.urlId);
         this.populateReviews(this.urlId);
       },
