@@ -1,3 +1,4 @@
+import { TrafficData } from './../models/traffic-data';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,7 +17,7 @@ export class TrafficDataService {
 
   public getTransitData(googleId: string) {
     const httpOptions = this.getHttpOptions();
-    return this.http.get<PopulartimesData>('http://127.0.0.1:5000/' + googleId, httpOptions).pipe(
+    return this.http.get<TrafficData>('http://127.0.0.1:5000/' + googleId, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error getting  transit data from api: ' + err);
