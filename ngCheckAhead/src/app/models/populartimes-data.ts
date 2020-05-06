@@ -1,7 +1,8 @@
+import { TrafficData } from './traffic-data';
 export class PopulartimesData {
-    data: number[];
+    data: TrafficData[];
     constructor(
-        data?: number[]
+        data?: TrafficData[]
     ){
         this.data = data
     }

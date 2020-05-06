@@ -222,13 +222,15 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `checkaheaddb`;
-INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (1, '3932 South Joplin Way', 'Aurora', 80013, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (1, '3970 S Hannibal St', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (2, '4271 South Buckley Road', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (3, '12200 E Mississippi Ave', 'Aurora', 80012, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (4, '12800 E Mississippi Ave', 'Aurora', 80012, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (5, '16746 E Smoky Hill Rd', 'Centennial', 80015, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (6, '3440 S Tower Rd', 'Aurora', 80013, 'CO');
 INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (7, '1200 S Buckley Rd', 'Aurora', 80017, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (8, '3898 S Eagle St', 'Aurora', 80014, 'CO');
+INSERT INTO `address` (`id`, `address`, `city`, `zip`, `state`) VALUES (9, '13728 E Quincy Ave', 'Aurora', 80015, 'CO');
 
 COMMIT;
 
@@ -239,8 +241,9 @@ COMMIT;
 START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (1, 1, 'admin', '$2a$10$9hwcGWMMTAHGf776ilxDR.BlOEYzhNLy38F1GjdLlC86naOrD9qFe\n\n', true, '2020-04-28', 'admin', 'admin@admin.com', NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (2, 4, 'carefulShopper', '$2a$10$RrDMn0It5d0rz2OfC5TkOu2rGO3z4KIEss6YqQTVfPS/JLQTueUSW\n\n', true, '2020-04-28', 'user', 'rob@robsoftheworld.com', NULL);
-INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'admin', NULL, NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (2, 3, 'carefulShopper', '$2a$10$RrDMn0It5d0rz2OfC5TkOu2rGO3z4KIEss6YqQTVfPS/JLQTueUSW\n\n', true, '2020-04-19', 'user', 'rob@robsoftheworld.com', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'admin', 'new@new.com', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (4, 8, 'JDavis', 'JDavis', true, '2020-04-10', 'user', 'jaydavis@gmail.com', NULL);
 
 COMMIT;
 
@@ -252,8 +255,9 @@ START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (1, 2, 3, '2020-04-27', 'King Soopers', '2020-04-27', 'Has pharmacy, deli, frozen products, grab and go.', 'ChIJ5ZyMLQGJbIcRg8wCW2q6dx8');
 INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (2, 5, 3, '2020-04-27', 'Walmart ', '2020-04-27', 'Grocery delivery and fresh produce', 'ChIJgXdlxR6JbIcR8l3Vcs6w2gM');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (3, 6, 3, '2020-04-27', 'Natural Grocers Aurora South', '2020-04-27', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood', 'ChIJ956jnEWIbIcRqxLVZjPVHNY');
-INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (4, 7, 3, '2020-04-27', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union', 'ChIJU5F43GRibIcR9uY-58eK6KI');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (3, 6, 3, '2020-02-15', 'Natural Grocers Aurora South', '2020-02-15', '100% Organic Produce, Body Care, Books, Bulk Foods, Dairy Products, Dietary Supplements, Frozen Products, Grab & Go, Grocery, Household Products, Organic Pet Products, Meat & Seafood', 'ChIJ956jnEWIbIcRqxLVZjPVHNY');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (4, 7, 3, '2020-02-17', 'Safeway', '2020-04-27', 'Pharmacy, coinstar, FedEx dropoff, grocery delivery, Redbox and Western Union', 'ChIJU5F43GRibIcR9uY-58eK6KI');
+INSERT INTO `location` (`id`, `address_id`, `creator_id`, `date_updated`, `name`, `date_created`, `description`, `google_place_id`) VALUES (5, 9, 4, '2020-03-27', 'Europa', '2020-02-12', 'Food products imported from all over Europe in a well-stocked storefront with a deli.', 'ChIJLUjJGmKIbIcR8RUORVd5pKU');
 
 COMMIT;
 
@@ -272,7 +276,9 @@ INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (7, 1, 2, 'It was the best shopping experience of my life! Go early', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (8, 2, 3, 'Favorite store', true, '2020-04-27', NULL, '2020-04-27');
 INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (9, 3, 3, 'This is my favorite', true, '2020-04-27', NULL, '2020-04-27');
-INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (10, 3, 4, 'This is an ok one', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (10, 3, 4, 'Nothing really stood out', true, '2020-04-27', NULL, '2020-04-27');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (11, 4, 5, 'Great little Russian market', true, '2020-04-25', NULL, '2020-04-25');
+INSERT INTO `review` (`id`, `user_id`, `location_id`, `content`, `active`, `date_created`, `date_updated`, `date_visited`) VALUES (12, 2, 5, 'Favorite neighborhood market', true, '2020-04-29', NULL, '2020-04-29');
 
 COMMIT;
 
@@ -319,6 +325,30 @@ INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 10, 6);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 10, 6);
 INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 10, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 5, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 5, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 5, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 5, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 6, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 6, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 6, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 6, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 7, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 7, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 7, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 7, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 8, 7);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 8, 6);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 8, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 8, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 11, 8);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 11, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 11, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 11, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (1, 12, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (2, 12, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (3, 12, 9);
+INSERT INTO `review_rating` (`rating_id`, `review_id`, `rating_value`) VALUES (4, 12, 9);
 
 COMMIT;
 
@@ -342,10 +372,12 @@ COMMIT;
 START TRANSACTION;
 USE `checkaheaddb`;
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (1, 2, 1, 'During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that During my visit I saw many things that ', '2020-04-27', NULL, 0, NULL, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'This is trash', '2020-04-27', NULL, 4, 1, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'I was there', '2020-04-27', NULL, 9, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (2, 2, 2, 'I found it very unclean this time around', '2020-04-27', NULL, 4, 1, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (3, 2, 1, 'The prices seem pretty decent, and the store is well kept', '2020-04-27', NULL, 9, 1, true);
 INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (4, 1, 3, 'This was the greatests time at the store This was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the storeThis was the greatests time at the store', '2020-04-27', NULL, 0, NULL, true);
-INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (5, 1, 2, 'Na ah', '2020-04-27', NULL, 3, 4, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (5, 1, 2, 'I had the same experience', '2020-04-27', NULL, 3, 4, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (6, 10, 4, 'Friendly staff with a distinct Russian-style of tending to customers.', '2020-04-27', NULL, 9, NULL, true);
+INSERT INTO `review_comment` (`id`, `review_id`, `user_id`, `content`, `date_created`, `date_updated`, `review_rating`, `reply_id`, `active`) VALUES (7, 11, 3, 'I am absolutely in love with this place! It reminds of all the wonderful treats my grandmother used to bring me home from Lithuania and Russia', '2020-04-28', NULL, 7, 10, true);
 
 COMMIT;
 

@@ -1,10 +1,10 @@
-import { PopulartimesData } from './populartimes-data';
+import { TrafficDetail } from './traffic-detail';
 
 export class TrafficData {
         address: String; 
         id: String; 
         name: String; 
-        populartimes: PopulartimesData[]; 
+        populartimes: TrafficDetail[]; 
         rating: number; 
         "types": String[]
       
@@ -12,7 +12,7 @@ export class TrafficData {
             address?: String ,
             id?: String,
             name?: String ,
-            populartimes?: PopulartimesData[] ,
+            populartimes?: TrafficDetail[] ,
             rating?: number ,
             types?: String[]
         ){
