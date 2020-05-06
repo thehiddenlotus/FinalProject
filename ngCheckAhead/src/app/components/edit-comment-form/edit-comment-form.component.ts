@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReviewCommentService } from 'src/app/services/review-comment.service';
 import { Router } from '@angular/router';
 import { Comment } from 'src/app/models/comment';
@@ -11,6 +11,7 @@ import { Comment } from 'src/app/models/comment';
 export class EditCommentFormComponent implements OnInit {
 
   @Input() editComment: Comment;
+  @Output() commentUpdated = new EventEmitter<string>();
 
   constructor(
     private router: Router,
@@ -22,7 +23,7 @@ export class EditCommentFormComponent implements OnInit {
   }
 
   reload() {
-    window.location.reload();
+    this.commentUpdated.emit('');
   }
 
   postComment(){

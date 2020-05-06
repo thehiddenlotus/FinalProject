@@ -3,6 +3,7 @@ import { LocationService } from 'src/app/services/location.service';
 import { Location } from 'src/app/models/location';
 import { AddressService } from 'src/app/services/address.service';
 import { Address } from 'src/app/models/address';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-form',
@@ -16,14 +17,15 @@ export class LocationFormComponent implements OnInit {
 
   constructor(
     private svc: LocationService,
-    private addSvc: AddressService
+    private addSvc: AddressService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  reload() {
-    window.location.reload();
+  load(id) {
+    this.router.navigateByUrl('locations/'+id);
   }
 
   postLocation(){
@@ -38,7 +40,7 @@ export class LocationFormComponent implements OnInit {
           yay => {
             console.log('LocationComponent.create(): Location created.');
             this.svc.show(yay.id);
-            this.reload();
+            this.load(yay.id);
           },
           nay => {
             console.error('LocationComponent.create(): ERROR.');

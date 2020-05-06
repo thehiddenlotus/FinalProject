@@ -11,6 +11,7 @@ public class RefreshController {
 		"search",
 		"team",
 		"settings",
+		"locations",
 		"register",
 		"login",
 		"changeAddress"

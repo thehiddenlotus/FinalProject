@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Review } from 'src/app/models/review';
 import { Location } from 'src/app/models/location';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ export class EditReviewFormComponent implements OnInit {
 
   @Input() editReview: Review;
   @Input() location: Location;
+  @Output() reviewUpdated = new EventEmitter<string>();
   ratingValues = [5,5,5,5];
 
   constructor(
@@ -29,7 +30,7 @@ export class EditReviewFormComponent implements OnInit {
   }
 
   reload() {
-    window.location.reload();
+    this.reviewUpdated.emit('');
   }
 
   postReview(){

@@ -32,7 +32,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "9AM",
       "series": [
@@ -66,7 +66,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "10AM",
       "series": [
@@ -100,7 +100,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "11AM",
       "series": [
@@ -134,7 +134,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "12PM",
       "series": [
@@ -168,7 +168,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "1PM",
       "series": [
@@ -202,7 +202,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "2PM",
       "series": [
@@ -236,7 +236,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "3PM",
       "series": [
@@ -270,7 +270,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "4PM",
       "series": [
@@ -304,7 +304,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "5PM",
       "series": [
@@ -338,7 +338,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "6PM",
       "series": [
@@ -372,7 +372,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "7PM",
       "series": [
@@ -406,7 +406,7 @@ export var multi = [
         }
       ]
     },
-  
+
     {
       "name": "8PM",
       "series": [
@@ -474,4 +474,3 @@ export var multi = [
       ]
     }
   ];
-  

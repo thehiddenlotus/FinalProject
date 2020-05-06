@@ -4,7 +4,7 @@ import { Location } from 'src/app/models/location';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -13,12 +13,12 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  
+
   urlParam = this.route.snapshot.paramMap.get('searchKey');
   aKey: string = this.urlParam;
 
   searchKey: string = null;
-  
+
   currentUser: User = null;
   newLocation: Location = null;
   userId = null;
@@ -27,9 +27,14 @@ export class SearchComponent implements OnInit {
     private auth: AuthService,
     private userSvc: UserService,
     private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.loadSearch();
+  }
+
+  loadSearch(){
     this.setSearchParamIfExists();
     this.userId = this.auth.getCurrentUserId();
     this.userSvc.show(this.userId).subscribe(
@@ -44,6 +49,7 @@ export class SearchComponent implements OnInit {
       }
     )
   }
+
 
   setSearchParamIfExists(){
     if(this.route.snapshot.paramMap.has){
