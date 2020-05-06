@@ -4,7 +4,8 @@
 }
 
 #searchbutton{
-  float:right;
+  text-align: center;
+
 }
 .jumbotron {
   background-size: cover;
@@ -28,4 +29,9 @@
 
 .bannerText {
   font-size: 2em;
+}
+input{
+  width: 400px;
+text-align: center;
+margin-bottom: 10px;
 }
