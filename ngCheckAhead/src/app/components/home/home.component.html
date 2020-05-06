@@ -26,13 +26,12 @@
   <div class="row mb-1">
     <div class="col-md-12">
       <div class="card flex-md-row mb-2 h-md-250">
-        <div class="card-body d-flex flex-column-12 justify-content-center chartContainer">
-          <div class="flex-md-row">
-            <div class="d-flex flex-column justify-content-center">
-              <label>Search for your store<br>
-                <input [(ngModel)]='searchKeyword' placeholder="Type Name or Address"></label>
-              <button [routerLink]="['/search/', searchKeyword]" id="searchbutton" type="button" class="btn btn-primary btn-lg pl-2">Find Store</button>
-            </div>
+        <div class="card-body d-flex flex-column-12 justify-content-center">
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <label class="text-center">Search for your store<br></label>
+              <input [(ngModel)]='searchKeyword' placeholder="Type Name or Address">
+            <button [routerLink]="['/search/', searchKeyword]" id="searchbutton" type="button"
+              class="btn btn-primary btn-lg pl-2">Find Store</button>
           </div>
         </div>
       </div>
