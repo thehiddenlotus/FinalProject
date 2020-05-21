@@ -56,7 +56,7 @@ export class LocationDetailComponent implements OnInit {
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-  ////////////end for stuff for chart
+  ////////////end of code for heat map
 
   //F I E L D S
   ratingReviewSelected = false;
@@ -288,5 +288,23 @@ export class LocationDetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getBackgroundColor(ratingNumber) {
+    console.log('The rating number is ' + ratingNumber);
+    let color = 'gray';
+    if (ratingNumber <= 5) {
+      color = 'red'
+    }
+    else if(ratingNumber <= 6.5) {
+        color = '#ED7D1D';
+      }
+    else if(ratingNumber <= 8) {
+        color = 'blue';
+      }
+   else if (ratingNumber <= 10) {
+        color = '#ED7D1D';
+      }
+    return color;
   }
 }

@@ -34,4 +34,6 @@ export class TrafficDataService {
     };
     return httpOptions;
   }
+
+
 }
