@@ -297,13 +297,13 @@ export class LocationDetailComponent implements OnInit {
       color = 'red'
     }
     else if(ratingNumber <= 6.5) {
-        color = 'orange';
+        color = '#ED7D1D';
       }
     else if(ratingNumber <= 8) {
         color = 'blue';
       }
    else if (ratingNumber <= 10) {
-        color = 'green';
+        color = '#ED7D1D';
       }
     return color;
   }
