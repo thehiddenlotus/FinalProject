@@ -1,19 +1,22 @@
 <div class="container">
   <div class="row mb-1 align-items-center">
     <div class="col-md-6">
-      <div class="card flex-md-row mb-2 h-md-250">
+      <div class="card text-black bg-light flex-md-row my-2 h-md-250" >
+        <!-- <div class="card-header">
+          <h3 class="card-title"> {{location.name}} </h3>
+        </div> -->
         <div class="card-body d-flex flex-column align-items-center">
-          <h3> {{location.name}} </h3>
-          <div class="mb-1 text-muted text-center">{{location.address.address}}<br>{{location.address.city}},
+          <h3 class="card-title"> {{location.name}} </h3>
+          <div class="mb-1 text-center">{{location.address.address}}<br>{{location.address.city}},
             {{location.address.state}} {{location.address.zip}}</div>
-          <ul class="list-group">
-            <li class="list-group-item">Cleanliness: {{cleanlinessAvg | number}}</li>
-            <li class="list-group-item">Traffic: {{trafficAvg | number}}</li>
-            <li class="list-group-item">Checkout: {{checkoutAvg | number}}</li>
-            <li class="list-group-item">Stock: {{stockAvg | number}}</li>
+          <ul class="list-group text-center text-white">
+            <li class="list-group-item"  [style.background-color]="getBackgroundColor(cleanlinessAvg)">Cleanliness: {{cleanlinessAvg | number}}</li>
+            <li class="list-group-item"  [style.background-color]="getBackgroundColor(trafficAvg)">Traffic: {{trafficAvg | number}}</li>
+            <li class="list-group-item" [style.background-color]="getBackgroundColor(checkoutAvg)">Checkout: {{checkoutAvg | number}}</li>
+            <li class="list-group-item"  [style.background-color]="getBackgroundColor(stockAvg)">Stock: {{stockAvg | number}}</li>
           </ul>
           <br>
-          <p>{{location.description}}</p>
+          <p class="text-center">{{location.description}}</p>
           <div class="row mb-1 align-items-center">
             <button class='btn btn-secondary' *ngIf='currentUser.role === "admin" && !editLoc'
               (click)="updateLoc(location)">Update Location</button>
@@ -80,14 +83,18 @@
     <div class="col-md-4">
       <div class="card flex-md-row mb-2 h-md-250">
         <div class="card-body d-flex flex-column align-items-center">
-          <ul class="list-group w-100 text-center" *ngFor="let reviewRating of reviewRatings">
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
+          <ul class="list-group w-100 text-center text-white" *ngFor="let reviewRating of reviewRatings">
+            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'
+                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
               {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
+            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'
+                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
               {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
+            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'
+                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
               {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
+            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'
+                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
               {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
           </ul>
         </div>
@@ -95,8 +102,8 @@
     </div>
 
     <div class="col-md-8">
-      <div class="card flex-md-row mb-4 box-shadow h-md-450">
-        <div class="card-body d-flex flex-column align-items-start">
+      <div class="card flex-md-row mb-2 box-shadow h-md-250">
+        <div class="card-body d-flex flex-column align-items-start bg-light">
           <strong class="d-inline-block mb-2 text-success">Review by {{review.user.username}}</strong>
           <h3 class="mb-0">
             <a class="text-dark" href="#">{{review.content}}</a>
