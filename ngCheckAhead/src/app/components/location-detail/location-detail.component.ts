@@ -27,19 +27,19 @@ export class LocationDetailComponent implements OnInit {
   //code for heat map
   multi: any[];
   newMulti: any[];
-  view: any[] = [700, 200];
+  view: any[] = [];
 
   // options
-  legend: boolean = false;
+  legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showYAxisLabel: boolean = false;
-  showXAxisLabel: boolean = true;
+  showXAxisLabel: boolean = false;
   xAxisLabel: string = 'Store Times';
-  yAxisLabel: string = 'Year';
-  legendPosition: string = 'below';
+  yAxisLabel: string = 'Days';
+  legendPosition: string = 'right';
 
   colorScheme = {
     domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5', '#ED7D1D'],
@@ -56,7 +56,7 @@ export class LocationDetailComponent implements OnInit {
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-  ////////////end for stuff for chart
+  ////////////end of code for heat map
 
   //F I E L D S
   ratingReviewSelected = false;
@@ -288,5 +288,27 @@ export class LocationDetailComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getBackgroundColor(ratingNumber) {
+    console.log('The rating number is ' + ratingNumber);
+    let color = 'gray';
+    if (ratingNumber <= 5) {
+      color = 'red'
+    }
+    else if(ratingNumber <= 6.5) {
+        color = '#ED7D1D';
+      }
+    else if(ratingNumber <= 8) {
+        color = 'blue';
+      }
+   else if (ratingNumber <= 10) {
+        color = '#ED7D1D';
+      }
+    return color;
+  }
+
+  public completionPercent(num: number): String{
+    return Math.round((num * 10)) + '';
   }
 }
