@@ -42,9 +42,6 @@ export class LocationFormComponent implements OnInit {
           (pass) => {
             console.log('LocationComponent.getId(): google id retrieved.');
             console.log(pass);
-            console.log(pass.results[0]);
-
-
 
             this.newLoc.googleId = pass.results[0].place_id;
             console.log("new ID = " + this.newLoc.googleId);
@@ -53,7 +50,7 @@ export class LocationFormComponent implements OnInit {
               (yay) => {
                 console.log('LocationComponent.create(): Location created.');
                 this.svc.show(yay.id);
-                // this.load(yay.id);
+                this.load(yay.id);
               },
               (nay) => {
                 console.error('LocationComponent.create(): ERROR.');
