@@ -307,4 +307,8 @@ export class LocationDetailComponent implements OnInit {
       }
     return color;
   }
+
+  public completionPercent(num: number): String{
+    return Math.round((num * 10)) + '';
+  }
 }
