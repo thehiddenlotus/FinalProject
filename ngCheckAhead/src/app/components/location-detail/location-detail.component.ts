@@ -27,19 +27,19 @@ export class LocationDetailComponent implements OnInit {
   //code for heat map
   multi: any[];
   newMulti: any[];
-  view: any[] = [700, 200];
+  view: any[] = [];
 
   // options
-  legend: boolean = false;
+  legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showYAxisLabel: boolean = false;
-  showXAxisLabel: boolean = true;
+  showXAxisLabel: boolean = false;
   xAxisLabel: string = 'Store Times';
-  yAxisLabel: string = 'Year';
-  legendPosition: string = 'below';
+  yAxisLabel: string = 'Days';
+  legendPosition: string = 'right';
 
   colorScheme = {
     domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5', '#ED7D1D'],
@@ -306,5 +306,9 @@ export class LocationDetailComponent implements OnInit {
         color = '#ED7D1D';
       }
     return color;
+  }
+
+  public completionPercent(num: number): String{
+    return Math.round((num * 10)) + '';
   }
 }
