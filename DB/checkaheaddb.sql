@@ -244,6 +244,7 @@ INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (2, 3, 'carefulShopper', '$2a$10$RrDMn0It5d0rz2OfC5TkOu2rGO3z4KIEss6YqQTVfPS/JLQTueUSW\n\n', true, '2020-04-19', 'user', 'rob@robsoftheworld.com', NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (3, 4, 'new', '$2a$10$JPluL5Brfa1sc.2Iw8YL/.ZsxxCJ2IWWEV2Gy8.2O5ucd4SHau8AK', true, '2020-04-28', 'admin', 'new@new.com', NULL);
 INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (4, 8, 'JDavis', 'JDavis', true, '2020-04-10', 'user', 'jaydavis@gmail.com', NULL);
+INSERT INTO `user` (`id`, `address_id`, `username`, `password`, `active`, `date_created`, `role`, `email`, `date_updated`) VALUES (5, 5, 'masterUser', '$2a$10$Q3RfNxHsSX2NOyShQFHXzOMnHA7dYOq7zi3mWKUIEDqYczK10tMbu', true, '2020-04-10', 'admin', 'master@master.com', NULL);
 
 COMMIT;
 
