@@ -39,10 +39,12 @@ export class LocationDetailComponent implements OnInit {
   showXAxisLabel: boolean = false;
   xAxisLabel: string = 'Store Times';
   yAxisLabel: string = 'Days';
-  legendPosition: string = 'right';
+  legendPosition: string = 'bottom';
+  xAxisTickFormatting = 'color: white';
+
 
   colorScheme = {
-    domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5', '#ED7D1D'],
+    domain: ['#43aa8b', '#90be6d', '#f9c74f', '#f8961e', '#f3722c', '#f94144'],
   };
 
   onSelect(data): void {
@@ -77,6 +79,8 @@ export class LocationDetailComponent implements OnInit {
   newComment: Comment = null;
   editComment: Comment = null;
   editLoc: Location = null;
+  ratingCount: number = 1;
+  filteredRatings: ReviewRating[] ;
 
   popTimes: TrafficData;
   jsonTimes: TrafficDetail;
@@ -291,24 +295,38 @@ export class LocationDetailComponent implements OnInit {
   }
 
   getBackgroundColor(ratingNumber) {
-    console.log('The rating number is ' + ratingNumber);
+    // console.log('The rating number is ' + ratingNumber);
     let color = 'gray';
     if (ratingNumber <= 5) {
-      color = 'red'
+      color = '#f94144'
     }
     else if(ratingNumber <= 6.5) {
-        color = '#ED7D1D';
+        color = '#f3722c';
       }
     else if(ratingNumber <= 8) {
-        color = 'blue';
+        color = '#90be6d';
       }
    else if (ratingNumber <= 10) {
-        color = '#ED7D1D';
+        color = '#43aa8b';
       }
     return color;
   }
 
   public completionPercent(num: number): String{
     return Math.round((num * 10)) + '';
+  }
+
+  public filterReviewRatings(reviewR: ReviewRating[], reviewId:number): ReviewRating[]{
+    let newArray:ReviewRating[] = new Array(3);
+    let counter = 0;
+    reviewR.forEach(element => {
+      if(element.id.reviewId == reviewId){
+        newArray[counter++] = element;
+        console.log(newArray[counter-1]);      
+      }
+    });
+    this.ratingCount++;
+    this.filteredRatings = newArray;
+    return this.filteredRatings;
   }
 }
