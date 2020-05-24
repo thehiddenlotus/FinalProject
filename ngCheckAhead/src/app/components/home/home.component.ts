@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
    xAxis: boolean = true;
    yAxis: boolean = true;
    showYAxisLabel: boolean = false;
-   showXAxisLabel: boolean = true;
+   showXAxisLabel: boolean = false;
    xAxisLabel: string = 'Store Times';
    yAxisLabel: string = 'Year';
    legendPosition: string = 'below';
