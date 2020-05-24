@@ -1,6 +1,7 @@
-<div class="container bg-light px-0">
   <!-- Main Info and Map Container -->
   <div class="container-fluid py-4 px-0 bluebg px-sm-3">
+    <div class="container bluebg px-0">
+
     <div class="row justify-content-center">
       <h2>{{location.name}}<br></h2>
     </div>
@@ -104,9 +105,12 @@
       <hr>
       <app-review-form [location]='location' [newReview]='newReview' (reviewAdded)='loadLocation()'></app-review-form>
     </div>
+    </div>
   </div>
   <!-- Chart Container -->
   <div class="container-fluid darkerbg py-4 px-0 px-sm-3">
+    <div class="container darkerbg px-0">
+
     <div class="row mb-1">
       <div class="col-md-12 ">
         <div class="card flex-md-row h-md-250 darkerbg">
@@ -132,9 +136,12 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   <!-- Reviews Container -->
   <div class="container-fluid lighterbg py-4 px-0 px-sm-3">
+    <div class="container lighterbg px-0">
+
     <div class="row mb-1">
       <div class="col-md-12 ">
         <div class="card flex-md-row lighterbg">
