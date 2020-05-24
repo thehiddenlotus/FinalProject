@@ -8,3 +8,8 @@ html {
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
 }
+
+.btn-secondary {
+  background-color: #1d3557;
+  margin-bottom: 1em;
+}
