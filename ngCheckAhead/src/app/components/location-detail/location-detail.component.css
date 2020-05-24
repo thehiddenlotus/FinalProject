@@ -3,11 +3,14 @@
     background-color:#f8f9fa;
     ;
 }
-.chartContainer {
-    max-height: 300px;
-    max-width: 1000px;
-  }
 
 .btn {
-    margin-left: 1em;
+    margin-right: 1em;
 }  
+div:empty { 
+    display: none; 
+}
+
+.text-success {
+    color: #43aa8b;
+}
