@@ -1,294 +1,270 @@
-<div class="container bg-light">
-  <div class="row mb-1 align-items-center">
-    <div class="col-md-6">
-      <div class="card text-black bg-light flex-md-row my-2 h-md-250">
-        <!-- <div class="card-header">
+<div class="container bg-light px-0">
+  <!-- Main Info and Map Container -->
+  <div class="container-fluid py-4 px-0 bluebg px-sm-3">
+    <div class="row mb-1 align-items-center">
+      <div class="col-md-6">
+        <div class="card text-black bg-light flex-md-row mb-2 h-md-250">
+          <!-- <div class="card-header">
           <h3 class="card-title"> {{location.name}} </h3>
         </div> -->
-        <div class="card-body d-flex flex-column align-items-center pb-1">
-          <h3 class="card-title"> {{location.name}} </h3>
-          <div class="mb-1 text-center">{{location.address.address}}<br>{{location.address.city}},
-            {{location.address.state}} {{location.address.zip}}</div>
-        </div>
-      </div>
-
-      <div class="row px-3 pb-3">
-        <div class="col-md-4 text-md-right text-sm-left">
-          <strong> Cleanliness</strong>
-        </div>
-        <div class="col-md-6 bg-secondary p-0 justify-content-right">
-          <div [style.width.%]='completionPercent(cleanlinessAvg)' class='row m-0'
-            [style.background-color]="getBackgroundColor(cleanlinessAvg)">
-            <span>&nbsp;
-            </span>
+          <div class="card-body d-flex flex-column align-items-center pb-1 bluebg">
+            <h3 class="card-title"> {{location.name}} </h3>
+            <div class="mb-1 text-center">{{location.address.address}}<br>{{location.address.city}},
+              {{location.address.state}} {{location.address.zip}}</div>
           </div>
         </div>
-        <div class="col-md-2" [style.color]="getBackgroundColor(cleanlinessAvg)">
-          <strong>{{cleanlinessAvg | number}}</strong>
-        </div>
-      </div>
-      <div class="row px-3 pb-3">
-        <div class="col-md-4 text-md-right text-sm-left">
-          <strong>Traffic</strong>
-        </div>
-        <div class="col-md-6 bg-secondary p-0">
-          <div [style.width.%]='completionPercent(trafficAvg)' class='row m-0'
-            [style.background-color]="getBackgroundColor(trafficAvg)">
-            <span>&nbsp;
-            </span>
+
+        <div class="row px-3 pb-3">
+          <div class="col-md-4 text-md-right text-sm-left">
+            <strong> Cleanliness</strong>
           </div>
-        </div>
-        <div class="col-md-2" [style.color]="getBackgroundColor(trafficAvg)">
-          <strong>{{trafficAvg | number}}</strong>
-        </div>
-      </div>
-      <div class="row px-3 pb-3">
-        <div class="col-md-4 text-md-right text-sm-left">
-          <strong>Checkout</strong>
-        </div>
-        <div class="col-md-6 bg-secondary p-0">
-          <div [style.width.%]='completionPercent(checkoutAvg)' class='row m-0'
-            [style.background-color]="getBackgroundColor(checkoutAvg)">
-            <span>&nbsp;
-            </span>
-          </div>
-        </div>
-        <div class="col-md-2" [style.color]="getBackgroundColor(checkoutAvg)">
-          <strong>{{checkoutAvg | number}}</strong>
-        </div>
-      </div>
-      <div class="row px-3">
-        <div class="col-md-4 text-md-right text-sm-left">
-          <strong>Stock</strong>
-        </div>
-        <div class="col-md-6 bg-secondary p-0">
-          <div [style.width.%]='completionPercent(stockAvg)' class='row m-0'
-            [style.background-color]="getBackgroundColor(stockAvg)">
-            <span>&nbsp;
-            </span>
-          </div>
-        </div>
-        <div class="col-md-2" [style.color]="getBackgroundColor(stockAvg)">
-          <strong>{{stockAvg | number}}</strong>
-        </div>
-      </div>
-      <div class="card text-black bg-light flex-md-row my-1 h-md-250">
-        <!-- <div class="card-header">
-          <h3 class="card-title"> {{location.name}} </h3>
-        </div> -->
-        <div class="card-body d-flex flex-column align-items-center">
-          <p class="text-center">{{location.description}}</p>
-          <div class="row mb-1 align-items-center">
-            <button class='btn btn-secondary' *ngIf='currentUser.role === "admin" && !editLoc'
-              (click)="updateLoc(location)">Update Location</button>
-            <button class='btn btn-secondary' *ngIf='editLoc' (click)="editLoc = null">Cancel</button>
-            <button class='btn btn-secondary' *ngIf='!newReview && currentUser && !editLoc' (click)="addReview()">Add
-              Review</button>
-            <button class='btn btn-secondary' *ngIf='newReview' (click)="newReview = null">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6 ">
-      <div class="card flex-md-row mb-4 box-shadow h-md-450">
-        <iframe [src]="finalMapUrl | safe" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen=""
-          aria-hidden="false" tabindex="0"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf='editLoc'>
-    <hr>
-    <app-edit-location-form [location]='location' (editLoc)='loadLocation()'></app-edit-location-form>
-  </div>
-  <hr>
-
-  <div *ngIf='newReview'>
-    <hr>
-    <app-review-form [location]='location' [newReview]='newReview' (reviewAdded)='loadLocation()'></app-review-form>
-  </div>
-
-  <div class="row mb-1">
-    <div class="col-md-12">
-      <div class="card flex-md-row h-md-250">
-        <div class="card-body d-flex pb-0 flex-column align-items-center">
-          <h3>Store Traffic Details </h3>
-          <p>You can view below to find preferable times to go to the store
-          </p>
-          <p>green = recommended | blue = good | orange = high traffic
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mb-1">
-    <div class="col-md-12">
-      <div class="card flex-md-row mb-2 h-md-250 ">
-        <div class="card-body d-flex flex-column justify-content-center align-items-center chartContainer">
-          <ngx-charts-heat-map [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel" [results]="multi" (select)="onSelect($event)" (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)">
-          </ngx-charts-heat-map>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr>
-
-
-  <div class="row mb-1 align-items-center" *ngFor="let review of reviews">
-    <div class="col-md-5 mt-1">
-      <div class="row px-3 pb-2" *ngFor="let reviewRating of filterReviewRatings(reviewRatings, review.id)">
-        <div class="col-md-4 text-md-right text-sm-left"
-        *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
-          <strong>
-            {{reviewRating.rating.category | capitalize}}</strong>
-        </div>
-        <div class="col-md-4 text-md-right text-sm-left"
-          *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
-          <strong> {{reviewRating.rating.category | capitalize}}</strong>
-        </div>
-        <div class="col-md-4 text-md-right text-sm-left"
-          *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
-          <strong> {{reviewRating.rating.category | capitalize}}</strong>
-        </div>
-        <div class="col-md-4 text-md-right text-sm-left"
-          *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
-          <strong> {{reviewRating.rating.category | capitalize}}</strong>
-        </div>
-        <div class="col-md-6 bg-secondary p-0 justify-content-right">
-          <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
-            [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
-            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
-            &nbsp;           
-          </div>
-          <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
-            [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
-            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
-            &nbsp;
-          </div>
-          <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
-            [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
-            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
-           &nbsp;
-           
-          </div>
-          <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
-            [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
-            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
-            &nbsp;
-            
-          </div>
-        </div>
-        <div class="col-md-2" [style.color]="getBackgroundColor(reviewRating.ratingValue)">
-          <strong *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>{{reviewRating.ratingValue}}</strong>
-          <strong *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>{{reviewRating.ratingValue}}</strong>
-          <strong *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>{{reviewRating.ratingValue}}</strong>
-          <strong *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>{{reviewRating.ratingValue}}</strong>
-        </div>
-      </div>
-      <!-- <div class="card flex-md-row mb-2 h-md-250">
-        <div class="card-body d-flex flex-column align-items-center">
-          <div class="mb-1 text-center">
-          <ul class="list-group w-100 text-center text-white" *ngFor="let reviewRating of reviewRatings">
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'
-                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
-              {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'
-                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
-              {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'
-                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
-              {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-            <li class="list-group-item" *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'
-                [style.background-color]="getBackgroundColor(reviewRating.ratingValue)">
-              {{reviewRating.rating.category | capitalize}}: {{reviewRating.ratingValue}}</li>
-          </ul>
-        </div>
-        </div>
-      </div> -->
-    </div>
-
-    <div class="col-md-7 ">
-      <div class="card flex-md-row  box-shadow h-md-450 ">
-        <div class="card-body d-flex flex-column align-items-start bg-light">
-          <strong class="d-inline-block mb-2 text-success">Review by {{review.user.username}}</strong>
-          <h3 class="mb-0">
-            <a class="text-dark" href="#">{{review.content}}</a>
-          </h3>
-          <div class="mb-1 text-muted">{{review.dateCreated | date}}</div>
-          <!-- <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p> -->
-          <div class="row align-items-center">
-            <!-- <div class="col mb-1 align-items-center"> -->
-            <button class='btn btn-secondary btn-sm'
-              *ngIf='(!editReview || editReview.id != review.id) && (currentUser.id === review.user.id || currentUser.role === "admin")'
-              (click)="updateReview(review)">Update Review</button>
-            <button class='btn btn-secondary btn-sm' *ngIf='editReview && review.id === editReview.id'
-              (click)="editReview = null">Cancel</button>
-            <button class='btn btn-secondary btn-sm'
-              *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"'
-              (click)="deleteReview(review)">Delete Review</button>
-            <!-- </div> -->
-            <!-- <div class="col mb-1 align-items-center"> -->
-            <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=true"
-              *ngIf='review.comments.length > 0 && !ratingReviewSelected2'>View comments</button>
-            <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=false"
-              *ngIf='ratingReviewSelected2'>Hide comments</button>
-            <button class='btn btn-secondary btn-sm'
-              *ngIf='(!newComment || newComment.review.id != review.id) && currentUser' (click)="addComment(review)">Add
-              comment</button>
-            <button class='btn btn-secondary btn-sm' *ngIf='newComment && newComment.review.id === review.id'
-              (click)="newComment = null">Cancel</button>
-            <!-- </div> -->
-          </div>
-        </div>
-      </div>
-
-      <div *ngIf='editReview && editReview.id === review.id'>
-        <hr>
-        <app-edit-review-form [editReview]='editReview' (reviewUpdated)='loadLocation()'></app-edit-review-form>
-      </div>
-
-      <div *ngIf='newComment && newComment.review.id === review.id'>
-        <hr>
-        <app-comment-form [newComment]='newComment' (commentAdded)='loadLocation()'></app-comment-form>
-      </div>
-
-      <div class="container-fluid" *ngFor="let comment of review.comments">
-        <div *ngIf='ratingReviewSelected2 && review.comments.length > 0' class="row mb-1">
-          <!-- <div class="col-md-3" *ngIf='comment.id !== 1'>
-            <div class="card flex-md-row mb-2 h-md-250">
-              <div class="card-body d-flex flex-column align-items-center">
-                <ul class="list-group">
-                  <li class="list-group-item">Rating Review: {{comment.reviewRating}}</li>
-                </ul>
-              </div>
+          <div class="col-md-6 bg-secondary p-0 justify-content-right">
+            <div [style.width.%]='completionPercent(cleanlinessAvg)' class='row m-0'
+              [style.background-color]="getBackgroundColor(cleanlinessAvg)">
+              <span>&nbsp;
+              </span>
             </div>
-          </div> -->
-          <div class="col-md-12">
-            <div class="card flex-md-row mb-4 box-shadow h-md-450">
-              <div class="card-body d-flex flex-column align-items-start">
-                <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
-                <div class="mb-1 text-muted">{{comment.createdAt | date}}</div>
-                <p class="card-text mb-auto">{{comment.content}}</p>
-                <div class="row mb-1 align-items-center">
-                  <div style="padding: 1em;">
+          </div>
+          <div class="col-md-2" [style.color]="getBackgroundColor(cleanlinessAvg)">
+            <strong>{{cleanlinessAvg | number}}</strong>
+          </div>
+        </div>
+        <div class="row px-3 pb-3">
+          <div class="col-md-4 text-md-right text-sm-left">
+            <strong>Traffic</strong>
+          </div>
+          <div class="col-md-6 bg-secondary p-0">
+            <div [style.width.%]='completionPercent(trafficAvg)' class='row m-0'
+              [style.background-color]="getBackgroundColor(trafficAvg)">
+              <span>&nbsp;
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2" [style.color]="getBackgroundColor(trafficAvg)">
+            <strong>{{trafficAvg | number}}</strong>
+          </div>
+        </div>
+        <div class="row px-3 pb-3">
+          <div class="col-md-4 text-md-right text-sm-left">
+            <strong>Checkout</strong>
+          </div>
+          <div class="col-md-6 bg-secondary p-0">
+            <div [style.width.%]='completionPercent(checkoutAvg)' class='row m-0'
+              [style.background-color]="getBackgroundColor(checkoutAvg)">
+              <span>&nbsp;
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2" [style.color]="getBackgroundColor(checkoutAvg)">
+            <strong>{{checkoutAvg | number}}</strong>
+          </div>
+        </div>
+        <div class="row px-3">
+          <div class="col-md-4 text-md-right text-sm-left">
+            <strong>Stock</strong>
+          </div>
+          <div class="col-md-6 bg-secondary p-0">
+            <div [style.width.%]='completionPercent(stockAvg)' class='row m-0'
+              [style.background-color]="getBackgroundColor(stockAvg)">
+              <span>&nbsp;
+              </span>
+            </div>
+          </div>
+          <div class="col-md-2" [style.color]="getBackgroundColor(stockAvg)">
+            <strong>{{stockAvg | number}}</strong>
+          </div>
+        </div>
+        <div class="card text-black bg-light flex-md-row my-1 h-md-250">
+          <div class="card-body d-flex flex-column align-items-center bluebg">
+            <p class="text-center">{{location.description}}</p>
+            <div class="row mb-1 align-items-center">
+              <button class='btn btn-secondary' *ngIf='currentUser.role === "admin" && !editLoc'
+                (click)="updateLoc(location)">Update Location</button>
+              <button class='btn btn-secondary' *ngIf='editLoc' (click)="editLoc = null">Cancel</button>
+              <button class='btn btn-secondary' *ngIf='!newReview && currentUser && !editLoc' (click)="addReview()">Add
+                Review</button>
+              <button class='btn btn-secondary' *ngIf='newReview' (click)="newReview = null">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="card flex-md-row mb-4 box-shadow h-md-450 px-2 justify-content-center">
+          <iframe [src]="finalMapUrl | safe" width="400" height="300" frameborder="0" style="border:0;"
+            allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf='editLoc'>
+      <hr>
+      <app-edit-location-form [location]='location' (editLoc)='loadLocation()'></app-edit-location-form>
+    </div>
+
+    <div *ngIf='newReview'>
+      <hr>
+      <app-review-form [location]='location' [newReview]='newReview' (reviewAdded)='loadLocation()'></app-review-form>
+    </div>
+  </div>
+  <!-- Chart Container -->
+  <div class="container-fluid darkerbg py-4 px-0 px-sm-3">
+    <div class="row mb-1">
+      <div class="col-md-12 ">
+        <div class="card flex-md-row h-md-250 darkerbg">
+          <div class="card-body d-flex pb-0 flex-column align-items-center text-white text-center">
+            <h3 class="pb-2">Store Traffic Details </h3>
+            <p><strong> green = not busy | yellow = normal | orange/red = busy</strong>
+            </p>
+            <p>Hover over the times and days to see details
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-md-12 justify-content-center">
+        <div class="flex-md-row d-flex mb-2 darkerbg align-items-center justify-content-center">
+          <div class="d-flex flex-column justify-content-center align-items-center chartContainer text-white w-100">
+            <ngx-charts-heat-map [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel" [results]="multi" (select)="onSelect($event)" (activate)="onActivate($event)"
+              (deactivate)="onDeactivate($event)" style="fill: white;">
+            </ngx-charts-heat-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Reviews Container -->
+  <div class="container-fluid lighterbg py-4 px-0 px-sm-3">
+    <div class="row mb-1 align-items-center" *ngFor="let review of reviews">
+      <div class="col-md-5 mt-1">
+        <div class="row px-3 pb-2" *ngFor="let reviewRating of filterReviewRatings(reviewRatings, review.id)">
+          <div class="col-md-4 text-md-right text-sm-left"
+            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
+            <strong>
+              {{reviewRating.rating.category | capitalize}}</strong>
+          </div>
+          <div class="col-md-4 text-md-right text-sm-left"
+            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
+            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+          </div>
+          <div class="col-md-4 text-md-right text-sm-left"
+            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
+            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+          </div>
+          <div class="col-md-4 text-md-right text-sm-left"
+            *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
+            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+          </div>
+          <div class="col-md-6 bg-secondary p-0 justify-content-right">
+            <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
+              [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
+              &nbsp;
+            </div>
+            <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
+              [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
+              &nbsp;
+            </div>
+            <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
+              [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
+              &nbsp;
+
+            </div>
+            <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
+              [style.background-color]="getBackgroundColor(reviewRating.ratingValue)"
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
+              &nbsp;
+
+            </div>
+          </div>
+          <div class="col-md-2" [style.color]="getBackgroundColor(reviewRating.ratingValue)">
+            <strong
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>{{reviewRating.ratingValue}}</strong>
+            <strong
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>{{reviewRating.ratingValue}}</strong>
+            <strong
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>{{reviewRating.ratingValue}}</strong>
+            <strong
+              *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>{{reviewRating.ratingValue}}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="card flex-md-row  box-shadow h-md-450 ">
+          <div class="card-body d-flex flex-column align-items-start lighterbg">
+            <strong class="d-inline-block mb-2 text-success">Review by {{review.user.username}}</strong>
+            <h4 class="mb-0">
+             {{review.content}}
+            </h4>
+            <div class="mb-1 text-muted">{{review.dateCreated | date}}</div>
+            <!-- <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p> -->
+            <div class="row align-items-center">
+              <!-- <div class="col mb-1 align-items-center"> -->
+              <button class='btn btn-secondary btn-sm'
+                *ngIf='(!editReview || editReview.id != review.id) && (currentUser.id === review.user.id || currentUser.role === "admin")'
+                (click)="updateReview(review)">Update Review</button>
+              <button class='btn btn-secondary btn-sm' *ngIf='editReview && review.id === editReview.id'
+                (click)="editReview = null">Cancel</button>
+              <button class='btn btn-secondary btn-sm'
+                *ngIf='currentUser.id === review.user.id || currentUser.role === "admin"'
+                (click)="deleteReview(review)">Delete Review</button>
+              <!-- </div> -->
+              <!-- <div class="col mb-1 align-items-center"> -->
+              <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=true"
+                *ngIf='review.comments.length > 0 && !ratingReviewSelected2'>View comments</button>
+              <button class='btn btn-secondary btn-sm' (click)="ratingReviewSelected2=false"
+                *ngIf='ratingReviewSelected2'>Hide comments</button>
+              <button class='btn btn-secondary btn-sm'
+                *ngIf='(!newComment || newComment.review.id != review.id) && currentUser'
+                (click)="addComment(review)">Add
+                comment</button>
+              <button class='btn btn-secondary btn-sm' *ngIf='newComment && newComment.review.id === review.id'
+                (click)="newComment = null">Cancel</button>
+              <!-- </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf='editReview && editReview.id === review.id'>
+          <hr>
+          <app-edit-review-form [editReview]='editReview' (reviewUpdated)='loadLocation()'></app-edit-review-form>
+        </div>
+
+        <div *ngIf='newComment && newComment.review.id === review.id'>
+          <hr>
+          <app-comment-form [newComment]='newComment' (commentAdded)='loadLocation()'></app-comment-form>
+        </div>
+
+        <div class="container-fluid" *ngFor="let comment of review.comments">
+          <div *ngIf='ratingReviewSelected2 && review.comments.length > 0' class="row mb-1">
+            <div class="col-md-12">
+              <div class="card flex-md-row mb-4 box-shadow h-md-450">
+                <div class="card-body d-flex flex-column align-items-start">
+                  <strong class="d-inline-block mb-2 text-success">Review by {{comment.user.username}}</strong>
+                  <div class="mb-1 text-muted">{{comment.createdAt | date}}</div>
+                  <p class="card-text mb-auto">{{comment.content}}</p>
+                  <div class="row mb-1 align-items-center">
+                    <div style="padding: 1em;">
+                      <button class='btn btn-secondary btn-sm'
+                        *ngIf='(!editComment || comment.id !== editComment.id) && (currentUser.id === comment.user.id || currentUser.role === "admin")'
+                        (click)="updateComment(comment)">Update Comment</button>
+                    </div>
+                    <button class='btn btn-secondary btn-sm' *ngIf='editComment && editComment.id === comment.id'
+                      (click)="editComment = null">Cancel</button>
                     <button class='btn btn-secondary btn-sm'
-                      *ngIf='(!editComment || comment.id !== editComment.id) && (currentUser.id === comment.user.id || currentUser.role === "admin")'
-                      (click)="updateComment(comment)">Update Comment</button>
+                      *ngIf='currentUser.id === comment.user.id || currentUser.role === "admin"'
+                      (click)="deleteComment(comment)">Delete Comment</button>
                   </div>
-                  <button class='btn btn-secondary btn-sm' *ngIf='editComment && editComment.id === comment.id'
-                    (click)="editComment = null">Cancel</button>
-                  <button class='btn btn-secondary btn-sm'
-                    *ngIf='currentUser.id === comment.user.id || currentUser.role === "admin"'
-                    (click)="deleteComment(comment)">Delete Comment</button>
-                </div>
-                <div *ngIf='editComment && editComment.id === comment.id'>
-                  <hr>
-                  <app-edit-comment-form [editComment]='comment' (commentUpdated)='loadLocation()'>
-                  </app-edit-comment-form>
+                  <div *ngIf='editComment && editComment.id === comment.id'>
+                    <hr>
+                    <app-edit-comment-form [editComment]='comment' (commentUpdated)='loadLocation()'>
+                    </app-edit-comment-form>
+                  </div>
                 </div>
               </div>
             </div>

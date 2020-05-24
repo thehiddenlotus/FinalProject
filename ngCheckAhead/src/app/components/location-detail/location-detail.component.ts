@@ -39,10 +39,12 @@ export class LocationDetailComponent implements OnInit {
   showXAxisLabel: boolean = false;
   xAxisLabel: string = 'Store Times';
   yAxisLabel: string = 'Days';
-  legendPosition: string = 'right';
+  legendPosition: string = 'bottom';
+  xAxisTickFormatting = 'color: white';
+
 
   colorScheme = {
-    domain: ['#D6E3CD', '#60C464', '#60C464', '#4486B5', '#4486B5', '#ED7D1D'],
+    domain: ['#43aa8b', '#90be6d', '#f9c74f', '#f8961e', '#f3722c', '#f94144'],
   };
 
   onSelect(data): void {
@@ -296,16 +298,16 @@ export class LocationDetailComponent implements OnInit {
     // console.log('The rating number is ' + ratingNumber);
     let color = 'gray';
     if (ratingNumber <= 5) {
-      color = 'red'
+      color = '#f94144'
     }
     else if(ratingNumber <= 6.5) {
-        color = '#ED7D1D';
+        color = '#f3722c';
       }
     else if(ratingNumber <= 8) {
-        color = 'blue';
+        color = '#90be6d';
       }
    else if (ratingNumber <= 10) {
-        color = 'green';
+        color = '#43aa8b';
       }
     return color;
   }
