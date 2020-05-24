@@ -19,3 +19,24 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: 'Lato', sans-serif;
 }
+
+/* Theme Backgrounds */
+.darkerbg {
+  background-color: #457b9d;
+}
+.lighterbg {
+  background-color:whitesmoke;
+}
+.bluebg {
+  background-color: #a8dadc;
+}
+/* Chart container sizes */
+.chartContainer {
+  max-height: 300px;
+  max-width: 1000px;
+  min-height: 250px;
+}
+
+.jumbotron {
+  margin-bottom: 0px!important;
+}

@@ -3,30 +3,12 @@
     background-color:#f8f9fa;
     ;
 }
-.chartContainer {
-    max-height: 300px;
-    max-width: 1000px;
-    min-height: 250px;
-  }
 
 .btn {
     margin-right: 1em;
 }  
 div:empty { 
     display: none; 
-}
-
-.darkerbg {
-    background-color: #457b9d;
-}
-.lighterbg {
-    background-color:whitesmoke;
-}
-
-
-
-.bluebg {
-    background-color: #a8dadc;
 }
 
 .text-success {
