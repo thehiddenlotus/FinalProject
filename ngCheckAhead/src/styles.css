@@ -4,12 +4,18 @@
 html {
   position: relative;
   min-height: 100%;
+  font-family: 'Lato';
 }
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
+  font-family: 'Open Sans', sans-serif;
 }
 
 .btn-secondary {
   background-color: #1d3557;
   margin-bottom: 1em;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Lato', sans-serif;
 }
