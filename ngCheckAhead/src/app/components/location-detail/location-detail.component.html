@@ -2,7 +2,7 @@
   <!-- Main Info and Map Container -->
   <div class="container-fluid py-4 px-0 bluebg px-sm-3">
     <div class="row justify-content-center">
-      <h2> {{location.name}} <br></h2>
+      <h2>{{location.name}}<br></h2>
     </div>
     <div class="row mb-1 justify-content-center">
       <h5 class="mb-1 text-center">{{location.address.address}}<br>{{location.address.city}},
@@ -15,7 +15,7 @@
         </div>
         <div class="row px-3 pb-3">
           <div class="col-md-4 text-md-right text-sm-left">
-            <strong> Cleanliness</strong>
+            <strong>Cleanliness</strong>
           </div>
           <div class="col-md-6 bg-secondary p-0 justify-content-right">
             <div [style.width.%]='completionPercent(cleanlinessAvg)' class='row m-0'
@@ -112,10 +112,9 @@
         <div class="card flex-md-row h-md-250 darkerbg">
           <div class="card-body d-flex pb-0 flex-column align-items-center text-white text-center">
             <h2 class="pb-2">Store Traffic Details </h2>
-            <p><strong> green = not busy | yellow = normal | orange/red = busy</strong>
+            <p><strong>green = not busy | yellow = normal | orange/red = busy</strong>
             </p>
-            <p>Hover over the times and days to see details
-            </p>
+            <p>Hover over the times and days to see details</p>
           </div>
         </div>
       </div>
@@ -150,20 +149,19 @@
         <div class="row px-3 pb-2" *ngFor="let reviewRating of filterReviewRatings(reviewRatings, review.id)">
           <div class="col-md-4 text-md-right text-sm-left"
             *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 1'>
-            <strong>
-              {{reviewRating.rating.category | capitalize}}</strong>
+            <strong>{{reviewRating.rating.category | capitalize}}</strong>
           </div>
           <div class="col-md-4 text-md-right text-sm-left"
             *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 2'>
-            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+            <strong>{{reviewRating.rating.category | capitalize}}</strong>
           </div>
           <div class="col-md-4 text-md-right text-sm-left"
             *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 3'>
-            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+            <strong>{{reviewRating.rating.category | capitalize}}</strong>
           </div>
           <div class="col-md-4 text-md-right text-sm-left"
             *ngIf='reviewRating.id.reviewId == review.id && reviewRating.id.ratingId == 4'>
-            <strong> {{reviewRating.rating.category | capitalize}}</strong>
+            <strong>{{reviewRating.rating.category | capitalize}}</strong>
           </div>
           <div class="col-md-6 bg-secondary p-0 justify-content-right">
             <div [style.width.%]='completionPercent(reviewRating.ratingValue)' class='row m-0'
@@ -205,11 +203,11 @@
       <div class="col-md-7">
         <div class="card flex-md-row  box-shadow h-md-450 ">
           <div class="card-body d-flex flex-column align-items-start lighterbg pl-0">
-            <strong class="d-inline-block mb-2 text-success">Review by {{review.user.username}}</strong>
+            <strong class="d-inline-block mb-1 text-success">Review by {{review.user.username}}</strong>
             <h4 class="mb-0">
               {{review.content}}
             </h4>
-            <div class="mb-1 text-muted">{{review.dateCreated | date}}</div>
+            <div class="my-1 text-muted">{{review.dateCreated | date}}</div>
             <!-- <p class="card-text mb-auto" *ngIf='review.comments.length > 0'>{{review.comments[0].content}}</p> -->
             <div class="row align-items-center mx-0">
               <!-- <div class="col mb-1 align-items-center"> -->
@@ -229,8 +227,7 @@
                 *ngIf='ratingReviewSelected2'>Hide comments</button>
               <button class='btn btn-secondary btn-sm'
                 *ngIf='(!newComment || newComment.review.id != review.id) && currentUser'
-                (click)="addComment(review)">Add
-                comment</button>
+                (click)="addComment(review)">Add comment</button>
               <button class='btn btn-secondary btn-sm' *ngIf='newComment && newComment.review.id === review.id'
                 (click)="newComment = null">Cancel</button>
               <!-- </div> -->
