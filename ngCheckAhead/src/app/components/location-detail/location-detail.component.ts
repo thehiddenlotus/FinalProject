@@ -77,6 +77,8 @@ export class LocationDetailComponent implements OnInit {
   newComment: Comment = null;
   editComment: Comment = null;
   editLoc: Location = null;
+  ratingCount: number = 1;
+  filteredRatings: ReviewRating[] ;
 
   popTimes: TrafficData;
   jsonTimes: TrafficDetail;
@@ -291,7 +293,7 @@ export class LocationDetailComponent implements OnInit {
   }
 
   getBackgroundColor(ratingNumber) {
-    console.log('The rating number is ' + ratingNumber);
+    // console.log('The rating number is ' + ratingNumber);
     let color = 'gray';
     if (ratingNumber <= 5) {
       color = 'red'
@@ -303,12 +305,26 @@ export class LocationDetailComponent implements OnInit {
         color = 'blue';
       }
    else if (ratingNumber <= 10) {
-        color = '#ED7D1D';
+        color = 'green';
       }
     return color;
   }
 
   public completionPercent(num: number): String{
     return Math.round((num * 10)) + '';
+  }
+
+  public filterReviewRatings(reviewR: ReviewRating[], reviewId:number): ReviewRating[]{
+    let newArray:ReviewRating[] = new Array(3);
+    let counter = 0;
+    reviewR.forEach(element => {
+      if(element.id.reviewId == reviewId){
+        newArray[counter++] = element;
+        console.log(newArray[counter-1]);      
+      }
+    });
+    this.ratingCount++;
+    this.filteredRatings = newArray;
+    return this.filteredRatings;
   }
 }
