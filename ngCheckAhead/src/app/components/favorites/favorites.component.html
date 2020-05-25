@@ -1,13 +1,12 @@
-<div>
-  <hr>
-  <div class="d-flex flex-column align-items-center">
-    <H3>Results</H3>
+<div class="container-fluid darkerbg py-2">
+  <div class="d-flex flex-column align-items-center text-white py-2">
+    <h2>Results</h2>
   </div>
   <div *ngFor="let location of favorites | search:searchKey">
     <div class="row mb-1 pb-2">
       <div class="col-md-12">
       <div class="card flex-md-row h-md-250">
-          <div class="card-body d-flex flex-column align-items-left">
+          <div class="card-body d-flex flex-column align-items-left lighterbg">
             <div class="row">
               <!-- <div class="col-sm-3">
                 <ul class="list-group">
@@ -26,14 +25,14 @@
                     <strong>Cleanliness</strong>
                   </div>
                   <div class="col-md-6 bg-secondary p-0 justify-content-right">
-                    <div [style.width.%]='completionPercent(cleanlinessAvg)' class='row m-0'
-                      [style.background-color]="getBackgroundColor(cleanlinessAvg)">
+                    <div [style.width.%]="completionPercent(location.averageRatings.cleanliness)" class='row m-0'
+                      [style.background-color]="getBackgroundColor(location.averageRatings.cleanliness)">
                       <span>&nbsp;
                       </span>
                     </div>
                   </div>
-                  <div class="col-md-2" [style.color]="getBackgroundColor(cleanlinessAvg)">
-                    <strong>{{cleanlinessAvg | number}}</strong>
+                  <div class="col-md-2" [style.color]="getBackgroundColor(location.averageRatings.cleanliness)">
+                    <strong>{{location.averageRatings.cleanliness | number}}</strong>
                   </div>
                 </div>
                 <div class="row px-3 pb-3">
@@ -41,14 +40,14 @@
                     <strong>Traffic</strong>
                   </div>
                   <div class="col-md-6 bg-secondary p-0">
-                    <div [style.width.%]='completionPercent(trafficAvg)' class='row m-0'
-                      [style.background-color]="getBackgroundColor(trafficAvg)">
+                    <div [style.width.%]='completionPercent(location.averageRatings.traffic)' class='row m-0'
+                      [style.background-color]="getBackgroundColor(location.averageRatings.traffic)">
                       <span>&nbsp;
                       </span>
                     </div>
                   </div>
-                  <div class="col-md-2" [style.color]="getBackgroundColor(trafficAvg)">
-                    <strong>{{trafficAvg | number}}</strong>
+                  <div class="col-md-2" [style.color]="getBackgroundColor(location.averageRatings.traffic)">
+                    <strong>{{location.averageRatings.traffic | number}}</strong>
                   </div>
                 </div>
                 <div class="row px-3 pb-3">
@@ -56,14 +55,14 @@
                     <strong>Checkout</strong>
                   </div>
                   <div class="col-md-6 bg-secondary p-0">
-                    <div [style.width.%]='completionPercent(checkoutAvg)' class='row m-0'
-                      [style.background-color]="getBackgroundColor(checkoutAvg)">
+                    <div [style.width.%]='completionPercent(location.averageRatings.checkout)' class='row m-0'
+                      [style.background-color]="getBackgroundColor(location.averageRatings.checkout)">
                       <span>&nbsp;
                       </span>
                     </div>
                   </div>
-                  <div class="col-md-2" [style.color]="getBackgroundColor(checkoutAvg)">
-                    <strong>{{checkoutAvg | number}}</strong>
+                  <div class="col-md-2" [style.color]="getBackgroundColor(location.averageRatings.checkout)">
+                    <strong>{{location.averageRatings.checkout | number}}</strong>
                   </div>
                 </div>
                 <div class="row px-3">
@@ -71,14 +70,14 @@
                     <strong>Stock</strong>
                   </div>
                   <div class="col-md-6 bg-secondary p-0">
-                    <div [style.width.%]='completionPercent(stockAvg)' class='row m-0'
-                      [style.background-color]="getBackgroundColor(stockAvg)">
+                    <div [style.width.%]='completionPercent(location.averageRatings.stock)' class='row m-0'
+                      [style.background-color]="getBackgroundColor(location.averageRatings.stock)">
                       <span>&nbsp;
                       </span>
                     </div>
                   </div>
-                  <div class="col-md-2" [style.color]="getBackgroundColor(stockAvg)">
-                    <strong>{{stockAvg | number}}</strong>
+                  <div class="col-md-2" [style.color]="getBackgroundColor(location.averageRatings.stock)">
+                    <strong>{{location.averageRatings.stock | number}}</strong>
                   </div>
                 </div>
               </div>
