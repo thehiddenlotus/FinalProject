@@ -1,11 +1,12 @@
 import { PopulartimesData } from './../models/populartimes-data';
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { Location } from '../models/location';
 import { AuthService } from './auth.service';
+import { PlaceId } from '../models/place-id';
 
 @Injectable({
   providedIn: 'root'
@@ -67,6 +68,34 @@ export class LocationService {
       })
     );
   }
+  public getId(location: Location) {
+    var httpOptions = this.getHttpOptions();
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const name = location.name.trim().split(' ');
+    const words = location.address.address.split(' ');
+    const zip = location.address.zip;
+    var url = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=';
+    // name.forEach(element => {
+    //   url += '+'+element;
+    // });
+    words.forEach(element => {
+      if (url.slice(-1) !== '=') {
+        url += '+'+element;
+      }else{
+        url += element;
+      }
+    });
+    url += '+'+zip;
+    url += '&key=AIzaSyCg68MnHawVIaCoIlGekODBeGEY13YWjxM';
+    console.log(url);
+
+    return this.http.get<PlaceId>(proxyurl+url, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError('Error getting  transit data from api: ' + err);
+      })
+    );
+  }
   private getHttpOptions() {
     const credentials = this.auth.getCredentials();
     let httpOptions = {};
@@ -76,7 +105,8 @@ export class LocationService {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'x-requested-with': 'XMLHttpRequest',
-          'Authorization': `Basic ${credentials}`
+          'Authorization': `Basic ${credentials}`,
+          'Access-Control-Allow-Origin': '*'
         })
       };
     } else {
