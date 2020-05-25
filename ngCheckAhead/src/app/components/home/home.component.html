@@ -39,7 +39,7 @@
           <div class="card-body d-flex flex-column-12 justify-content-center darkerbg pb-0 pt-1">
             <div class="d-flex flex-column justify-content-center align-items-center">
               <h3 class="text-center text-white mb-1">Search for your store</h3>
-              <input [(ngModel)]='searchKeyword' placeholder="Type Name or Address" class="py-1">
+              <input [(ngModel)]='searchKeyword' placeholder="Type Name or Address" class="form-control mr-sm-2 py-1">
               <button [routerLink]="['/search/', searchKeyword]" id="searchbutton" type="button"
                 class="btn btn-secondary btn-md text-white">Find Store</button>
             </div>
