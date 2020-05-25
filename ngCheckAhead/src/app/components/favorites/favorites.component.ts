@@ -21,6 +21,11 @@ export class FavoritesComponent implements OnInit, OnChanges {
   favorites: Location[];
   reviewRatings: ReviewRating[];
 
+  cleanlinessAvg: number;
+  trafficAvg: number;
+  checkoutAvg: number;
+  stockAvg: number;
+
   constructor(
     private locSvc: LocationService,
     private rrServ: ReviewRatingService,
@@ -124,6 +129,29 @@ export class FavoritesComponent implements OnInit, OnChanges {
     }
     console.log(this.favorites[id])
   }
+
+  public completionPercent(num: number): String{
+    return Math.round((num * 10)) + '';
+  }
+
+  getBackgroundColor(ratingNumber) {
+    // console.log('The rating number is ' + ratingNumber);
+    let color = 'gray';
+    if (ratingNumber <= 5) {
+      color = '#f94144'
+    }
+    else if(ratingNumber <= 6.5) {
+        color = '#f3722c';
+      }
+    else if(ratingNumber <= 8) {
+        color = '#90be6d';
+      }
+   else if (ratingNumber <= 10) {
+        color = '#43aa8b';
+      }
+    return color;
+  }
+
 
 }
 
