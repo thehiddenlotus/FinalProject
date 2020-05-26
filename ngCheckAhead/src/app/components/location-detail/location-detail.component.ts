@@ -263,7 +263,7 @@ export class LocationDetailComponent implements OnInit {
     this.reviewServ.getReviewsByLocationId(id).subscribe(
       (good) => {
         this.reviews = good;
-        // this.populateTransitData();
+        this.populateTransitData();
       },
       (error) => {
         console.log('error in populating reviews in location-detail');

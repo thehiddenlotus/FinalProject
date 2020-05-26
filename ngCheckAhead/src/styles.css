@@ -5,6 +5,7 @@ html {
   position: relative;
   min-height: 100%;
   font-family: 'Lato';
+  background-color:whitesmoke;
 }
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
