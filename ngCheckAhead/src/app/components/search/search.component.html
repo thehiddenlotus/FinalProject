@@ -15,9 +15,9 @@
       <br>
       <div class="row justify-content-center">
         <div style="justify-content: center;">
-          <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
+          <button class="btn btn-secondary btn-md" *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
             Location</button>
-          <button class='btn btn-secondary btn-lg' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
+          <button class='btn btn-secondary btn-md' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
         </div>
       </div>
       <div *ngIf='newLocation'>
