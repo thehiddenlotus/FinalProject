@@ -1,5 +1,7 @@
 <form>
-  <h2>Add a New Location</h2>
+  <div class="row" style="justify-content: center;">
+    <h2><strong>Add a New Location</strong></h2>
+  </div>
   <div class="form-row">
       <label for="locName">Location Name</label>
       <input type="text" class="form-control" id="locName" placeholder="Name" name="name"[(ngModel)]="newLoc.name" >
@@ -38,5 +40,7 @@
       </label>
     </div>
   </div> -->
-  <button (click)="postLocation()">Submit</button>
+  <div class="row" style="justify-content: center;">
+    <button class="btn btn-secondary btn-lg" (click)="postLocation()">Submit</button>
+  </div>
 </form>

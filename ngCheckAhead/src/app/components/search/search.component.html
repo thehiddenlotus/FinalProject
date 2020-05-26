@@ -1,46 +1,51 @@
 <!-- <div class="container-fluid bluebg"> -->
-  <div class="container-fluid bluebg">
-    <div class="container bluebg">
-      <div class="container">
-        <div class="card flex-md-row mb-4 box-shadow h-md-450">
-          <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3072.1636685425146!2d-104.81896868376049!3d39.64603097946214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876c885c7178d797%3A0xc3f11199f153118e!2s3898%20S%20Eagle%20St%2C%20Aurora%2C%20CO%2080014!5e0!3m2!1sen!2sus!4v1588776752575!5m2!1sen!2sus"
+<div class="container-fluid bluebg">
+  <div class="container bluebg">
+    <div class="container">
+      <div class="card flex-md-row mb-4 box-shadow h-md-450">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5536.0416571094165!2d-104.79488824473152!3d39.637859413092336!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x1f77ba6a5b02cc83!2sKing%20Soopers!5e0!3m2!1sen!2sus!4v1590446318498!5m2!1sen!2sus"
           width="1200" height="300" frameborder="0" style="border: 0;" allowfullscreen="" aria-hidden="false"
           tabindex="0"></iframe>
+      </div>
+      <div class="d-flex flex-column align-items-center">
+        <!-- <H3><strong>Search</strong></H3> -->
+      </div>
+      <input class="form-control mr-sm-2" [(ngModel)]='searchKey' placeholder="Type in name or address to search" />
+      <br>
+      <div class="row justify-content-center">
+        <div style="justify-content: center;">
+          <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
+            Location</button>
+          <button class='btn btn-secondary btn-lg' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
         </div>
-        <div class="d-flex flex-column align-items-center">
-          <!-- <H3><strong>Search</strong></H3> -->
+      </div>
+      <div *ngIf='newLocation'>
+        <div class="container">
+          <app-location-form [newLoc]='newLocation'></app-location-form>
         </div>
-        <input class="form-control mr-sm-2" [(ngModel)]='searchKey' placeholder="Type in name or address to search" />
         <br>
-        <div class="row justify-content-center">
-          <div style="justify-content: center;">
-            <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
-              Location</button>
-              <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
-            </div>
-            <div *ngIf='newLocation'>
-              <app-location-form [newLoc]='newLocation'></app-location-form>
-            </div>
-          </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid darkerbg">
+</div>
+<div class="container-fluid darkerbg">
+  <div class="container">
+    <app-favorites [searchKey]='searchKey'></app-favorites>
+  </div>
+  <br>
+  <!-- <div class="row justify-content-center">
+    <div style="justify-content: center;">
+      <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
+        Location</button>
+      <button class='btn btn-secondary btn-lg' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf='newLocation'>
     <div class="container">
-      <app-favorites [searchKey]='searchKey'></app-favorites>
+      <app-location-form [newLoc]='newLocation'></app-location-form>
     </div>
     <br>
-    <div class="row justify-content-center">
-      <div style="justify-content: center;">
-        <button class="btn btn-secondary btn-lg " *ngIf='!newLocation && currentUser' (click)="addLocation()">Add a New
-          Location</button>
-          <button class='btb btn-secondary' *ngIf='newLocation' (click)="newLocation = null">Cancel</button>
-        </div>
-        <div *ngIf='newLocation'>
-          <app-location-form [newLoc]='newLocation'></app-location-form>
-        </div>
-      </div>
-    </div>
+  </div> -->
+</div>
 <!-- </div> -->
-
