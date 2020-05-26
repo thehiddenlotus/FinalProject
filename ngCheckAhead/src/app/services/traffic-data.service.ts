@@ -17,7 +17,7 @@ export class TrafficDataService {
 
   public getTransitData(googleId: string) {
     const httpOptions = this.getHttpOptions();
-    return this.http.get<TrafficData>('http://127.0.0.1:5000/' + googleId, httpOptions).pipe(
+    return this.http.get<TrafficData>('http://18.222.135.147/' + googleId, httpOptions).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError('Error getting  transit data from api: ' + err);
