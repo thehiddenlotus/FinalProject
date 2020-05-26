@@ -1,29 +1,18 @@
-.note {
-  text-align: center;
-  height: 80px;
-  background: -webkit-linear-gradient(left, #048abf, #049dbf);
-  color: #fff;
-  font-weight: bold;
-  line-height: 80px;
-}
+
 .form-content {
   padding: 5%;
   border: 1px solid #ced4da;
   margin-bottom: 2%;
 }
 .form-control {
-  border-radius: 1.5rem;
-}
-.btnSubmit {
-  border: none;
-  border-radius: 1.5rem;
-  padding: 1%;
-  width: 20%;
-  cursor: pointer;
-  background: #0062cc;
-  color: #fff;
+  border-radius: .5rem;
 }
 
 .container {
-  padding-top: 2%;
+  padding-top: 10%;
+}
+
+.logintop {
+  background-color: #1d3557;
+  min-width: 30rem;
 }
