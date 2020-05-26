@@ -1,8 +1,8 @@
 <form>
   <div class="form-group">
-    <label class="form-control-label mbr-fonts-style display-7" for="content-form1-4t">Comment</label>
+    <label class="form-control-label mbr-fonts-style display-7" for="content-form1-4t"><strong>Comment</strong></label>
     <textarea type="text" class="form-control" name="content" rows="4" [(ngModel)]="newComment.content"
       id="content-form1-4t"></textarea>
   </div>
-      <button type="submit" (click)="postComment()">Submit</button>
+      <button class="btn btn-secondary btn-sm" type="submit" (click)="postComment()">Submit</button>
 </form>

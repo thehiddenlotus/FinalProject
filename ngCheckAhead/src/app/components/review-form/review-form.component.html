@@ -35,13 +35,13 @@
       id="content-form1-4t"></textarea>
   </div>
 
-  <div class="col-md-6 multi-horizontal">
-    <label class="form-control-label mbr-fonts-style display-7"for="visitdate">Date of Visit </label>
+  <div class="col-md-6 multi-horizontal px-0">
+    <label class="form-control-label mbr-fonts-style display-7"for="visitdate">Date of Visit&nbsp;&nbsp;</label>
     <input type="date" id="visitdate" [(ngModel)]="newReview.content">
   </div>
-  <div class="col-md-6 multi-horizontal">
+  <div class="col-md-6 multi-horizontal pt-4 px-0">
 
-      <button type="submit" (click)="postReview()">Submit Review</button>
+      <button class="btn btn-secondary" type="submit" (click)="postReview()">Submit Review</button>
 
   </div>
 </form>

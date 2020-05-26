@@ -149,7 +149,7 @@
         </div>
       </div>
     </div>
-    <div class="row mb-1 align-items-center" *ngFor="let review of reviews">
+    <div class="row mb-1 align-items-start" *ngFor="let review of reviews">
       <div class="col-md-5 mt-1">
         <div class="row px-3 pb-2" *ngFor="let reviewRating of filterReviewRatings(reviewRatings, review.id)">
           <div class="col-md-4 text-md-right text-sm-left"
@@ -207,7 +207,7 @@
 
       <div class="col-md-7">
         <div class="card flex-md-row  box-shadow h-md-450 ">
-          <div class="card-body d-flex flex-column align-items-start lighterbg pl-0">
+          <div class="card-body d-flex flex-column align-items-start lighterbg pl-0 pt-0">
             <strong class="d-inline-block mb-1 text-success">Review by {{review.user.username}}</strong>
             <h4 class="mb-0">
               {{review.content}}
