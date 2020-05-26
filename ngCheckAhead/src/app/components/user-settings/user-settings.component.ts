@@ -34,6 +34,7 @@ export class UserSettingsComponent implements OnInit {
 
     this.userSvc.destroy(userId).subscribe(
       success => {
+        this.auth.logout();
         this.router.navigateByUrl('/home');
       },
       fail => {
