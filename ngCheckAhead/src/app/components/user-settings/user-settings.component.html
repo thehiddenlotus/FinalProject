@@ -12,7 +12,7 @@
           <a
             [routerLink]="['/changeAddress']"
             *ngIf="checkLogin()"
-            class="btn btn-primary"
+            class="btn btn-secondary"
             >Update Address</a
           >
         </div>
@@ -27,7 +27,7 @@
           <button
             type="submit"
             *ngIf="checkLogin()"
-            class="btn btn-primary"
+            class="btn btn-secondary"
             (click)="deleteUser()"
           >
             Delete

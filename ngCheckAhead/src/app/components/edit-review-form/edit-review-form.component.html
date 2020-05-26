@@ -30,7 +30,7 @@
     </div>
   </div> -->
   <div class="form-group">
-    <label class="form-control-label mbr-fonts-style display-7" for="content-form1-4t">Review</label>
+    <label class="form-control-label mbr-fonts-style display-7" for="content-form1-4t"><strong>Review</strong></label>
     <textarea type="text" class="form-control" name="content" rows="7" [(ngModel)]="editReview.content"
       id="content-form1-4t">{{editReview.content}}</textarea>
   </div>
@@ -39,9 +39,9 @@
     <label class="form-control-label mbr-fonts-style display-7"for="visitdate">Date of Visit </label>
     <input type="date" id="visitdate" [(ngModel)]="editReview.dateVisited">
   </div> -->
-  <div class="col-md-6 multi-horizontal">
+  <div class="col-md-6 px-0">
 
-      <button class='btb btn-secondary' (click)="postReview()">Update Review</button>
+    <button class='btb btn-secondary btn-sm' (click)="postReview()">Update Review</button>
 
   </div>
 </form>
