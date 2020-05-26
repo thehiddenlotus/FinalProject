@@ -127,7 +127,7 @@ export class FavoritesComponent implements OnInit, OnChanges {
       rating.stock = 0;
       this.favorites[id].averageRatings = rating;
     }
-    console.log(this.favorites[id])
+    // console.log(this.favorites[id])
   }
 
   public completionPercent(num: number): String{

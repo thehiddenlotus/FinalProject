@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="col-md-2" [style.color]="getBackgroundColor(cleanlinessAvg)">
-            <strong>{{cleanlinessAvg | number}}</strong>
+            <strong>{{cleanlinessAvg | number:'1.1-1'}}</strong>
           </div>
         </div>
         <div class="row px-3 pb-3">
@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="col-md-2" [style.color]="getBackgroundColor(trafficAvg)">
-            <strong>{{trafficAvg | number}}</strong>
+            <strong>{{trafficAvg | number:'1.1-1'}}</strong>
           </div>
         </div>
         <div class="row px-3 pb-3">
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="col-md-2" [style.color]="getBackgroundColor(checkoutAvg)">
-            <strong>{{checkoutAvg | number}}</strong>
+            <strong>{{checkoutAvg | number:'1.1-1'}}</strong>
           </div>
         </div>
         <div class="row px-3">
@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="col-md-2" [style.color]="getBackgroundColor(stockAvg)">
-            <strong>{{stockAvg | number}}</strong>
+            <strong>{{stockAvg | number:'1.1-1'}}</strong>
           </div>
         </div>
         <div class="card text-black bg-light flex-md-row my-1 h-md-250">
