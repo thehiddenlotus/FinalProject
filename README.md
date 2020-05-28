@@ -6,6 +6,7 @@
 Current Team Members
 * Diego Hoyos - Database Administrator
 * Luke Sutherland - Repo Owner
+
 Past Team Members
 * David Yoachum - Scrum Master
 * Frank Martin
