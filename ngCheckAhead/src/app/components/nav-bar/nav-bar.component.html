@@ -5,18 +5,18 @@
           aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation"
           (click)="isCollapsed = !isCollapsed"
           [attr.aria-expanded]="!isCollapsed">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon"><i class="fa fa-bars" aria-hidden="true">nav</i></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]='isCollapsed'>
     <div class="navbar-nav text-white">
-      <a [routerLink]="['/home']" class="nav-item nav-link active">Home</a>
+      <!-- <a [routerLink]="['/home']" class="nav-item nav-link active">Home</a> -->
       <a [routerLink]="['/search']" class="nav-item nav-link active">Search</a>
       <a [routerLink]="['/team']" class="nav-item nav-link active">Team</a>
-      <a [routerLink]="['/login']" class="nav-item nav-link active" *ngIf="!checkLogin()">Login</a>
-      <a [routerLink]="['/register']" class="nav-item nav-link active" *ngIf="!checkLogin()">Register</a>
     </div>
     <div class="navbar-nav ml-auto">
-      <a [routerLink]="['/settings']" class="nav-item nav-link active">Settings</a>
+      <a [routerLink]="['/login']" class="nav-item nav-link active" *ngIf="!checkLogin()">Login</a>
+      <a [routerLink]="['/register']" class="nav-item nav-link active" *ngIf="!checkLogin()">Register</a>
+      <a [routerLink]="['/settings']" class="nav-item nav-link active" *ngIf="checkLogin()" >Settings</a>
     </div>
   </div>
   <div *ngIf="checkLogin()">
