@@ -322,7 +322,7 @@ export class LocationDetailComponent implements OnInit {
     reviewR.forEach(element => {
       if(element.id.reviewId == reviewId){
         newArray[counter++] = element;
-        // console.log(newArray[counter-1]);      
+        // console.log(newArray[counter-1]);
       }
     });
     this.ratingCount++;

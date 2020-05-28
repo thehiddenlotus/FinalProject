@@ -1,19 +1,19 @@
-#jumbotron{
-  background-image: url('https://image.shutterstock.com/image-photo/abstract-blurred-photo-trolley-department-260nw-604474658.jpg');
-  color: black;
+#jumbotron {
+  background-image: url("https://i.imgur.com/j4egFJ1.jpg");
+  color: whitesmoke;
 }
 
-#searchbutton{
+#searchbutton {
   text-align: center;
-
 }
 .jumbotron {
   background-size: cover;
+  background-position: center;
 }
-#learnmore{
-  float:center;
+#learnmore {
+  float: center;
 }
-#Team{
+#Team {
   background-color: black;
   border-color: black;
 }
@@ -30,8 +30,8 @@
 .bannerText {
   font-size: 2em;
 }
-input{
+input {
   width: 400px;
-text-align: center;
-margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
