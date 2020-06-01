@@ -1,3 +1,4 @@
+import { User } from 'src/app/models/user';
 import { ReviewRatingId } from './../../models/review-rating-id';
 import { AverageRatings } from './../../models/average-ratings';
 import { ReviewService } from 'src/app/services/review.service';
@@ -8,6 +9,7 @@ import { Location } from 'src/app/models/location';
 import { Review } from 'src/app/models/review';
 import { ReviewRating } from 'src/app/models/review-rating';
 import { ReviewRatingService } from 'src/app/services/review-rating.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-favorites',
@@ -26,13 +28,16 @@ export class FavoritesComponent implements OnInit, OnChanges {
   checkoutAvg: number;
   stockAvg: number;
 
+
   constructor(
+    private auth: AuthService,
     private locSvc: LocationService,
     private rrServ: ReviewRatingService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+
     this.locSvc.index().subscribe(
       data => {
         this.favorites = data;
@@ -48,6 +53,14 @@ export class FavoritesComponent implements OnInit, OnChanges {
 
   showDetail(id: number) {
     this.router.navigateByUrl('locations/' + id);
+  }
+
+  login() {
+    this.router.navigateByUrl('login');
+  }
+
+  register() {
+    this.router.navigateByUrl('register');
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -152,6 +165,9 @@ export class FavoritesComponent implements OnInit, OnChanges {
     return color;
   }
 
+  checkLogin(): boolean {
+    return this.auth.checkLogin();
+  }
 
 }
 
