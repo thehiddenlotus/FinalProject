@@ -16,9 +16,14 @@
                 <div class="mb-1 text-muted">{{location.address.address}}, {{location.address.city}} {{location.address.zip}}</div>
                 <p class="card-text mb-auto">{{location.description}}</p>
                 <br>
-
-                <button class="btn btn-secondary" (click)="showDetail(location.id)">Show More</button>
-
+                <div *ngIf="checkLogin()" >
+                  <button class="btn btn-secondary" (click)="showDetail(location.id)">Show More</button>
+                </div>
+                <div class="mb-1" *ngIf="!checkLogin()" >
+                  <p class="card-text">Please Login or Register to view more details about this location.</p>
+                  <button class="btn btn-secondary mx-1" (click)="login()">Login</button>
+                  <button class="btn btn-secondary" (click)="register()">Register</button>
+                </div>
               </div>
 
               <div class="col-md-6 pt-2 order-md-1">
@@ -86,7 +91,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>

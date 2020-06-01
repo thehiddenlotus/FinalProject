@@ -3,11 +3,8 @@
 ### Final Team Project for Skill Distillery
 
 #### Team Cuddle Blossom
-Current Team Members
 * Diego Hoyos - Database Administrator
 * Luke Sutherland - Repo Owner
-
-Past Team Members
 * David Yoachum - Scrum Master
 * Frank Martin
 
